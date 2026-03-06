@@ -1,4 +1,4 @@
-import random
+import 
 from typing import Tuple, Callable
 
 
@@ -13,9 +13,19 @@ def minimax_move(state, max_depth:int, eval_func:Callable) -> Tuple[int, int]:
                     and should return a float value representing the utility of the state for the player.
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    raise NotImplementedError()
+    alpha = float('-inf')
+    beta = float('inf')
+    best_move = None
+    for move in state.legal_moves():
+        new_state = state.next_state(move)
+        move_value = min_value(new_state, alpha, beta, 1, max_depth, eval_func)
+        if move_value > alpha:
+            alpha = move_value
+            best_move = move
+    
+    return best_move
 
-def max_value(state, alpha, beta, depth, max_depth, eval_func):
+def max_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     """
     A recursive fuction to compute the maximum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the maximum value of the state for the player to move, and also updates the alpha and beta values for pruning.
@@ -42,7 +52,7 @@ def max_value(state, alpha, beta, depth, max_depth, eval_func):
              return alpha
     return alpha
 
-def min_value(state, alpha, beta, depth, max_depth, eval_func):
+def min_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     """
     A recursive fuction to compute the minimum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the minimum value of the state for the player to move, and also updates the alpha and beta values for pruning.
