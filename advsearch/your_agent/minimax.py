@@ -1,4 +1,4 @@
-import 
+
 from typing import Tuple, Callable
 
 
@@ -74,8 +74,7 @@ def min_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     for move in state.legal_moves():
          new_state = state.next_state(move)
          move_value = max_value(new_state, alpha, beta, depth + 1, max_depth, eval_func)
-         min_value = min(min_value, move_value)
          beta = min(beta, move_value)
          if beta <= alpha:
              return beta
-    return min_value
+    return beta

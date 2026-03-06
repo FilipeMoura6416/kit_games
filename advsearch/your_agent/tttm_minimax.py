@@ -1,8 +1,8 @@
 import random
 from typing import Tuple
-from ..tttm.gamestate import GameState
-from ..tttm.board import Board
-from .minimax import minimax_move
+from advsearch.tttm.gamestate import GameState
+from advsearch.tttm.board import Board
+from advsearch.your_agent.minimax import minimax_move
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
@@ -25,10 +25,18 @@ def make_move(state: GameState) -> Tuple[int, int]:
     # uma vez que o jogo tem profundidade maxima 9. 
     # Preencha a funcao utility com o valor de um estado terminal e passe-a como funcao de avaliação para seu minimax_move
 
-    return random.choice(range(3)), random.choice(range(3))
+    return minimax_move(state, -1, utility)
 
 def utility(state, player:str) -> float:
     """
     Retorna a utilidade de um estado (terminal) 
     """
-    return 0   # substitua pelo seu codigo
+    if state.is_terminal():
+        if state.winner() == player:
+            return 1.0
+        elif state.winner() is None:
+            return 0.0
+        else:
+            return -1.0
+    else:
+        raise ValueError("Utility function should only be called on terminal states.")
