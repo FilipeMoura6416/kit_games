@@ -1,7 +1,7 @@
 
 from typing import Tuple, Callable
 
-
+log_path = "minimax_log.txt"
 
 def minimax_move(state, max_depth:int, eval_func:Callable) -> Tuple[int, int]:
     """
@@ -19,10 +19,13 @@ def minimax_move(state, max_depth:int, eval_func:Callable) -> Tuple[int, int]:
     for move in state.legal_moves():
         new_state = state.next_state(move)
         move_value = min_value(new_state, alpha, beta, 1, max_depth, eval_func)
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"Move: {move}, Value: {move_value}\n")
         if move_value > alpha:
             alpha = move_value
             best_move = move
-    
+    with open(log_path, 'a') as log_file:
+        log_file.write(f"Best move: {best_move} with value: {alpha}\n")
     return best_move
 
 def max_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
@@ -40,6 +43,8 @@ def max_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state    
     if state.is_terminal() or (max_depth != -1 and depth >= max_depth):
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"Max Evaluating state at depth {depth} with utility: {eval_func(state, state.player)}\n")
         return eval_func(state, state.player)
     
     ##Recursive case: compute the maximum value of the state for the player to move
@@ -47,9 +52,21 @@ def max_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     for move in state.legal_moves():
          new_state = state.next_state(move)
          move_value = min_value(new_state, alpha, beta, depth + 1, max_depth, eval_func)
+         with open(log_path, 'a') as log_file:
+                for x in range(depth):
+                    log_file.write("  ")  # indent for better visualization of the tree
+                log_file.write(f"Max Move: {move}, Value: {move_value}\n")
          alpha = max(alpha, move_value)
-         if alpha >= beta:
+         if alpha > beta:
+             with open(log_path, 'a') as log_file:
+                for x in range(depth):
+                    log_file.write("  ")  # indent for better visualization of the tree
+                log_file.write(f"Max Pruning at move: {move} with value: {move_value}\n")
              return alpha
+    with open(log_path, 'a') as log_file:
+        for x in range(depth):
+            log_file.write("  ")  # indent for better visualization of the tree
+        log_file.write(f"Max Returning value: {alpha} for state at depth {depth}\n")
     return alpha
 
 def min_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
@@ -67,6 +84,10 @@ def min_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state    
     if state.is_terminal() or (max_depth != -1 and depth >= max_depth):
+        with open(log_path, 'a') as log_file:
+            for x in range(depth):
+                log_file.write("  ")  # indent for better visualization of the tree
+            log_file.write(f"Min Evaluating state at depth {depth} with utility: {eval_func(state, state.player)}\n")
         return eval_func(state, state.player)
     
     ##Recursive case: compute the minimum value of the state for the player to move
@@ -74,7 +95,19 @@ def min_value(state, alpha, beta, depth, max_depth, eval_func) -> float:
     for move in state.legal_moves():
          new_state = state.next_state(move)
          move_value = max_value(new_state, alpha, beta, depth + 1, max_depth, eval_func)
+         with open(log_path, 'a') as log_file:
+            for x in range(depth):
+                log_file.write("  ")  # indent for better visualization of the tree
+            log_file.write(f"Min Move: {move}, Value: {move_value}\n")
          beta = min(beta, move_value)
-         if beta <= alpha:
+         if beta < alpha:
+             with open(log_path, 'a') as log_file:
+                for x in range(depth):
+                    log_file.write("  ")  # indent for better visualization of the tree
+                log_file.write(f"Min Pruning at move: {move} with value: {move_value}\n")
              return beta
+    with open(log_path, 'a') as log_file:
+        for x in range(depth):
+            log_file.write("  ")  # indent for better visualization of the tree
+        log_file.write(f"Min Returning value: {beta} for state at depth {depth}\n")
     return beta
