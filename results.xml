@@ -1,17 +1,15 @@
 <?xml version="1.0" ?>
 <othello-match>
-	<timing start="Thu Mar  5 10:40:39 2026" finish="Thu Mar  5 10:43:24 2026"/>
-	<player directory="advsearch\humanplayer" color="B" result="draw" score="0"/>
-	<player directory="advsearch\humanplayer" color="W" result="draw" score="0"/>
+	<timing start="Fri Mar  6 19:25:26 2026" finish="Fri Mar  6 19:26:02 2026"/>
+	<player directory="advsearch\your_agent" color="B" result="loss" score="-1"/>
+	<player directory="advsearch\humanplayer" color="W" result="win" score="1"/>
 	<moves>
 		<move coord="0,1" color="B"/>
 		<move coord="1,1" color="W"/>
-		<move coord="2,2" color="B"/>
-		<move coord="0,2" color="W"/>
-		<move coord="1,0" color="B"/>
-		<move coord="2,1" color="W"/>
 		<move coord="1,2" color="B"/>
-		<move coord="0,0" color="W"/>
-		<move coord="2,0" color="B"/>
+		<move coord="2,1" color="W"/>
+		<move coord="0,0" color="B"/>
+		<move coord="1,0" color="W"/>
+		<move coord="0,2" color="B"/>
 	</moves>
 </othello-match>
