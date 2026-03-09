@@ -40,5 +40,3 @@ def utility(state, player:str) -> float:
             return -1.0
     else:
         raise ValueError("Utility function should only be called on terminal states.")
-
-minimax_move(GameState(Board(), 'B'), -1, utility)
