@@ -1,0 +1,2 @@
+python server.py tttm .\advsearch\humanplayer\agent.py .\advsearch\your_agent\tttm_minimax.py -d 600 -p 1
+python server.py tttm .\advsearch\your_agent\tttm_minimax.py .\advsearch\humanplayer\agent.py -d 600 -p 1
