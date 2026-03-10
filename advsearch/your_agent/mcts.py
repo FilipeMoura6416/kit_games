@@ -24,3 +24,18 @@ def make_move(state) -> Tuple[int, int]:
     return (-1, -1)
 
 
+def playout(state) -> float:
+    """
+    Simulates a random playout from the given state until the game ends.
+    Returns the score of the player who made the move in this state.
+
+    :param state: state to simulate
+    :return: score of the player who made the move in this state
+    """
+    
+    while not state.is_terminal():
+        moves = list(state.board.legal_moves(state.player))
+        move = random.choice(moves)
+        state = state.next_state(move)
+    
+    return state.winner()

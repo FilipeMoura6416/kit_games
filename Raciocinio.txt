@@ -1,3 +1,16 @@
 python server.py tttm .\advsearch\humanplayer\agent.py .\advsearch\your_agent\tttm_minimax.py -d 600 -p 1
 python server.py tttm .\advsearch\your_agent\tttm_minimax.py .\advsearch\humanplayer\agent.py -d 600 -p 1
 python server.py othello .\advsearch\your_agent\othello_minimax_count.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
+
+Classe que servirá de nodos para a árvore 
+
+Class Nodo 
+
+Cada nodo será um game state
+O nodo deve guardar:
+a quantidade de playouts e 
+os resultados dos playout em relação ao agente
+O valor do nodo segundo a fórmula
+
+O nodo deve ter:
+Um método para recalcular seu valor conforme a atualização dos playouts
