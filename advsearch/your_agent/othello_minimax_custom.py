@@ -2,6 +2,7 @@ import random
 from typing import Tuple
 from ..othello.gamestate import GameState
 from ..othello.board import Board
+import othello_minimax_mask
 from .minimax import minimax_move
 
 # Voce pode criar funcoes auxiliares neste arquivo
@@ -34,4 +35,12 @@ def evaluate_custom(state, player:str) -> float:
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    return 0    # substitua pelo seu codigo
+    count_moves = 0
+    acumuled_value = 0
+    for move in state.board.legal_moves(player):
+        new_state = state.next_state(move)
+        count_moves += 1
+        acumuled_value += othello_minimax_mask.evaluate_mask(new_state, new_state.player)
+    
+    return acumuled_value / count_moves if count_moves > 0 else 0
+
