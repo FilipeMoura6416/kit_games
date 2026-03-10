@@ -37,7 +37,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 10, evaluate_mask)
+    return minimax_move(state, 5, evaluate_mask)
 
 
 def evaluate_mask(state, player:str) -> float:
@@ -50,8 +50,8 @@ def evaluate_mask(state, player:str) -> float:
     :param player: player to evaluate the state for (B or W)
     """
     count_player = 0
-    for row in state.board.board:
-        for cell in row:
+    for row in range(0, int(len(state.board.tiles))):
+        for cell in range(0, int(len(state.board.tiles[row]))):
             if cell == player:
                 count_player += EVAL_TEMPLATE[row][cell]
             elif cell != Board.EMPTY:

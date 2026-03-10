@@ -1,2 +1,3 @@
 python server.py tttm .\advsearch\humanplayer\agent.py .\advsearch\your_agent\tttm_minimax.py -d 600 -p 1
 python server.py tttm .\advsearch\your_agent\tttm_minimax.py .\advsearch\humanplayer\agent.py -d 600 -p 1
+python server.py othello .\advsearch\your_agent\othello_minimax_count.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
