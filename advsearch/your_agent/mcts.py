@@ -3,6 +3,7 @@ import math
 import time
 from typing import Tuple
 from ..othello.gamestate import GameState
+from ..othello.board import Board
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
@@ -34,15 +35,22 @@ class MCTSNode:
     def retroprogation(self, result):
         ## Update the node's statistics with the result of a playout
         self.visits += 1
-        if result == self.state.player:
+        if result == self.player:
             self.wins += 1
-        self.calculate_UCT_value()
-        if self.parent:
-            self.parent.retroprogation(result)
+        child = self
+        node = self.parent
+        while node:
+            node.visits += 1
+            if result == node.player:
+                node.wins += 1
+            child.calculate_UCT_value()
+            child = node
+            node = node.parent
     
     def calculate_UCT_value(self) -> None:
         ##Calculate the UCT value of the node
-        self.value = self.wins / self.visits + 2 * self._C_PARAM * math.sqrt(math.log(self.parent.visits) / self.visits)
+        if self.parent:
+            self.value = self.wins / self.visits + 2 * self._C_PARAM * math.sqrt(math.log(self.parent.visits) / self.visits)
     
     def expand(self) -> 'MCTSNode':
         ## Create a new child node by applying the given move to the current state. If no move is given, choose a random move from the non-expanded moves.
@@ -64,7 +72,7 @@ class MCTSNode:
         """
         state = self.state
         while not state.is_terminal():
-            moves = list(self.state.board.legal_moves(state.player))
+            moves = list(state.board.legal_moves(state.player))
             move = random.choice(moves)
             state = state.next_state(move)
         
@@ -90,7 +98,7 @@ def MCTS(root_state: GameState, time_limit=5.0) -> Tuple[int, int]:
             node = node.chose_child()
             
         #Expand
-        if not node.state.is_terminal:
+        if not node.state.is_terminal():
             node = node.expand()
 
         #Simulation
@@ -115,7 +123,9 @@ def make_move(state:GameState) -> Tuple[int, int]:
     return MCTS(state)
 
 
-
+board = Board()
+state = GameState(board, "B")
+print(MCTS(state))
 
 
 

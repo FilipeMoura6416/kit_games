@@ -1,6 +1,7 @@
 python server.py tttm .\advsearch\humanplayer\agent.py .\advsearch\your_agent\tttm_minimax.py -d 600 -p 1
 python server.py tttm .\advsearch\your_agent\tttm_minimax.py .\advsearch\humanplayer\agent.py -d 600 -p 1
 python server.py othello .\advsearch\your_agent\othello_minimax_count.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
+python server.py othello .\advsearch\your_agent\mcts.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
 
 Classe que servirá de nodos para a árvore 
 
@@ -14,3 +15,14 @@ O valor do nodo segundo a fórmula
 
 O nodo deve ter:
 Um método para recalcular seu valor conforme a atualização dos playouts
+
+Loop:
+Se não estiver totalmente expandido e não for terminal
+    Expandir
+    Simular
+Senão se estiver totalmente expandido 
+    Seleciona o melhor filho, go to Loop
+Senão se for terminal 
+
+enquanto estiver totalmente expandido e não for terminal
+    Seleciona o melhor filho
