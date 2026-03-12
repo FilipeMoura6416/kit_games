@@ -2,6 +2,7 @@ import random
 import math
 import time
 from typing import Tuple
+from ..othello.gamestate import GameState
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
@@ -11,7 +12,7 @@ from typing import Tuple
 
 class MCTSNode:
     _C_PARAM = 1.4
-    def __init__(self, state, parent=None, player=None, move = None):
+    def __init__(self, state:GameState, parent=None, player=None, move = None):
         self.state = state
         self.player = player if player is not None else state.player
         self.non_expanded_moves = list(state.board.legal_moves(state.player))
@@ -69,7 +70,7 @@ class MCTSNode:
         
         return state.winner()
     
-def MCTS(root_state, time_limit=5.0) -> Tuple[int, int]:
+def MCTS(root_state: GameState, time_limit=5.0) -> Tuple[int, int]:
     """
     Performs MCTS starting from the given root state and returns the best move found within the time limit.
 
@@ -101,7 +102,7 @@ def MCTS(root_state, time_limit=5.0) -> Tuple[int, int]:
     best_child = max(root_node.children, key=lambda c: c.visits)
     return best_child.last_move
 
-def make_move(state) -> Tuple[int, int]:
+def make_move(state:GameState) -> Tuple[int, int]:
     """
     Returns a move for the given game state. 
     The game is not specified, but this is MCTS and should handle any game, since
@@ -111,11 +112,8 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     
+    return MCTS(state)
 
-    # o codigo abaixo retorna uma jogada ilegal
-    # Remova-o e coloque a sua implementacao do MCTS
-
-    return (-1, -1)
 
 
 
