@@ -16,7 +16,9 @@ class MCTSNode:
     def __init__(self, state:GameState, parent=None, player=None, move = None):
         self.state = state
         self.player = player if player is not None else state.player
-        self.non_expanded_moves = list(state.board.legal_moves(state.player))
+        """if state.player == None:
+            raise "Error player == None"""
+        self.non_expanded_moves = [] if state.is_terminal() else list(state.board.legal_moves(state.player))
         self.parent = parent
         self.children = []
         self.visits = 0
@@ -57,7 +59,6 @@ class MCTSNode:
         
         move = self.non_expanded_moves.pop()
         new_state = self.state.next_state(move)
-
         child_node = MCTSNode(new_state, parent=self, player=self.player, move=move)
         self.children.append(child_node)
         return child_node
@@ -78,7 +79,7 @@ class MCTSNode:
         
         return state.winner()
     
-def MCTS(root_state: GameState, time_limit=5.0) -> Tuple[int, int]:
+def MCTS(root_state: GameState, time_limit=3.0) -> Tuple[int, int]:
     """
     Performs MCTS starting from the given root state and returns the best move found within the time limit.
 
@@ -86,7 +87,6 @@ def MCTS(root_state: GameState, time_limit=5.0) -> Tuple[int, int]:
     :param time_limit: the time limit for MCTS in seconds
     :return: (int, int) tuple with x, y coordinates of the best move found
     """
-
     ## Inicialization of the MCTS algorithm
     root_node = MCTSNode(root_state)
     start_time = time.time()
@@ -119,7 +119,6 @@ def make_move(state:GameState) -> Tuple[int, int]:
     :param state: state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    
     return MCTS(state)
 
 
