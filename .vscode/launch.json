@@ -5,7 +5,7 @@
    "name": "Run minimax",
    "type": "python",
    "request": "launch",
-   "module": "advsearch.your_agent.mcts",
+   "module": "advsearch.your_agent.othello_minimax_mask",
    "console": "integratedTerminal"
   }
  ]

@@ -2,6 +2,7 @@ import random
 from typing import Tuple
 from ..othello.gamestate import GameState
 from ..othello.board import Board
+from .minimax import log_path 
 from .minimax import minimax_move
 
 # Voce pode criar funcoes auxiliares neste arquivo
@@ -37,7 +38,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 3, evaluate_mask)
+    return minimax_move(state, 2, evaluate_mask)
 
 
 def evaluate_mask(state, player:str) -> float:
@@ -52,9 +53,20 @@ def evaluate_mask(state, player:str) -> float:
     count_player = 0
     for row in range(0, int(len(state.board.tiles))):
         for cell in range(0, int(len(state.board.tiles[row]))):
-            if cell == player:
+            if state.board.tiles[row][cell] == player:
                 count_player += EVAL_TEMPLATE[row][cell]
-            elif cell != Board.EMPTY:
+            elif state.board.tiles[row][cell] != Board.EMPTY:
                 count_player -= EVAL_TEMPLATE[row][cell]
+            with open(log_path, 'a') as log_file:
+                 log_file.write(f"cell: {state.board.tiles[row][cell]} player: {player}\n")
+    with open(log_path, 'a') as log_file:
+                 log_file.write(f"Count_player: {count_player}\n")
                 
     return count_player
+
+result = 0
+for row in range(0, len(EVAL_TEMPLATE)):
+        for cell in range(0, len(EVAL_TEMPLATE[0])):
+             result += EVAL_TEMPLATE[row][cell]
+
+print(result)

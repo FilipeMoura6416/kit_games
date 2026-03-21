@@ -79,7 +79,7 @@ class MCTSNode:
         
         return state.winner()
     
-def MCTS(root_state: GameState, time_limit=3.0) -> Tuple[int, int]:
+def MCTS(root_state: GameState, time_limit=2.0) -> Tuple[int, int]:
     """
     Performs MCTS starting from the given root state and returns the best move found within the time limit.
 
@@ -108,6 +108,7 @@ def MCTS(root_state: GameState, time_limit=3.0) -> Tuple[int, int]:
         node.retroprogation(result)
 
     best_child = max(root_node.children, key=lambda c: c.visits)
+    print("Visits: ", root_node.visits)
     return best_child.last_move
 
 def make_move(state:GameState) -> Tuple[int, int]:

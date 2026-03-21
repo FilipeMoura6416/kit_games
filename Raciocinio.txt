@@ -3,6 +3,12 @@ python server.py tttm .\advsearch\your_agent\tttm_minimax.py .\advsearch\humanpl
 python server.py othello .\advsearch\your_agent\othello_minimax_count.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
 python server.py othello .\advsearch\your_agent\mcts.py .\advsearch\your_agent\othello_minimax_mask.py -d 60 -p 1
 
+advsearch\your_agent\othello_minimax_count.py
+advsearch\your_agent\othello_minimax_custom.py
+advsearch\your_agent\othello_minimax_mask.py
+advsearch\your_agent\minimax.py
+advsearch\your_agent\mcts.py
+
 Classe que servirá de nodos para a árvore 
 
 Class Nodo 
