@@ -15,14 +15,14 @@ from .minimax import minimax_move
 # could optimize for symmetries but just put all values here for coding speed :P
 # DO NOT CHANGE! 
 EVAL_TEMPLATE = [
-    [100, -30, 6, 2, 2, 6, -30, 100],
-    [-30, -50, 1, 1, 1, 1, -50, -30],
+    [ 80, -20, 6, 2, 2, 6, -30,  80],
+    [-20, -50, 1, 1, 1, 1, -50, -20],
     [  6,   1, 1, 1, 1, 1,   1,   6],
     [  2,   1, 1, 3, 3, 1,   1,   2],
     [  2,   1, 1, 3, 3, 1,   1,   2],
     [  6,   1, 1, 1, 1, 1,   1,   6],
-    [-30, -50, 1, 1, 1, 1, -50, -30],
-    [100, -30, 6, 2, 2, 6, -30, 100]
+    [-20, -50, 1, 1, 1, 1, -50, -20],
+    [ 80, -20, 6, 2, 2, 6, -20,  80]
 ]
 
 
@@ -57,10 +57,10 @@ def evaluate_mask(state, player:str) -> float:
                 count_player += EVAL_TEMPLATE[row][cell]
             elif state.board.tiles[row][cell] != Board.EMPTY:
                 count_player -= EVAL_TEMPLATE[row][cell]
-            with open(log_path, 'a') as log_file:
-                 log_file.write(f"cell: {state.board.tiles[row][cell]} player: {player}\n")
-    with open(log_path, 'a') as log_file:
-                 log_file.write(f"Count_player: {count_player}\n")
+            """ with open(log_path, 'a') as log_file:
+                 log_file.write(f"cell: {state.board.tiles[row][cell]} player: {player}\n") """
+    """ with open(log_path, 'a') as log_file:
+                 log_file.write(f"Count_player: {count_player}\n") """
                 
     return count_player
 

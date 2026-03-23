@@ -42,10 +42,10 @@ def minimax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
             alpha = move_value
             best_move = move"""
     with open(log_path, 'a') as log_file:
-        log_file.write(f"Best move will me maked: {best_move} with value: {move_value} calculed in {end_time - start_time} seconds\n")
+        log_file.write(f"Player: {player} Best move will me maked: {best_move} with value: {move_value} calculed in {end_time - start_time} seconds\n")
     return best_move
 
-def max_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float:
+def max_value(state, alpha, beta, depth, time_limit, eval_func, player, parent_state = None) -> float:
     """
     A recursive fuction to compute the maximum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the maximum value of the state for the player to move, and also updates the alpha and beta values for pruning.
@@ -74,15 +74,22 @@ def max_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float
     ##Recursive case: compute the maximum value of the state for the player to move
     ##For each legal move, compute the next state and call min_value on it to get the value of the move.
     best_move = (0, 0)
-    """ with open(log_path, 'a') as log_file:
-            log_file.write(f"Max chamado, player: {state.player}\n") """
+    if state.player != player:
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"WARNING! ")
+    with open(log_path, 'a') as log_file:
+        log_file.write(f"max, player: {player}, state.player: {state.player}\n")
     for move in state.legal_moves():
          new_state = state.next_state(move)
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Max Evaluating move: {move} at depth {depth}\n")
-         move_value = min_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player)
+         if new_state.player == player:
+            move_value = max_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player, state)[0]
+         else:
+             move_value = min_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player, state)
+            
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
@@ -90,7 +97,7 @@ def max_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float
          if move_value > alpha:
              alpha = move_value
              best_move = move
-         if alpha > beta:
+         if alpha > beta and (parent_state == None or parent_state.player != state.player):
              # with open(log_path, 'a') as log_file:
              #     for x in range(depth):
              #         log_file.write("  ")  # indent for better visualization of the tree
@@ -103,7 +110,7 @@ def max_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float
          log_file.write(f"At depth {depth} best move: {best_move} val_return: {val_return}\n") """
     return val_return
 
-def min_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float:
+def min_value(state, alpha, beta, depth, time_limit, eval_func, player, parent_state) -> float:
     """
     A recursive fuction to compute the minimum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the minimum value of the state for the player to move, and also updates the alpha and beta values for pruning.
@@ -129,21 +136,27 @@ def min_value(state, alpha, beta, depth, time_limit, eval_func, player) -> float
     
     ##Recursive case: compute the minimum value of the state for the player to move
     ##For each legal move, compute the next state and call max_value on it to get the value of the move.
-    """ with open(log_path, 'a') as log_file:
-            log_file.write(f"Min chamado, player: {state.player}\n") """
+    if state.player == player:
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"WARNING! ")
+    with open(log_path, 'a') as log_file:
+        log_file.write(f"Min, player: {player}, state.player: {state.player}\n")
     for move in state.legal_moves():
          new_state = state.next_state(move)
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Min Evaluating move: {move} at depth {depth}\n")
-         move_value, move_return = max_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player)
+         if new_state.player == player:
+            move_value, move_return = max_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player, state)
+         else:
+            move_value = min_value(new_state, alpha, beta, depth + 1, time_limit, eval_func, player, state)
          """ with open(log_path, 'a') as log_file:
               for x in range(depth):
                   log_file.write("  ")  # indent for better visualization of the tree
               log_file.write(f"Min received move_Return: {move_return}, move_value: {move_value}\n") """
          beta = min(beta, move_value)
-         if beta < alpha:
+         if beta < alpha and parent_state.player != state.player:
              # with open(log_path, 'a') as log_file:
              #     for x in range(depth):
              #         log_file.write("  ")  # indent for better visualization of the tree
