@@ -15,14 +15,14 @@ from .minimax import minimax_move
 # could optimize for symmetries but just put all values here for coding speed :P
 # DO NOT CHANGE! 
 EVAL_TEMPLATE = [
-    [ 80, -20, 6, 2, 2, 6, -30,  80],
-    [-20, -50, 1, 1, 1, 1, -50, -20],
+    [100, -30, 6, 2, 2, 6, -30,  100],
+    [-30, -50, 1, 1, 1, 1, -50, -30],
     [  6,   1, 1, 1, 1, 1,   1,   6],
     [  2,   1, 1, 3, 3, 1,   1,   2],
     [  2,   1, 1, 3, 3, 1,   1,   2],
     [  6,   1, 1, 1, 1, 1,   1,   6],
-    [-20, -50, 1, 1, 1, 1, -50, -20],
-    [ 80, -20, 6, 2, 2, 6, -20,  80]
+    [-30, -50, 1, 1, 1, 1, -50, -30],
+    [100, -30, 6, 2, 2, 6, -30,  100]
 ]
 
 
@@ -38,7 +38,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 2, evaluate_mask)
+    return minimax_move(state, 1, evaluate_mask)
 
 
 def evaluate_mask(state, player:str) -> float:

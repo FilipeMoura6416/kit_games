@@ -79,7 +79,7 @@ class MCTSNode:
         
         return state.winner()
     
-def MCTS(root_state: GameState, time_limit=2.0) -> Tuple[int, int]:
+def MCTS(root_state: GameState, time_limit=1.0) -> Tuple[int, int]:
     """
     Performs MCTS starting from the given root state and returns the best move found within the time limit.
 
