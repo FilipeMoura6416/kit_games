@@ -4,7 +4,7 @@ import datetime
 import time
 from ..tttm import board as board
 from datetime import datetime
-import othello_minimax_count
+from ..othello.board import Board
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"log_{timestamp}.txt"
@@ -61,7 +61,7 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
     if state.is_terminal():
-        val_return =  othello_minimax_count.evaluate_count(state, player) 
+        val_return =  evaluate_count(state, player) 
         return val_return
     elif (time_limit != -1 and time.time() >= time_limit):
         """ with open(log_path, 'a') as log_file:
@@ -132,7 +132,7 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
     if state.is_terminal():
-        val_return =  othello_minimax_count.evaluate_count(state, player) 
+        val_return =  evaluate_count(state, player) 
         return val_return  
     elif (time_limit != -1 and time.time() >= time_limit):
         """ with open(log_path, 'a') as log_file:
@@ -181,3 +181,21 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     #         log_file.write("  ")  # indent for better visualization of the tree
     #     log_file.write(f"Min Returning value: {beta} for state at depth {depth}\n")
     return beta
+
+
+def evaluate_count(state, player:str) -> float:
+    """
+    Evaluates an othello state from the point of view of the given player. 
+    If the state is terminal, returns its utility. 
+    If non-terminal, returns an estimate of its value based on the number of pieces of each color.
+    :param state: state to evaluate (instance of GameState)
+    :param player: player to evaluate the state for (B or W)
+    """
+    count_player = 0
+    for row in state.board.tiles:
+        for cell in row:
+            if cell == player:
+                count_player += 1
+            elif cell != Board.EMPTY:
+                count_player -= 1
+    return count_player

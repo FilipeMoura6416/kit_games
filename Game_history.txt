@@ -98,3 +98,27 @@ MCTS vs count 6x0
         Player 1 (B - advsearch\your_agent wins!
 
 Mask vs game_app 1x0
+
+Mask vs MCTS 
+pós adição de teste usar count em estado terminal
+    python server.py othello advsearch\your_agent\mcts.py  advsearch\your_agent\othello_minimax_mask.py -d 60
+        Player 1 (B - advsearch\your_agent): 18
+        Player 2 (W - advsearch\your_agent): 46
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 6
+        Player 2 (W - advsearch\your_agent): 57
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\mcts.py -d 60
+        Player 1 (B - advsearch\your_agent): 53
+        Player 2 (W - advsearch\your_agent): 11
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 32
+        Player 2 (W - advsearch\your_agent): 32
+        Draw!
+
+        Player 1 (B - advsearch\your_agent): 57
+        Player 2 (W - advsearch\your_agent): 7
+        Player 1 (B - advsearch\your_agent wins!
