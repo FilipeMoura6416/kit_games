@@ -73,14 +73,14 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     
     ##Recursive case: compute the maximum value of the state for the player to move
     ##For each legal move, compute the next state and call min_value on it to get the value of the move.
-    best_move = (0, 0)
+    best_move = 0
     """ if state.player != player:
         with open(log_path, 'a') as log_file:
             log_file.write(f"WARNING! ")
     with open(log_path, 'a') as log_file:
         log_file.write(f"max, player: {player}, state.player: {state.player}\n") """
     legal_moves = list(state.legal_moves())
-    for move in range(len(legal_moves)):
+    for move in range(0, len(legal_moves)):
          new_state = state.next_state(legal_moves[move])
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
@@ -106,7 +106,7 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
              #         log_file.write("  ")  # indent for better visualization of the tree
              #     log_file.write(f"Max Pruning at move: {move} with value: {move_value}\n")
              return alpha, best_move
-    val_return = (alpha, best_move)
+    val_return = (alpha, legal_moves[best_move])
     """  with open(log_path, 'a') as log_file:
          for x in range(depth):
              log_file.write("  ")  # indent for better visualization of the tree
