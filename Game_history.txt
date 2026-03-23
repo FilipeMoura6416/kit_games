@@ -1,0 +1,100 @@
+Maks vs count 4x2   
+    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_count.py -d 60
+        Player 1 (B - advsearch\your_agent): 36 
+        Player 2 (W - advsearch\your_agent): 28
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent): 30
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 38
+        Player 2 (W - advsearch\your_agent): 26
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello .\advsearch\your_agent\othello_minimax_count.py advsearch\your_agent\othello_minimax_mask.py -d 60
+        Player 1 (B - advsearch\your_agent): 35
+        Player 2 (W - advsearch\your_agent): 29
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 31
+        Player 2 (W - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent): 31
+        Player 1 (B - advsearch\your_agent wins!
+
+Mask vs MCTS 3x6
+    python server.py othello advsearch\your_agent\mcts.py  advsearch\your_agent\othello_minimax_mask.py -d 60
+        Player 1 (B - advsearch\your_agent): 25
+        Player 2 (W - advsearch\your_agent): 39
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent): 31
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 30
+        Player 2 (W - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 32
+        Player 2 (W - advsearch\your_agent): 32
+        Draw!
+
+        Player 1 (B - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent): 24
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\mcts.py -d 60 
+
+        Player 1 (B - advsearch\your_agent): 30
+        Player 2 (W - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 38
+        Player 2 (W - advsearch\your_agent): 26
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 30
+        Player 2 (W - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 22
+        Player 2 (W - advsearch\your_agent): 42
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 23
+        Player 2 (W - advsearch\your_agent): 41
+        Player 2 (W - advsearch\your_agent) wins!
+
+MCTS vs count 6x0
+    python server.py othello .\advsearch\your_agent\othello_minimax_count.py advsearch\your_agent\mcts.py -d 60
+
+        Player 1 (B - advsearch\your_agent): 28
+        Player 2 (W - advsearch\your_agent): 36
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 31
+        Player 2 (W - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 28
+        Player 2 (W - advsearch\your_agent): 36
+        Player 2 (W - advsearch\your_agent) wins!
+    
+    python server.py othello advsearch\your_agent\mcts.py .\advsearch\your_agent\othello_minimax_count.py -d 60
+        Player 1 (B - advsearch\your_agent): 42
+        Player 2 (W - advsearch\your_agent): 22
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 41
+        Player 2 (W - advsearch\your_agent): 23
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 47
+        Player 2 (W - advsearch\your_agent): 17
+        Player 1 (B - advsearch\your_agent wins!
+
+Mask vs game_app 1x0

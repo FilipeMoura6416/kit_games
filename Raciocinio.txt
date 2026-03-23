@@ -8,6 +8,7 @@ advsearch\your_agent\othello_minimax_custom.py
 advsearch\your_agent\othello_minimax_mask.py
 advsearch\your_agent\minimax.py
 advsearch\your_agent\mcts.py
+advsearch\humanplayer\agent.py
 
 Classe que servirá de nodos para a árvore 
 

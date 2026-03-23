@@ -4,6 +4,7 @@ import datetime
 import time
 from ..tttm import board as board
 from datetime import datetime
+import othello_minimax_count
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"log_{timestamp}.txt"
@@ -58,8 +59,11 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     :param eval_func: the function to evaluate a terminal state or a leaf state (when search is interrupted at max_depth)
     :return: the maximum value of the state for the player to move
     """
-    ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state    
-    if state.is_terminal() or (time_limit != -1 and time.time() >= time_limit):
+    ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
+    if state.is_terminal():
+        val_return =  othello_minimax_count.evaluate_count(state, player) 
+        return val_return
+    elif (time_limit != -1 and time.time() >= time_limit):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Max avaliando estado, player: {state.player}\n") """
         val_return = (eval_func(state, player), (0, 0))
@@ -126,8 +130,11 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     :param eval_func: the function to evaluate a terminal state or a leaf state (when search is interrupted at max_depth)
     :return: the minimum value of the state for the player to move
     """
-    ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state    
-    if state.is_terminal() or (time_limit != -1 and time.time() >= time_limit):
+    ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
+    if state.is_terminal():
+        val_return =  othello_minimax_count.evaluate_count(state, player) 
+        return val_return  
+    elif (time_limit != -1 and time.time() >= time_limit):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Min avaliando estado, player: {state.player}\n") """
         return_val = eval_func(state, player)
