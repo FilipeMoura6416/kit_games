@@ -7,7 +7,7 @@ from datetime import datetime
 from ..othello.board import Board
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_path = f"log_{timestamp}.txt"
+log_path = f"game_log\log_{timestamp}.txt"
 
 
 
@@ -83,15 +83,16 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
             log_file.write(f"WARNING! ")
     with open(log_path, 'a') as log_file:
         log_file.write(f"max, player: {player}, state.player: {state.player}\n") """
-    legal_moves = list(state.legal_moves())
-    for move in range(0, len(legal_moves)):
-         new_state = state.next_state(legal_moves[move])
+    legal_moves = state.legal_moves()
+    count_moves = 0
+    for move in legal_moves:
+         new_state = state.next_state(move)
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Max Evaluating move: {move} at depth {depth}\n")
          rest_time = time_limit - time.time()
-         time_division = float(rest_time)/(len(legal_moves) - move)
+         time_division = float(rest_time)/(len(legal_moves) - count_moves)
          if new_state.player == player:
             move_value = max_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)[0]
          else:
@@ -110,7 +111,8 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
              #         log_file.write("  ")  # indent for better visualization of the tree
              #     log_file.write(f"Max Pruning at move: {move} with value: {move_value}\n")
              return alpha, best_move
-    val_return = (alpha, legal_moves[best_move])
+         count_moves += 1
+    val_return = (alpha, best_move)
     """  with open(log_path, 'a') as log_file:
          for x in range(depth):
              log_file.write("  ")  # indent for better visualization of the tree
@@ -152,15 +154,16 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
             log_file.write(f"WARNING! ")
     with open(log_path, 'a') as log_file:
         log_file.write(f"Min, player: {player}, state.player: {state.player}\n") """
-    legal_moves = list(state.legal_moves())
-    for move in range(len(legal_moves)):
-         new_state = state.next_state(legal_moves[move])
+    legal_moves = state.legal_moves()
+    count_moves = 0
+    for move in legal_moves:
+         new_state = state.next_state(move)
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Min Evaluating move: {move} at depth {depth}\n")
          rest_time = time_limit - time.time()
-         time_division = float(rest_time)/(len(legal_moves) - move)
+         time_division = float(rest_time)/(len(legal_moves) - count_moves)
          if new_state.player == player:
             move_value, move_return = max_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)
          else:
@@ -176,6 +179,7 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
              #         log_file.write("  ")  # indent for better visualization of the tree
              #     log_file.write(f"Min Pruning at move: {move} with value: {move_value}\n")
              return beta
+         count_moves += 1
     # with open(log_path, 'a') as log_file:
     #     for x in range(depth):
     #         log_file.write("  ")  # indent for better visualization of the tree

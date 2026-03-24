@@ -25,7 +25,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 2, evaluate_custom)
+    return minimax_move(state, 4.9, evaluate_custom)
 
 
 def evaluate_custom(state, player:str) -> float:
@@ -38,5 +38,5 @@ def evaluate_custom(state, player:str) -> float:
     """
     
     
-    return 0.75*evaluate_mask(state, player) + 0.25*evaluate_count(state, player)
+    return 0.5*evaluate_mask(state, player) + 0.5*evaluate_count(state, player)
 
