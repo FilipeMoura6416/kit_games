@@ -218,7 +218,7 @@ Mask vs weighted(0.5) 5s
         Player 1 (B - advsearch\your_agent wins!
 
 
-Mask vs MCTS 5s
+Mask vs MCTS 5s 2x1
 
     python server.py othello advsearch\your_agent\mcts.py  advsearch\your_agent\othello_minimax_mask.py
         Player 1 (B - advsearch\your_agent): 36
@@ -228,10 +228,18 @@ Mask vs MCTS 5s
         Player 1 (B - advsearch\your_agent): 24
         Player 2 (W - advsearch\your_agent): 40
         Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 17
+        Player 2 (W - advsearch\your_agent): 47
+        Player 2 (W - advsearch\your_agent) wins!
         
 
-    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\mcts.py -d 60
+    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\mcts.py
 
         Player 1 (B - advsearch\your_agent): 52
         Player 2 (W - advsearch\your_agent): 12
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 43
+        Player 2 (W - advsearch\your_agent): 21
         Player 1 (B - advsearch\your_agent wins!
