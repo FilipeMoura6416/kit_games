@@ -234,7 +234,7 @@ Mask vs MCTS 5s 2x1
         Player 2 (W - advsearch\your_agent) wins!
         
 
-    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\mcts.py
+    python server.py othello .\advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\another_mask.py
 
         Player 1 (B - advsearch\your_agent): 52
         Player 2 (W - advsearch\your_agent): 12

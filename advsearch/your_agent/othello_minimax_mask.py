@@ -25,7 +25,6 @@ EVAL_TEMPLATE = [
     [100, -30, 6, 2, 2, 6, -30,  100]
 ]
 
-
 def make_move(state) -> Tuple[int, int]:
     """
     Returns a move for the given game state
@@ -38,7 +37,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 4.9, evaluate_mask)
+    return minimax_move(state, 0.9, evaluate_mask)
 
 
 def evaluate_mask(state, player:str) -> float:

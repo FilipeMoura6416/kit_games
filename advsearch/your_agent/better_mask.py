@@ -37,11 +37,14 @@ Simétricos: x,y = 7 - x, y; x, 7 - y; 7 - x, 7 - y;
 """
 EVAL_TEMPLATE = [[0 for _ in range(8)] for _ in range(8)]
 best_masks_file = "best_masks.txt"
-agents = ["advsearch\your_agent\othello_minimax.another_mask.py" , "advsearch\your_agent\othello_minimax_mask.py"]
+agents = [r"advsearch/your_agent/othello_minimax_another_mask.py" , r"advsearch/your_agent/othello_minimax_mask.py"]
+print("Criando mascara...\n")
+
 for j in range(1):
     for linha in range(4):
         for coluna in range(linha + 1):
-            EVAL_TEMPLATE[linha][coluna] = random.randrange(-100, 101, 0.5)
+            EVAL_TEMPLATE[linha][coluna] = random.choice(range(-100, 101))
+            
             EVAL_TEMPLATE[7 - linha][coluna] = EVAL_TEMPLATE[linha][coluna]
             EVAL_TEMPLATE[linha][7 - coluna] = EVAL_TEMPLATE[linha][coluna]
             EVAL_TEMPLATE[7 - linha][7 - coluna] = EVAL_TEMPLATE[linha][coluna]
@@ -51,12 +54,15 @@ for j in range(1):
                 EVAL_TEMPLATE[7 - coluna][linha] = EVAL_TEMPLATE[linha][coluna]
                 EVAL_TEMPLATE[7 - coluna][7 - linha] = EVAL_TEMPLATE[linha][coluna]
 
+
     another_mask_score_count = 0
     mask_score_count = 0
     for i in range(2):
         for j in range(5):
-            subprocess.run([f"python server.py othello {agents[i]} {agents[(i + 1)%2]}"])
-            root = ET.parse("../../results.xml")
+            print("Executando partida")
+            result = subprocess.Popen(["python", "server.py", "othello" , agents[i], agents[(i + 1)%2]])
+            print(result.stdout)
+            root = ET.parse("results.xml")
             if root == None:
                 raise "Results não encontrado"
             retorno = root.findall("player")

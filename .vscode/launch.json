@@ -2,10 +2,10 @@
  "version": "0.2.0",
  "configurations": [
   {
-   "name": "Run minimax",
+   "name": "Run better_mask",
    "type": "python",
    "request": "launch",
-   "module": "advsearch.your_agent.othello_minimax_mask",
+   "module": "advsearch.your_agent.better_mask",
    "console": "integratedTerminal"
   }
  ]
