@@ -44,7 +44,7 @@ if __name__ == "__main__":
     agents = [r"advsearch/your_agent/othello_minimax_another_mask.py" , r"advsearch/your_agent/othello_minimax_mask.py"]
     print("Criando mascara...\n")
 
-    for j in range(1):
+    for j in range(10):
 
         for linha in range(4):
             for coluna in range(linha + 1):
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         another_mask_score_count = 0
         mask_score_count = 0
         for i in range(2):
-            for j in range(5):
+            for j in range(3):
                 print("Executando partida")
                 result = subprocess.run(["python", "server.py", "othello" , agents[i], agents[(i + 1)%2]])
                 root = ET.parse("results.xml")
