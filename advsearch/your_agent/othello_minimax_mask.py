@@ -4,6 +4,7 @@ from ..othello.gamestate import GameState
 from ..othello.board import Board
 from .minimax import log_path 
 from .minimax import minimax_move
+from .othello_minimax_count import evaluate_count
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
@@ -40,7 +41,7 @@ def make_move(state) -> Tuple[int, int]:
     return minimax_move(state, 4.9, evaluate_mask)
 
 
-def evaluate_mask(state, player:str) -> float:
+def evaluate_mask(state, player:str, sequencia=0, state_is_terminal=False) -> float:
     """
     Evaluates an othello state from the point of view of the given player. 
     If the state is terminal, returns its utility. 
@@ -50,15 +51,19 @@ def evaluate_mask(state, player:str) -> float:
     :param player: player to evaluate the state for (B or W)
     """
     count_player = 0
-    for row in range(0, int(len(state.board.tiles))):
-        for cell in range(0, int(len(state.board.tiles[row]))):
-            if state.board.tiles[row][cell] == player:
-                count_player += EVAL_TEMPLATE[row][cell]
-            elif state.board.tiles[row][cell] != Board.EMPTY:
-                count_player -= EVAL_TEMPLATE[row][cell]
-            """ with open(log_path, 'a') as log_file:
-                 log_file.write(f"cell: {state.board.tiles[row][cell]} player: {player}\n") """
-    """ with open(log_path, 'a') as log_file:
-                 log_file.write(f"Count_player: {count_player}\n") """
+    if not state_is_terminal:
+        for row in range(0, int(len(state.board.tiles))):
+            for cell in range(0, int(len(state.board.tiles[row]))):
+                if state.board.tiles[row][cell] == player:
+                    count_player += EVAL_TEMPLATE[row][cell]
+                elif state.board.tiles[row][cell] != Board.EMPTY:
+                    count_player -= EVAL_TEMPLATE[row][cell]
+                """ with open(log_path, 'a') as log_file:
+                    log_file.write(f"cell: {state.board.tiles[row][cell]} player: {player}\n") """
+        """ with open(log_path, 'a') as log_file:
+                    log_file.write(f"Count_player: {count_player}\n") """
+        return count_player
+    else :
+        return evaluate_count(state, player)
                 
-    return count_player
+    

@@ -5,8 +5,19 @@ from ..othello.board import Board
 from .minimax import log_path 
 from .minimax import minimax_move
 import json
+from .othello_minimax_count import evaluate_count
+from .minimax import log_path
 
-EVAL_TEMPLATE = None
+EVAL_TEMPLATE = [
+    [100, -41, 10, 10, 10, 10, -41, 100],
+    [-41, -50, 1, 1, 1, 1, -50, -41],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [-41, -50, 1, 1, 1, 1, -50, -41],
+    [100, -41, 10, 10, 10, 10, -41, 100]
+]
 
 def make_move(state) -> Tuple[int, int]:
     """
@@ -23,7 +34,7 @@ def make_move(state) -> Tuple[int, int]:
     return minimax_move(state, 4.9, evaluate_mask)
 
 
-def evaluate_mask(state, player:str) -> float:
+def evaluate_mask(state, player:str, sequencia=0, state_is_terminal=False) -> float:
     """
     Evaluates an othello state from the point of view of the given player. 
     If the state is terminal, returns its utility. 
@@ -32,8 +43,10 @@ def evaluate_mask(state, player:str) -> float:
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    with open("mask.json", 'r') as mask_file:
-        EVAL_TEMPLATE = json.load(mask_file)
+    """with open("mask.json", 'r') as mask_file:
+        EVAL_TEMPLATE = json.load(mask_file)"""
+    if state_is_terminal:
+        return evaluate_count(state,player)
     count_player = 0
     for row in range(0, int(len(state.board.tiles))):
         for cell in range(0, int(len(state.board.tiles[row]))):

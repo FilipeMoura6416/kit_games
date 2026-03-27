@@ -83,7 +83,7 @@ class TestAlphaBetaPruning(unittest.TestCase):
 # conta o numero de vezes que a funcao de utilidade e' chamada em cada nodo
 calls = defaultdict(int)
 
-def utility(state: 'GameState', player:str) -> float:
+def utility(state: 'GameState', player:str, sequencia=0, state_is_terminal=False) -> float:
     """
     Returns the utility of the given state.
     """

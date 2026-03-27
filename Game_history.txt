@@ -243,3 +243,171 @@ Mask vs MCTS 5s 4x1
         Player 1 (B - advsearch\your_agent): 43
         Player 2 (W - advsearch\your_agent): 21
         Player 1 (B - advsearch\your_agent wins!
+
+Mask vs custom mask: 2x2
+EVAL_TEMPLATE = [
+    [50, -20, 7, 4, 4, 7, -20,  50],
+    [-20, -20, 0, 0, 0, 0, -20, -20],
+    [  7,   0, 1, 1, 1, 1,   0,   7],
+    [  4,   0, 1, 1, 1, 1,   0,   4],
+    [  4,   0, 1, 1, 1, 1,   0,   4],
+    [  7,   0, 1, 1, 1, 1,   0,   7],
+    [-20, -20, 0, 0, 0, 0, -20, -20],
+    [50, -20, 7, 4, 4, 7, -20,  50]
+
+    python server.py othello advsearch\your_agent\othello_minimax_another_mask.py  advsearch\your_agent\othello_minimax_mask.py
+        Player 1 (B - advsearch\your_agent): 35
+        Player 2 (W - advsearch\your_agent): 29
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_another_mask.py  
+        Player 1 (B - advsearch\your_agent): 44
+        Player 2 (W - advsearch\your_agent): 20
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 37
+        Player 2 (W - advsearch\your_agent): 27
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 24
+        Player 2 (W - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent) wins!
+
+
+Mask vs custom mask: 
+EVAL_TEMPLATE = [
+    [30, -10, 5, 5, 5, 6, -10,  30],
+    [-10, -20, 0, 0, 0, 0, -20, -10],
+    [  6,   0, 1, 1, 1, 1,   0,   6],
+    [  5,   0, 1, 1, 1, 1,   0,   5],
+    [  5,   0, 1, 1, 1, 1,   0,   5],
+    [  6,   0, 1, 1, 1, 1,   0,   6],
+    [-10, -20, 0, 0, 0, 0, -20, -10],
+    [30, -10, 6, 5, 5, 6, -10,  30]
+]
+    
+    python server.py othello advsearch\your_agent\othello_minimax_another_mask.py  advsearch\your_agent\othello_minimax_mask.py
+        Player 1 (B - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent): 30
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 20
+        Player 2 (W - advsearch\your_agent): 44
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_another_mask.py  
+        Player 1 (B - advsearch\your_agent): 48
+        Player 2 (W - advsearch\your_agent): 16
+        Player 1 (B - advsearch\your_agent wins!
+-
+Mask vs custom mask: 2x2
+EVAL_TEMPLATE = [
+    [100, -41, 10, 10, 10, 10, -41, 100],
+    [-41, -50, 1, 1, 1, 1, -50, -41],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [ 10,   1, 1, 1, 1, 1,   1,  10],
+    [-41, -50, 1, 1, 1, 1, -50, -41],
+    [100, -41, 10, 10, 10, 10, -41, 100]
+]
+    python server.py othello advsearch\your_agent\othello_minimax_another_mask.py  advsearch\your_agent\othello_minimax_mask.py
+        Player 1 (B - advsearch\your_agent): 59
+        Player 2 (W - advsearch\your_agent): 5
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_another_mask.py
+
+        Player 1 (B - advsearch\your_agent): 39
+        Player 2 (W - advsearch\your_agent): 25
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 25
+        Player 2 (W - advsearch\your_agent): 39
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent): 30
+        Player 1 (B - advsearch\your_agent wins!
+
+
+Mask vs weighted(0.5) 5s return (evaluate_mask(state, player) + evaluate_count(state, player) + moves)/3
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+    Player 1 (B - advsearch\your_agent): 24
+    Player 2 (W - advsearch\your_agent): 40
+    Player 2 (W - advsearch\your_agent) wins!
+    
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py 
+
+Mask vs weighted(0.5) 5s return (0.4*evaluate_mask(state, player) + 0.4*evaluate_count(state, player) + 0.2*moves)
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+    Player 1 (B - advsearch\your_agent): 32
+    Player 2 (W - advsearch\your_agent): 32
+    Draw!
+    
+    Player 1 (B - advsearch\your_agent): 6
+    Player 2 (W - advsearch\your_agent): 57
+    Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py 
+
+Mask vs weighted(0.5) 5s return (0.7*evaluate_mask(state, player) + 0.2*evaluate_count(state, player) + 0.1*moves)
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+        Player 1 (B - advsearch\your_agent): 25
+        Player 2 (W - advsearch\your_agent): 39
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 17
+        Player 2 (W - advsearch\your_agent): 47
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py 
+
+Mask vs weighted(0.5) 5s return  return (0.8*evaluate_mask(state, player) + 0.1*evaluate_count(state, player) + 0.1*moves)
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+        Player 1 (B - advsearch\your_agent): 36
+        Player 2 (W - advsearch\your_agent): 28
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py 
+        Player 1 (B - advsearch\your_agent): 38
+        Player 2 (W - advsearch\your_agent): 26
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 23
+        Player 2 (W - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent) wins!
+
+Mask vs weighted(0.5) 5s return  return 0.8*player_value + 0.1*count_pieces + 0.1*moves + sequencia*10
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+        Player 1 (B - advsearch\your_agent): 17
+        Player 2 (W - advsearch\your_agent): 47
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 29
+        Player 2 (W - advsearch\your_agent): 35
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py 
+        Player 1 (B - advsearch\your_agent): 19
+        Player 2 (W - advsearch\your_agent): 45
+        Player 2 (W - advsearch\your_agent) wins!
+
+Mask vs weighted(0.5) 5s return  return 0.8*player_value + 0.1*count_pieces + 0.1*moves + sequencia*5
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\othello_minimax_mask.py 
+        Player 1 (B - advsearch\your_agent): 23
+        Player 2 (W - advsearch\your_agent): 41
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py
+
+        Player 1 (B - advsearch\your_agent): 41
+        Player 2 (W - advsearch\your_agent): 23
+        Player 1 (B - advsearch\your_agent wins!

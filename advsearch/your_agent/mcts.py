@@ -18,7 +18,7 @@ class MCTSNode:
         self.player = player if player is not None else state.player
         """if state.player == None:
             raise "Error player == None"""
-        self.non_expanded_moves = [] if state.is_terminal() else list(state.board.legal_moves(state.player))
+        self.non_expanded_moves = [] if state.is_terminal() else list(state.legal_moves())
         self.parent = parent
         self.children = []
         self.visits = 0
@@ -123,9 +123,6 @@ def make_move(state:GameState) -> Tuple[int, int]:
     return MCTS(state)
 
 
-board = Board()
-state = GameState(board, "B")
-print(MCTS(state))
 
 
 

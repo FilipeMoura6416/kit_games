@@ -7,6 +7,11 @@
    "request": "launch",
    "module": "advsearch.your_agent.better_mask",
    "console": "integratedTerminal"
-  }
+  },
+  {"name": "Run test_mcts",
+   "type": "python",
+   "request": "launch",
+   "module": "test_mcts",
+   "console": "integratedTerminal"}
  ]
 }

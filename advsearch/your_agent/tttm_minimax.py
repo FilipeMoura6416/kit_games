@@ -27,7 +27,7 @@ def make_move(state: GameState) -> Tuple[int, int]:
 
     return minimax_move(state, -1, utility)
 
-def utility(state, player:str) -> float:
+def utility(state, player:str, sequencia=0, state_is_terminal=False) -> float:
     """
     Retorna a utilidade de um estado (terminal) 
     """

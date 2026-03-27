@@ -28,7 +28,7 @@ def minimax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     beta = float('inf')
     best_move = None
     player = state.player
-    time_limit = float(time.time()) + time_amount
+    time_limit = float(time.time()) + time_amount if time_amount != -1 else time_amount
     start_time = time.time()
     move_value, best_move = max_value(state, alpha, beta, 0, time_limit, eval_func, player)
     end_time = time.time()
@@ -46,7 +46,7 @@ def minimax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
         log_file.write(f"Player: {player} Best move will me maked: {best_move} with value: {move_value} calculed in {end_time - start_time} seconds\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     return best_move
 
-def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, parent_state = None) -> float:
+def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, parent_state = None, sequencia=0) -> float:
     """
     A recursive fuction to compute the maximum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the maximum value of the state for the player to move, and also updates the alpha and beta values for pruning.
@@ -60,13 +60,11 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     :return: the maximum value of the state for the player to move
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
-    if state.is_terminal():
-        val_return =  evaluate_count(state, player) 
-        return val_return
-    elif (time_limit != -1 and time.time() >= time_limit):
+    state_is_terminal = state.is_terminal()
+    if (state_is_terminal or (time_limit != -1 and time.time() >= time_limit)):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Max avaliando estado, player: {state.player}\n") """
-        val_return = (eval_func(state, player), (0, 0))
+        val_return = (eval_func(state, player, sequencia, state_is_terminal), (0, 0))
         with open(log_path, 'a') as log_file:
              for x in range(depth):
                  log_file.write("  ")  # indent for better visualization of the tree
@@ -91,12 +89,16 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Max Evaluating move: {move} at depth {depth}\n")
-         rest_time = time_limit - time.time()
-         time_division = float(rest_time)/(len(legal_moves) - count_moves)
-         if new_state.player == player:
-            move_value = max_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)[0]
+         if time_limit != -1:
+            rest_time = time_limit - time.time() 
+            time_division = float(rest_time)/(len(legal_moves) - count_moves)
+            child_time_limit = time.time() + time_division
          else:
-            move_value = min_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)
+            child_time_limit = time_limit
+         if new_state.player == player:
+            move_value = max_value(new_state, alpha, beta, depth + 1, child_time_limit, eval_func, player, state, sequencia + 1)[0]
+         else:
+            move_value = min_value(new_state, alpha, beta, depth + 1, child_time_limit, eval_func, player, state, sequencia)
             
          # with open(log_path, 'a') as log_file:
          #     for x in range(depth):
@@ -119,7 +121,7 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
          log_file.write(f"At depth {depth} best move: {best_move} val_return: {val_return}\n") """
     return val_return
 
-def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, parent_state) -> float:
+def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, parent_state, sequencia=0) -> float:
     """
     A recursive fuction to compute the minimum value of a state in the minimax algorithm with alpha-beta pruning.
     Returns the minimum value of the state for the player to move, and also updates the alpha and beta values for pruning.
@@ -133,18 +135,16 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     :return: the minimum value of the state for the player to move
     """
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
-    if state.is_terminal():
-        val_return =  evaluate_count(state, player) 
-        return val_return  
-    elif (time_limit != -1 and time.time() >= time_limit):
+    state_is_terminal = state.is_terminal()
+    if (state_is_terminal or (time_limit != -1 and time.time() >= time_limit)):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Min avaliando estado, player: {state.player}\n") """
-        return_val = eval_func(state, player)
-        with open(log_path, 'a') as log_file:
+        return_val = eval_func(state, player, sequencia, state_is_terminal)
+        """ with open(log_path, 'a') as log_file:
             for x in range(depth):
                 log_file.write("  ")  # indent for better visualization of the tree
             #log_file.write(f"State:\n{state.board.decorated_str(colors = False)}\n\n")
-            log_file.write(f"Min Evaluating depth: {depth} with utility: {return_val}\n")
+            log_file.write(f"Min Evaluating depth: {depth} with utility: {return_val}\n") """
         return return_val
     
     ##Recursive case: compute the minimum value of the state for the player to move 
@@ -162,12 +162,16 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
          #     for x in range(depth):
          #         log_file.write("  ")  # indent for better visualization of the tree
          #     log_file.write(f"Min Evaluating move: {move} at depth {depth}\n")
-         rest_time = time_limit - time.time()
-         time_division = float(rest_time)/(len(legal_moves) - count_moves)
-         if new_state.player == player:
-            move_value, move_return = max_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)
+         if time_limit != -1:
+            rest_time = time_limit - time.time() 
+            time_division = float(rest_time)/(len(legal_moves) - count_moves)
+            child_time_limit = time.time() + time_division
          else:
-            move_value = min_value(new_state, alpha, beta, depth + 1, time.time() + time_division, eval_func, player, state)
+            child_time_limit = time_limit
+         if new_state.player == player:
+            move_value, move_return = max_value(new_state, alpha, beta, depth + 1, child_time_limit, eval_func, player, state, sequencia)
+         else:
+            move_value = min_value(new_state, alpha, beta, depth + 1, child_time_limit, eval_func, player, state, sequencia - 1)
          """ with open(log_path, 'a') as log_file:
               for x in range(depth):
                   log_file.write("  ")  # indent for better visualization of the tree
@@ -185,21 +189,3 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     #         log_file.write("  ")  # indent for better visualization of the tree
     #     log_file.write(f"Min Returning value: {beta} for state at depth {depth}\n")
     return beta
-
-
-def evaluate_count(state, player:str) -> float:
-    """
-    Evaluates an othello state from the point of view of the given player. 
-    If the state is terminal, returns its utility. 
-    If non-terminal, returns an estimate of its value based on the number of pieces of each color.
-    :param state: state to evaluate (instance of GameState)
-    :param player: player to evaluate the state for (B or W)
-    """
-    count_player = 0
-    for row in state.board.tiles:
-        for cell in row:
-            if cell == player:
-                count_player += 1
-            elif cell != Board.EMPTY:
-                count_player -= 1
-    return count_player
