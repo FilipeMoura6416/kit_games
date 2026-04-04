@@ -13,14 +13,14 @@ from .minimax import log_path
 # do seu agente.
 
 EVAL_TEMPLATE = [
-    [100, -30, 6, 2, 2, 6, -30,  100],
-    [-30, -50, 1, 1, 1, 1, -50, -30],
-    [  6,   1, 1, 1, 1, 1,   1,   6],
-    [  2,   1, 1, 3, 3, 1,   1,   2],
-    [  2,   1, 1, 3, 3, 1,   1,   2],
-    [  6,   1, 1, 1, 1, 1,   1,   6],
-    [-30, -50, 1, 1, 1, 1, -50, -30],
-    [100, -30, 6, 2, 2, 6, -30,  100]
+    [100, -40, 10, 8, 8, 10, -40,  100],
+    [-40, -50, 1, 1, 1, 1, -50, -40],
+    [ 10,   1, 2, 1, 1, 2,   1,   10],
+    [  8,   1, 1, 2, 2, 1,   1,   8],
+    [  8,   1, 1, 2, 2, 1,   1,   8],
+    [ 10,   1, 2, 1, 1, 2,   1,   10],
+    [-40, -50, 1, 1, 1, 1, -50, -40],
+    [100, -40, 10, 8, 8, 10, -40,  100]
 ]
 
 def make_move(state) -> Tuple[int, int]:
@@ -61,8 +61,54 @@ def evaluate_custom(state, player:str, sequencia=0, state_is_terminal=False) -> 
                 elif state.board.tiles[row][cell] != Board.EMPTY:
                     player_value -= EVAL_TEMPLATE[row][cell]
                     count_pieces -= 1
+        adversario = 'W' if player == 'B' else 'B'
+        ##Testa primeira linha
+        linha_completa = 1
+        for j in range(2, 7):
+            if not (state.board.tiles[0][j] == state.board.tiles[0][j - 1] and state.board.tiles[0][j] != Board.EMPTY):
+                linha_completa = 0
+                break  
+        if linha_completa:
+            if state.board.tiles[0][1] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[0][7] != adversario)):
+                player_value += 60
+            else:
+                player_value -= 60
+        ##Testa ultima linha
+        linha_completa = 1
+        for j in range(2, 7):
+            if not (state.board.tiles[7][j] == state.board.tiles[7][j - 1] and state.board.tiles[7][j] != Board.EMPTY):
+                linha_completa = 0
+                break  
+        if linha_completa:
+            if state.board.tiles[7][1] == player and ((state.board.tiles[7][0] != adversario) ^ (state.board.tiles[7][7] != adversario)):
+                player_value += 60
+            else:
+                player_value -= 60
+        ##Testa primeira coluna
+        linha_completa = 1
+        for j in range(2, 7):
+            if not (state.board.tiles[j][0] == state.board.tiles[j-1][0] and state.board.tiles[j][0] != Board.EMPTY):
+                linha_completa = 0
+                break  
+        if linha_completa:
+            if state.board.tiles[1][0] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[7][0] != adversario)):
+                player_value += 60
+            else:
+                player_value -= 60
+         ##Testa ultima coluna
+        linha_completa = 1
+        for j in range(2, 7):
+            if not (state.board.tiles[j][7] == state.board.tiles[j-1][7] and state.board.tiles[j][7] != Board.EMPTY):
+                linha_completa = 0
+                break  
+        if linha_completa:
+            if state.board.tiles[1][7] == player and ((state.board.tiles[0][7] != adversario) ^ (state.board.tiles[7][7] != adversario)):
+                player_value += 60
+            else:
+                player_value -= 60
 
-        return 0.8*player_value + 0.1*count_pieces + 0.1*moves + sequencia*5
+
+        return player_value
     else:
         return evaluate_count(state, player)
 
