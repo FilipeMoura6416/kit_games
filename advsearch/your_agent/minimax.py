@@ -42,8 +42,9 @@ def minimax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
         if move_value > alpha:
             alpha = move_value
             best_move = move"""
-    with open(log_path, 'a') as log_file:
+    """ with open(log_path, 'a') as log_file:
         log_file.write(f"Player: {player} Best move will me maked: {best_move} with value: {move_value} calculed in {end_time - start_time} seconds\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+     """
     return best_move
 
 def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, parent_state = None, sequencia=0) -> float:
@@ -65,11 +66,11 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Max avaliando estado, player: {state.player}\n") """
         val_return = (eval_func(state, player, sequencia, state_is_terminal), (0, 0))
-        with open(log_path, 'a') as log_file:
+        """ with open(log_path, 'a') as log_file:
              for x in range(depth):
                  log_file.write("  ")  # indent for better visualization of the tree
         #     log_file.write(f"State:\n{state.board.decorated_str(colors = False)}\n\n")
-             log_file.write(f"Max Evaluating depth {depth} val_return: {val_return}\n")
+             log_file.write(f"Max Evaluating depth {depth} val_return: {val_return}\n") """
              
         return val_return
     

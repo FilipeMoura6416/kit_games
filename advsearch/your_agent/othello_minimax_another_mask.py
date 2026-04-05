@@ -31,7 +31,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
     
-    return minimax_move(state, 4.9, evaluate_mask)
+    return minimax_move(state, 2, evaluate_mask)
 
 
 def evaluate_mask(state, player:str, sequencia=0, state_is_terminal=False) -> float:
@@ -43,8 +43,8 @@ def evaluate_mask(state, player:str, sequencia=0, state_is_terminal=False) -> fl
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    """with open("mask.json", 'r') as mask_file:
-        EVAL_TEMPLATE = json.load(mask_file)"""
+    with open("mask.json", 'r') as mask_file:
+        EVAL_TEMPLATE = json.load(mask_file)
     if state_is_terminal:
         return evaluate_count(state,player)
     count_player = 0
