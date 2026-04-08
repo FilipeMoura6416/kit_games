@@ -506,3 +506,39 @@ EVAL_TEMPLATE = [
         Player 1 (B - advsearch\your_agent wins!
 
     python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_custom.py
+        Player 1 (B - advsearch\your_agent): 9
+        Player 2 (W - advsearch\your_agent): 55
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent): 31
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 48
+        Player 2 (W - advsearch\your_agent): 16
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 17
+        Player 2 (W - advsearch\your_agent): 47
+        Player 2 (W - advsearch\your_agent) wins!
+
+Mask vs custom mask:
+EVAL_TEMPLATE = [
+    [92, 15, 49, -25, -25, 49, 15, 92],
+    [15, -55, -69, 66, 66, -69, -55, 15],
+    [49, -69, -68, -29, -29, -68, -69, 49],
+    [-25, 66, -29, 24, 24, -29, 66, -25],
+    [-25, 66, -29, 24, 24, -29, 66, -25],
+    [49, -69, -68, -29, -29, -68, -69, 49],
+    [15, -55, -69, 66, 66, -69, -55, 15],
+    [92, 15, 49, -25, -25, 49, 15, 92]
+]
+    python server.py othello advsearch\your_agent\othello_minimax_another_mask.py  advsearch\your_agent\othello_minimax_mask.py
+        Player 1 (B - advsearch\your_agent): 19
+        Player 2 (W - advsearch\your_agent): 45
+        Player 2 (W - advsearch\your_agent) wins!
+
+    python server.py othello  advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\othello_minimax_another_mask.py
+        Player 1 (B - advsearch\your_agent): 13
+        Player 2 (W - advsearch\your_agent): 51
+        Player 2 (W - advsearch\your_agent) wins!
