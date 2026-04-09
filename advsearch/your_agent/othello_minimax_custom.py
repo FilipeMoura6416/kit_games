@@ -48,7 +48,7 @@ def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
     """
     if not state_is_terminal:        
         player_value = 0
-        for row in range(1, len(state.board.tiles - 1)):
+        for row in range(1, len(state.board.tiles) - 1):
             for cell in range(1, len(state.board.tiles[row]) - 1):
                 if state.board.tiles[row][cell] == player:
                     player_value += EVAL_TEMPLATE[row][cell]
@@ -71,7 +71,7 @@ def eval_edges(state) -> float:
     if state.board.tiles[0][1] == player:
                     player_value += EVAL_TEMPLATE[0][1]
     elif state.board.tiles[0][1] != Board.EMPTY:
-            player_value -= EVAL_TEMPLATE[0][j]
+            player_value -= EVAL_TEMPLATE[0][1]
     for j in range(2, 7):
         if not (state.board.tiles[0][j] == state.board.tiles[0][j - 1] and state.board.tiles[0][j] != Board.EMPTY) :
             linha_completa = 0

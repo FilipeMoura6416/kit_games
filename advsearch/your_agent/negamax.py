@@ -5,11 +5,12 @@ import time
 from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
-from othello_minimax_custom import eval_edges
+from .othello_minimax_custom import eval_edges
+from .othello_minimax_custom import EVAL_TEMPLATE
 
 
 
-def minimax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
+def negamax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     """
     Returns a move computed by the minimax algorithm with alpha-beta pruning for the given game state.
     :param state: state to make the move (instance of GameState)
@@ -58,6 +59,7 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
     legal_moves = list(state.legal_moves())
     legal_moves.sort(key=fast_eval, reverse=True)
     count_moves = 0
+    best_move = None
     for move in legal_moves:
 
         new_state = state.next_state(move)
@@ -81,5 +83,5 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
         
     return alpha, best_move
 
-def fast_eval(state) -> float:
-    return eval_edges(state)
+def fast_eval(move) -> float:
+    return EVAL_TEMPLATE[move[0]][move[1]]

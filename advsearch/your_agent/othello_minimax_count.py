@@ -34,5 +34,5 @@ def evaluate_count(state, player:str) -> float:
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    return state.num_pieces(player) - state.num_pieces(Board.opponent(player))
+    return state.board.num_pieces(player) - state.board.num_pieces(Board.opponent(player))
 
