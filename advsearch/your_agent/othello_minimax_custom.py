@@ -38,7 +38,7 @@ def make_move(state) -> Tuple[int, int]:
     return minimax_move(state, 4.9, evaluate_custom)
 
 
-def evaluate_custom(state, player:str, sequencia=0, state_is_terminal=False) -> float:
+def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
     """
     Evaluates an othello state from the point of view of the given player. 
     If the state is terminal, returns its utility. 
@@ -46,70 +46,101 @@ def evaluate_custom(state, player:str, sequencia=0, state_is_terminal=False) -> 
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    if not state_is_terminal:
-        moves = len(state.legal_moves())
-        if state.player != player:
-            moves = -moves
-        
+    if not state_is_terminal:        
         player_value = 0
-        count_pieces = 0
-        for row in range(0, int(len(state.board.tiles))):
-            for cell in range(0, int(len(state.board.tiles[row]))):
+        for row in range(1, len(state.board.tiles - 1)):
+            for cell in range(1, len(state.board.tiles[row]) - 1):
                 if state.board.tiles[row][cell] == player:
                     player_value += EVAL_TEMPLATE[row][cell]
-                    count_pieces += 1
                 elif state.board.tiles[row][cell] != Board.EMPTY:
                     player_value -= EVAL_TEMPLATE[row][cell]
-                    count_pieces -= 1
-        adversario = 'W' if player == 'B' else 'B'
-        ##Testa primeira linha
-        linha_completa = 1
-        for j in range(2, 7):
-            if not (state.board.tiles[0][j] == state.board.tiles[0][j - 1] and state.board.tiles[0][j] != Board.EMPTY):
-                linha_completa = 0
-                break  
-        if linha_completa:
-            if state.board.tiles[0][1] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[0][7] != adversario)):
-                player_value += 60
-            else:
-                player_value -= 60
-        ##Testa ultima linha
-        linha_completa = 1
-        for j in range(2, 7):
-            if not (state.board.tiles[7][j] == state.board.tiles[7][j - 1] and state.board.tiles[7][j] != Board.EMPTY):
-                linha_completa = 0
-                break  
-        if linha_completa:
-            if state.board.tiles[7][1] == player and ((state.board.tiles[7][0] != adversario) ^ (state.board.tiles[7][7] != adversario)):
-                player_value += 60
-            else:
-                player_value -= 60
-        ##Testa primeira coluna
-        linha_completa = 1
-        for j in range(2, 7):
-            if not (state.board.tiles[j][0] == state.board.tiles[j-1][0] and state.board.tiles[j][0] != Board.EMPTY):
-                linha_completa = 0
-                break  
-        if linha_completa:
-            if state.board.tiles[1][0] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[7][0] != adversario)):
-                player_value += 60
-            else:
-                player_value -= 60
-         ##Testa ultima coluna
-        linha_completa = 1
-        for j in range(2, 7):
-            if not (state.board.tiles[j][7] == state.board.tiles[j-1][7] and state.board.tiles[j][7] != Board.EMPTY):
-                linha_completa = 0
-                break  
-        if linha_completa:
-            if state.board.tiles[1][7] == player and ((state.board.tiles[0][7] != adversario) ^ (state.board.tiles[7][7] != adversario)):
-                player_value += 60
-            else:
-                player_value -= 60
 
+        player_value += eval_edges(state)
 
         return player_value
     else:
         return evaluate_count(state, player)
 
+def eval_edges(state) -> float:
+    player = state.player
+    player_value = 0
+    adversario = 'W' if player == 'B' else 'B'
 
+    ##Testa primeira linha
+    linha_completa = 1
+    if state.board.tiles[0][1] == player:
+                    player_value += EVAL_TEMPLATE[0][1]
+    elif state.board.tiles[0][1] != Board.EMPTY:
+            player_value -= EVAL_TEMPLATE[0][j]
+    for j in range(2, 7):
+        if not (state.board.tiles[0][j] == state.board.tiles[0][j - 1] and state.board.tiles[0][j] != Board.EMPTY) :
+            linha_completa = 0
+        if state.board.tiles[0][j] == player:
+                    player_value += EVAL_TEMPLATE[0][j]
+        elif state.board.tiles[0][j] != Board.EMPTY:
+            player_value -= EVAL_TEMPLATE[0][j]
+
+    if linha_completa:
+        if state.board.tiles[0][1] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[0][7] != adversario)):
+            player_value += 60
+        else:
+            player_value -= 60
+
+    ##Testa ultima linha
+    linha_completa = 1
+    if state.board.tiles[7][1] == player:
+                    player_value += EVAL_TEMPLATE[7][1]
+    elif state.board.tiles[7][1] != Board.EMPTY:
+        player_value -= EVAL_TEMPLATE[7][1]
+    for j in range(2, 7):
+        if not (state.board.tiles[7][j] == state.board.tiles[7][j - 1] and state.board.tiles[7][j] != Board.EMPTY):
+            linha_completa = 0
+        if state.board.tiles[7][j] == player:
+                    player_value += EVAL_TEMPLATE[7][j]
+        elif state.board.tiles[7][j] != Board.EMPTY:
+            player_value -= EVAL_TEMPLATE[7][j]
+    if linha_completa:
+        if state.board.tiles[7][1] == player and ((state.board.tiles[7][0] != adversario) ^ (state.board.tiles[7][7] != adversario)):
+            player_value += 60
+        else:
+            player_value -= 60
+
+    ##Testa primeira coluna
+    linha_completa = 1
+    if state.board.tiles[1][0] == player:
+                    player_value += EVAL_TEMPLATE[1][0]
+    elif state.board.tiles[1][0] != Board.EMPTY:
+        player_value -= EVAL_TEMPLATE[1][0]
+    for j in range(2, 7):
+        if not (state.board.tiles[j][0] == state.board.tiles[j-1][0] and state.board.tiles[j][0] != Board.EMPTY):
+            linha_completa = 0
+        if state.board.tiles[j][0] == player:
+                    player_value += EVAL_TEMPLATE[j][0]
+        elif state.board.tiles[j][0] != Board.EMPTY:
+            player_value -= EVAL_TEMPLATE[j][0]
+    if linha_completa:
+        if state.board.tiles[1][0] == player and ((state.board.tiles[0][0] != adversario) ^ (state.board.tiles[7][0] != adversario)):
+            player_value += 60
+        else:
+            player_value -= 60
+        ##Testa ultima coluna
+
+    linha_completa = 1
+    if state.board.tiles[1][7] == player:
+                    player_value += EVAL_TEMPLATE[1][7]
+    elif state.board.tiles[1][7] != Board.EMPTY:
+        player_value -= EVAL_TEMPLATE[1][7]
+    for j in range(2, 7):
+        if not (state.board.tiles[j][7] == state.board.tiles[j-1][7] and state.board.tiles[j][7] != Board.EMPTY):
+            linha_completa = 0
+        if state.board.tiles[j][7] == player:
+                    player_value += EVAL_TEMPLATE[j][7]
+        elif state.board.tiles[j][7] != Board.EMPTY:
+            player_value -= EVAL_TEMPLATE[j][7]
+    if linha_completa:
+        if state.board.tiles[1][7] == player and ((state.board.tiles[0][7] != adversario) ^ (state.board.tiles[7][7] != adversario)):
+            player_value += 60
+        else:
+            player_value -= 60
+
+    return player_value

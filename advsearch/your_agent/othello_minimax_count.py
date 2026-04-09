@@ -34,12 +34,5 @@ def evaluate_count(state, player:str) -> float:
     :param state: state to evaluate (instance of GameState)
     :param player: player to evaluate the state for (B or W)
     """
-    count_player = 0
-    for row in state.board.tiles:
-        for cell in row:
-            if cell == player:
-                count_player += 1
-            elif cell != Board.EMPTY:
-                count_player -= 1
-    return count_player
+    return state.num_pieces(player) - state.num_pieces(Board.opponent(player))
 
