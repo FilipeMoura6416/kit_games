@@ -9,7 +9,7 @@ from .othello_minimax_custom import eval_edges
 from .othello_minimax_custom import EVAL_TEMPLATE
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_path = f"game_log\log_{timestamp}.txt"
+log_path = f"game_log\\negamax_new_log_{timestamp}.txt"
 
 def negamax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     """
@@ -57,12 +57,12 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
     state_is_terminal = state.is_terminal()
     if state_is_terminal or time.time() >= time_limit:
         ##Eval            
-        pov_player = state.player if state.player != None else Board.opponent(my_player)
+        pov_player = state.player if state.player != None else Board.opponent(previous_state.player)
         state_value = eval_func(state, pov_player, state_is_terminal)
         with open(log_path, "a") as log_file:
             for x in range(depth):
                 log_file.write("\t")
-            log_file.write(f"Evaluating state at depth {depth} player: {pov_player}\n")
+            log_file.write(f"Evaluating state at depth {depth} player: {state.player}\n")
             for lines in state.board.tiles:
                 for x in range(depth):
                     log_file.write("\t")

@@ -1,6 +1,6 @@
 from typing import Tuple
 from .othello_minimax_custom import evaluate_custom
-from .negamax import negamax_move
+from .negamax_new import negamax_move
 
 def make_move(state) -> Tuple[int, int]:
     """

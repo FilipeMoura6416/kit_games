@@ -546,21 +546,23 @@ EVAL_TEMPLATE = [
 Minimax custom vs Negamax custom:
 
     python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\negamax_custom.py
+        Player 1 (B - advsearch\your_agent): 24
+        Player 2 (W - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent) wins!
 
 
     python server.py othello  advsearch\your_agent\negamax_custom.py advsearch\your_agent\othello_minimax_custom.py
 
-        Player 1 (B - advsearch\your_agent): 13
-        Player 2 (W - advsearch\your_agent): 51
-        Player 2 (W - advsearch\your_agent) wins!
+Negamax custom old vs Negamax custom new:
 
-        Player 1 (B - advsearch\your_agent): 40
-        Player 2 (W - advsearch\your_agent): 24
+    python server.py othello advsearch\your_agent\negamax_custom_new.py  advsearch\your_agent\negamax_custom.py
+
+        Player 1 (B - advsearch\your_agent): 41
+        Player 2 (W - advsearch\your_agent): 23
         Player 1 (B - advsearch\your_agent wins!
 
-        Player 1 (B - advsearch\your_agent): 14
-        Player 2 (W - advsearch\your_agent): 50
-        Player 2 (W - advsearch\your_agent) wins!
+    python server.py othello  advsearch\your_agent\negamax_custom.py advsearch\your_agent\negamax_custom_new.py
+
 
 x 0 1 2 3 4 5 6 7
 0 . . . . . . . .

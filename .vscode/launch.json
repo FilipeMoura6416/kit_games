@@ -12,6 +12,13 @@
    "type": "python",
    "request": "launch",
    "module": "test_mcts",
-   "console": "integratedTerminal"}
+   "console": "integratedTerminal"
+  },
+  {"name": "Run test eval",
+   "type": "debugpy",
+   "request": "launch",
+   "module": "advsearch.your_agent.test",
+   "console": "integratedTerminal"
+  }
  ]
 }

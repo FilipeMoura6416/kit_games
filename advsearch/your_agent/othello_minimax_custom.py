@@ -14,13 +14,13 @@ from .minimax import log_path
 
 EVAL_TEMPLATE = [
     [100, -40, 10, 8, 8, 10, -40,  100],
-    [-40, -50, 1, 1, 1, 1, -50, -40],
-    [ 10,   1, 2, 1, 1, 2,   1,   10],
-    [  8,   1, 1, 2, 2, 1,   1,   8],
-    [  8,   1, 1, 2, 2, 1,   1,   8],
-    [ 10,   1, 2, 1, 1, 2,   1,   10],
-    [-40, -50, 1, 1, 1, 1, -50, -40],
-    [100, -40, 10, 8, 8, 10, -40,  100]
+    [-40, -50,  1, 1, 1, 1,  -50,  -40],
+    [ 10,   1,  2, 1, 1, 2,    1,   10],
+    [  8,   1,  1, 2, 2, 1,    1,   8],
+    [  8,   1,  1, 2, 2, 1,    1,    8],
+    [ 10,   1,  2, 1, 1, 2,    1,  10],
+    [-40, -50,  1, 1, 1, 1,  -50, -40],
+    [100, -40, 10, 8, 8, 10, -40, 100]
 ]
 
 def make_move(state) -> Tuple[int, int]:
@@ -55,14 +55,13 @@ def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
                 elif state.board.tiles[row][cell] != Board.EMPTY:
                     player_value -= EVAL_TEMPLATE[row][cell]
 
-        player_value += eval_edges(state)
+        player_value += eval_edges(state, player)
 
         return player_value
     else:
         return evaluate_count(state, player)
 
-def eval_edges(state) -> float:
-    player = state.player
+def eval_edges(state, player) -> float:
     player_value = 0
     adversario = 'W' if player == 'B' else 'B'
 
@@ -144,3 +143,54 @@ def eval_edges(state) -> float:
             player_value -= 60
 
     return player_value
+
+def evaluate_edges(state, player) -> float:
+    
+    ## Inicializa lista de corners
+    corners = [(0,0), (0,7), (7,7), (7,0)]
+    ## Percorre formando vetores
+    ## Verifica a distância das coordenadas x e y
+    ## Enquanto distancia > 0 
+    #   Decrementa
+    #   Verifica
+    player_value = 0
+    for dot in range(len(corners)):
+        start = corners[dot]
+        end = corners[(dot + 1)%4]
+        y_dist = end[0] - start[0]
+        x_dist = end[1] - start[1]
+        linha_completa = True
+        direction = (0,0)
+        if y_dist > 1:
+            direction[0] = y_dist/abs(y_dist)
+        if x_dist > 1:
+            direction[1] = x_dist/abs(x_dist)
+        current = (start[0] + direction[0], start[1] + direction[1])
+        current_tile = ''
+        while current[0] + direction[0] != end[0] or current[1] + direction[1] != end[1] :
+            next = (current[0] + direction[0], current[1] + direction[1])
+            current_tile = get_position(state, current)
+            if  current_tile != get_position(state, next):
+                linha_completa = False
+            if current_tile == player:
+                player_value += get_pos_mask(current)
+            elif current_tile != Board.EMPTY:
+                player_value -+  get_pos_mask(current)
+            current = next
+        if linha_completa and get_position(state, current) != Board.EMPTY:
+              opponent = Board.opponent(player)
+              ##if current_tile == player and ((get_position(start) != opponent) ^ (get_position(end) != opponent)):
+                    
+    return player_value
+                    
+            
+def check_imutable_rocks(state, player):
+      
+
+def get_position(state, pos):
+      return state.board.tiles[pos[0]][pos[1]]
+
+def get_pos_mask(pos):
+      return EVAL_TEMPLATE[pos[0]][pos[1]]
+
+          
