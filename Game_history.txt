@@ -549,3 +549,45 @@ Minimax custom vs Negamax custom:
 
 
     python server.py othello  advsearch\your_agent\negamax_custom.py advsearch\your_agent\othello_minimax_custom.py
+
+        Player 1 (B - advsearch\your_agent): 13
+        Player 2 (W - advsearch\your_agent): 51
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent): 24
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 14
+        Player 2 (W - advsearch\your_agent): 50
+        Player 2 (W - advsearch\your_agent) wins!
+
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 W . . . . . . .
+2*B*B*B*B . W . .
+3 . B W B W . . .
+4 . . W W W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+x 0 1 2 3 4 5 6 7
+0 B*W*. B . . . .
+1 B .*W*. . . . .
+2 B B B*W*B B B .
+3 . W W W*W*. . .
+4 W . W W W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B B W B W B*B*.
+2 B W W W B W*B*.
+3 B B B W W B*B*W
+4 B B B B W W*B*.
+5 B . B . B B*B*B
+6 . . . . . B*B*.
+7 . . . . . . . .

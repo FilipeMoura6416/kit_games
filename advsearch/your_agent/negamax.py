@@ -8,7 +8,8 @@ from ..othello.board import Board
 from .othello_minimax_custom import eval_edges
 from .othello_minimax_custom import EVAL_TEMPLATE
 
-
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_path = f"game_log\log_{timestamp}.txt"
 
 def negamax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     """
@@ -22,10 +23,13 @@ def negamax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     """
     alpha = float('-inf')
     beta = float('inf')
+    with open(log_path, "a") as log_file:
+        for lines in state.board.tiles:
+            log_file.write(f"{lines}\n")
 
     return negamax(state, time.time() + time_amount, eval_func, alpha, beta, state.player, None)[1]
 
-def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state) -> tuple:
+def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state, depth = 0) -> tuple:
     """
     Return the best move value and best move
     """
@@ -52,10 +56,22 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
     ##If is terminal state or time is up 
     state_is_terminal = state.is_terminal()
     if state_is_terminal or time.time() >= time_limit:
-        ##Eval
+        ##Eval            
         pov_player = state.player if state.player != None else Board.opponent(my_player)
-        return eval_func(state, pov_player, state_is_terminal), None
-    
+        state_value = eval_func(state, pov_player, state_is_terminal)
+        with open(log_path, "a") as log_file:
+            for x in range(depth):
+                log_file.write("\t")
+            log_file.write(f"Evaluating state at depth {depth} player: {pov_player}\n")
+            for lines in state.board.tiles:
+                for x in range(depth):
+                    log_file.write("\t")
+                log_file.write(f"{lines}\n")
+            for x in range(depth):
+                log_file.write("\t")
+            log_file.write(f"Evaluated state: {state_value}\n")
+        return state_value, None
+
     legal_moves = list(state.legal_moves())
     legal_moves.sort(key=fast_eval, reverse=True)
     count_moves = 0
@@ -66,12 +82,12 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
         rest_time = time_limit - time.time()
         time_division = rest_time/(len(legal_moves) - count_moves)
 
-        if new_state.player == my_player:
+        if new_state.player == state.player:
             ## move_value = Call "max"
-            move_value = negamax(new_state, time_division + time.time(), eval_func, alpha, beta, my_player, state)[0]
+            move_value = negamax(new_state, time_division + time.time(), eval_func, alpha, beta, my_player, state, depth + 1)[0]
         else: 
             ## move_value = Call "Min"
-            move_value = -negamax(new_state, time_division + time.time(), eval_func, -beta, -alpha, my_player, state)[0]
+            move_value = -negamax(new_state, time_division + time.time(), eval_func, -beta, -alpha, my_player, state, depth + 1)[0]
 
         if move_value > alpha:
             alpha = move_value
@@ -81,7 +97,17 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
             return alpha, best_move
         count_moves += 1
         
+    with open(log_path, "a") as log_file:
+        
+        for lines in state.board.tiles:
+            for x in range(depth):
+                log_file.write("\t")
+            log_file.write(f"{lines}\n")
+        for x in range(depth):
+            log_file.write("\t")
+        log_file.write(f"Best move at depth {depth}: {best_move} with value {alpha}, player {state.player}\n")
     return alpha, best_move
 
 def fast_eval(move) -> float:
-    return EVAL_TEMPLATE[move[0]][move[1]]
+    value = EVAL_TEMPLATE[move[0]][move[1]]
+    return value
