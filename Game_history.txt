@@ -563,6 +563,26 @@ Negamax custom old vs Negamax custom new:
 
     python server.py othello  advsearch\your_agent\negamax_custom.py advsearch\your_agent\negamax_custom_new.py
 
+Mask vs immutable:
+
+    python server.py othello advsearch\your_agent\negamax_custom_new.py  advsearch\your_agent\nega_mask.py
+        Player 1 (B - advsearch\your_agent): 37
+        Player 2 (W - advsearch\your_agent): 27
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 36
+        Player 2 (W - advsearch\your_agent): 28
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello  advsearch\your_agent\nega_mask.py advsearch\your_agent\negamax_custom_new.py
+        Player 1 (B - advsearch\your_agent): 21
+        Player 2 (W - advsearch\your_agent): 43
+        Player 2 (W - advsearch\your_agent) wins!
+
+        Player 1 (B - advsearch\your_agent): 34
+        Player 2 (W - advsearch\your_agent): 30
+        Player 1 (B - advsearch\your_agent wins!
+
 
 x 0 1 2 3 4 5 6 7
 0 . . . . . . . .

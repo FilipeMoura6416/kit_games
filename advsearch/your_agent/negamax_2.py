@@ -6,9 +6,24 @@ from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
 from .othello_minimax_custom import EVAL_TEMPLATE
+from othello_minimax_custom import evaluate_custom
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"game_log\\negamax_new_log_{timestamp}.txt"
+
+"""
+In this code a fix the little error in fast_eval, move is (column, line) but i was using like (line, column) 
+I keep the two codes to verify if the fixed version is better
+"""
+
+def make_move(state) -> Tuple[int, int]:
+    """
+    Returns a move for the given game state
+    :param state: state to make the move
+    :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
+    """
+
+    return negamax_move(state, 4.8, evaluate_custom)
 
 def negamax_move(state, time_amount, eval_func:Callable) -> Tuple[int, int]:
     """
@@ -109,5 +124,5 @@ def negamax(state, time_limit, eval_func, alpha, beta, my_player, previous_state
     return alpha, best_move
 
 def fast_eval(move) -> float:
-    value = EVAL_TEMPLATE[move[0]][move[1]]
+    value = EVAL_TEMPLATE[move[1]][move[0]]
     return value
