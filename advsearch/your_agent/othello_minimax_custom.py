@@ -63,7 +63,7 @@ def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
                         player_value -= EVAL_TEMPLATE[row][cell]
 
             custom = Custom_eval(state, player)
-            player_value += custom.check_imutable_rocks(state, player)
+            player_value += custom.check_imutable_rocks()
 
             return player_value
         else:
@@ -89,22 +89,25 @@ class Custom_eval:
         if self.get_tile(pos) != self.get_tile(corner):
             return False
         for sense in SENSES:
-            if not (self.is_my_imutable(deslocate_point(pos, sense[0])) or self.is_my_imutable(deslocate_point(pos, sense[1]))):
+            if not (self.is_my_imutable(deslocate_point(pos, sense[0]), corner) or self.is_my_imutable(deslocate_point(pos, sense[1]), corner)):
                 return False
             
         self.immutable[pos[0]][pos[1]] = True
         return True
 
 
-    def is_my_imutable(self, pos):
-        return read_matrix(self.immutable, pos) and self.get_tile(pos) == self.player
+    def is_my_imutable(self, pos, corner):
+        return read_matrix(self.immutable, pos) and self.get_tile(pos) == self.get_tile(corner)
 
     def set_imutable(self, pos):
         """
         Try set position, if the position was already true return false else return true 
         """
-        
-        return False if read_matrix(self.immutable, pos) else True
+        if read_matrix(self.immutable, pos):
+            return False 
+        else:
+            self.immutable[pos[0]][pos[1]] = True
+            return True
 
     def imutable_value(self, pos):
         if self.get_tile(pos) == self.player:
@@ -114,6 +117,18 @@ class Custom_eval:
 
     def get_tile(self, pos):
         return self.tiles[pos[0]][pos[1]]
+    def calc_limit(self, pontos):
+        dx0 = abs(pontos[0][0]-pontos[2][0])
+        dy0 = abs(pontos[0][1]-pontos[2][1])
+        dx1 = abs(pontos[1][0]-pontos[2][0])
+        dy1 = abs(pontos[1][1]-pontos[2][1])
+        if max(dx0,dy0) > max(dx1, dy1):
+            self.far_end = pontos[0]
+            self.near_end = pontos[1]
+        else:
+            self.far_end = pontos[1]
+            self.near_end = pontos[0]
+        return (max(dx0, dx1), max(dy0, dy1))
     
     def check_imutable_rocks(self):
         """
@@ -146,29 +161,31 @@ class Custom_eval:
             ## Inicializa na coluna e na linha do canto em questão
             for i in range(2):
                 end = pontos[i]
-                dxy = direction(end, pontos[2])
+                dxy = direction(pontos[2], end)
                 current = deslocate_point(pontos[2], dxy)
                 pontos[i] = pontos[2] ##pontos[i] passará a guardar o imutável mais distante, inicializando no próprio start
-                while self.get_tile(current) != self.get_tile(pontos[2]): #pontos[2] = start = canto
+                while self.get_tile(current) == self.get_tile(pontos[2]): #pontos[2] = start = canto
                     pontos[i] = current
                     if self.set_imutable(current):
                         immutables_value_sum += self.imutable_value(current)
-                    current = deslocate_point(current, dxy)
                     if current == end:
                         break
+                    current = deslocate_point(current, dxy)
+                    
 
             ##Percorre as diagonais limitado pelo mais distante da linha e o da coluna
-            current = pontos[2]
-            far_end = max(pontos[0], pontos[1])
-            near_end = min(pontos[0], pontos[1])
-            dxy = direction(current, far_end)
+            
+            limit = self.calc_limit(pontos)
 
-            while current != far_end:
-                current = deslocate_point(current, dxy)
+            dxy = direction(pontos[2], self.far_end)
+            diag_dxy = direction(self.far_end, self.near_end)
+            if diag_dxy[0] == 0 or diag_dxy[1] == 0:
+                continue
+            current = deslocate_point(pontos[2], dxy)
+            while is_before(pontos[2], limit, current):
                 diagonal_current = current ## elemento atual da diagonal, não a diagonal atual
-                diag_dxy = direction(diagonal_current, near_end)
                 diagonal_next = deslocate_point(diagonal_current, diag_dxy)
-                while diagonal_next <= near_end[0] and diagonal_next <= near_end[1]:
+                while is_before(pontos[2], limit, diagonal_next) and is_in_bounds(diagonal_next):
                     diagonal_current = diagonal_next
                     if self.check_and_set_slot(diagonal_current, pontos[2]):
                         immutables_value_sum += self.imutable_value(diagonal_current)
@@ -177,6 +194,10 @@ class Custom_eval:
 
         return immutables_value_sum
       
+
+
+def is_before(start, limit, point):
+    return abs(point[0] - start[0]) <= limit[0] and abs(point[1] - start[1]) <= limit[1] 
 
 def read_matrix(matrix, pos):
     return matrix[pos[0]][pos[1]]
@@ -189,10 +210,17 @@ def get_pos_mask(pos):
 
 def direction(start, end):
     dist_y = end[0] - start[0]
-    delta_y = dist_y/abs(dist_y)
+    delta_y = dist_y/abs(dist_y) if dist_y != 0 else 0
     dist_x = end[1] - start[1]
-    delta_x = dist_x/abs(dist_x)
-    return (delta_y, delta_x)
+    delta_x = dist_x/abs(dist_x) if dist_x != 0 else 0
+    return (int(delta_y), int(delta_x))
+
+def d1_distance(point1, point2):
+    """Returns the 1 dimension distance"""
+    return max(abs(point1[0]-point2[0]), abs(point1[1] -point2[1]))
+def is_in_bounds(pos):
+    return 0 <= pos[0] < 8 and 0 <= pos[1] < 8
+
 
 
 """
