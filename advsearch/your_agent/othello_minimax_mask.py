@@ -41,7 +41,7 @@ def make_move(state) -> Tuple[int, int]:
     return minimax_move(state, 4.9, evaluate_mask)
 
 
-def evaluate_mask(state, player:str, sequencia=0, state_is_terminal=False) -> float:
+def evaluate_mask(state, player:str, state_is_terminal=False) -> float:
     """
     Evaluates an othello state from the point of view of the given player. 
     If the state is terminal, returns its utility. 

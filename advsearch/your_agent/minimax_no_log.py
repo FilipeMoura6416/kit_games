@@ -62,10 +62,9 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     """
 
     with open(log_path, 'a') as log_file:
-        for i in range(depth):
-            log_file.write("\t")
-        log_file.write(f"Max; depth: {depth}\n")
-        #log_file.write(print_with_ident(state.board.tiles, depth))
+        for x in range(depth):
+            log_file.write("  ")  # indent for better visualization of the tree
+        log_file.write(f"State:\n{state.board.decorated_str(colors = False)}\n")
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
     state_is_terminal = state.is_terminal()
     if (state_is_terminal or (time_limit != -1 and time.time() >= time_limit)):
@@ -74,7 +73,7 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
         val_return = (eval_func(state, player, state_is_terminal), (0, 0))
         with open(log_path, 'a') as log_file:
             for x in range(depth):
-                log_file.write("\t")  # indent for better visualization of the tree
+                log_file.write("  ")  # indent for better visualization of the tree
             log_file.write(f"Max Evaluating depth {depth} value: {val_return[0]}\n")
              
         return val_return
@@ -116,14 +115,14 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
         if alpha > beta and (parent_state == None or parent_state.player != state.player):
             with open(log_path, 'a') as log_file:
                for x in range(depth):
-                   log_file.write("\t")  # indent for better visualization of the tree
+                   log_file.write("  ")  # indent for better visualization of the tree
                log_file.write(f"Max Pruning returned value: {alpha} best_move: {best_move} depth: {depth}\n")
             return alpha, best_move
         count_moves += 1
     val_return = (alpha, best_move)
     with open(log_path, 'a') as log_file:
         for x in range(depth):
-            log_file.write("\t")  # indent for better visualization of the tree
+            log_file.write("  ")  # indent for better visualization of the tree
         log_file.write(f"Max return without pruning depth: {depth} value: {alpha} best move: {best_move}\n")
     return val_return
 
@@ -142,10 +141,9 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     """
 
     with open(log_path, 'a') as log_file:
-        for i in range(depth):
-            log_file.write("\t")
-        log_file.write(f"Min; depth: {depth}\n")
-        #log_file.write(print_with_ident(state.board.tiles, depth))
+        for x in range(depth):
+            log_file.write("  ")  # indent for better visualization of the tree
+        log_file.write(f"State:\n{state.board.decorated_str(colors = False)}\n")
 
     ##Base case: if the state is terminal or we have reached the maximum depth, return the utility of the state  
     state_is_terminal = state.is_terminal()
@@ -155,7 +153,7 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
         return_val = eval_func(state, player, state_is_terminal)
         with open(log_path, 'a') as log_file:
             for x in range(depth):
-                log_file.write("\t")  # indent for better visualization of the tree
+                log_file.write("  ")  # indent for better visualization of the tree
             log_file.write(f"Min Evaluating depth: {depth} value: {return_val}\n")
         return return_val
     
@@ -195,23 +193,8 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
         if beta < alpha and parent_state.player != state.player:
             with open(log_path, 'a') as log_file:
                 for x in range(depth):
-                    log_file.write("\t")  # indent for better visualization of the tree
+                    log_file.write("  ")  # indent for better visualization of the tree
                 log_file.write(f"Min Pruning depth: {depth} value: {beta} best_move: {best_move}\n")
             return beta
         count_moves += 1
-    with open(log_path, 'a') as log_file:
-        for x in range(depth):
-            log_file.write("\t")  # indent for better visualization of the tree
-        log_file.write(f"Min without pruning Returning depth: {depth} value: {beta} best_move: {best_move}\n")
     return beta
-
-def print_with_ident(tiles, ident) -> str:
-    string = ""
-    tab = ""
-    for i in range(ident):
-        tab += "\t"
-    for lines in tiles:
-        string += tab
-        string += f"{lines}"
-        string += "\n"
-    return string

@@ -19,6 +19,13 @@
    "request": "launch",
    "module": "advsearch.your_agent.test",
    "console": "integratedTerminal"
+  },
+  {
+    "name": "Run train",
+   "type": "debugpy",
+   "request": "launch",
+   "module": "advsearch.rl.eval_function_train",
+   "console": "integratedTerminal"
   }
  ]
 }

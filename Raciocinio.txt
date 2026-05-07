@@ -33,3 +33,7 @@ Senão se for terminal
 
 enquanto estiver totalmente expandido e não for terminal
     Seleciona o melhor filho
+
+
+Negamax com iterative deepening
+Criar uma classe nodo_state para evitar retrabalho na criação dos estados

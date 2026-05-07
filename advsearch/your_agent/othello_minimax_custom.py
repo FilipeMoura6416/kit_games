@@ -55,8 +55,8 @@ def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
         """
         if not state_is_terminal:        
             player_value = 0
-            for row in range(1, len(state.board.tiles) - 1):
-                for cell in range(1, len(state.board.tiles[row]) - 1):
+            for row in range(0, len(state.board.tiles)):
+                for cell in range(0, len(state.board.tiles[row])):
                     if state.board.tiles[row][cell] == player:
                         player_value += EVAL_TEMPLATE[row][cell]
                     elif state.board.tiles[row][cell] != Board.EMPTY:
@@ -110,10 +110,11 @@ class Custom_eval:
             return True
 
     def imutable_value(self, pos):
+        value = abs(read_matrix(EVAL_TEMPLATE, pos))
         if self.get_tile(pos) == self.player:
-            return 1
+            return value
         else:
-            return -1
+            return -value
 
     def get_tile(self, pos):
         return self.tiles[pos[0]][pos[1]]
