@@ -12,7 +12,7 @@ from ..othello.board import Board
 # do seu agente.
 
 class MCTSNode:
-    _C_PARAM = 1.4
+    _C_PARAM = 0.5
     def __init__(self, state:GameState, parent=None, player=None, move = None):
         self.state = state
         self.player = player if player is not None else state.player
@@ -108,8 +108,9 @@ def MCTS(root_state: GameState, time_limit=4.9) -> Tuple[int, int]:
         node.retroprogation(result)
 
     best_child = max(root_node.children, key=lambda c: c.visits)
-    print("Visits: ", root_node.visits)
-    return best_child.last_move
+    victorious_child = max(root_node.children, key=lambda c: c.wins/c.visits)
+    print(f"Visits: {root_node.visits} best: {best_child.last_move} victorious: {victorious_child.last_move}")
+    return victorious_child.last_move
 
 def make_move(state:GameState) -> Tuple[int, int]:
     """

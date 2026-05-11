@@ -37,3 +37,89 @@ enquanto estiver totalmente expandido e não for terminal
 
 Negamax com iterative deepening
 Criar uma classe nodo_state para evitar retrabalho na criação dos estados
+
+Minimax iterativo:
+    Aspectos:
+        Ordem de avaliação:
+        Moemento de ordenamento
+
+    Classe minimax
+    ideia geral:
+        Ir diretamente para a última camada expandida. A classe minimax terá salvo qual o primeiro nodo da última camada, chamemos de Nu. O valore de Nu será definido pelo max de seus filhos. Essa ordenação servirá para que na próxima iteração a ordem de análise já esteja correta. Uma vez que todos os nodos da última camada tenham sido analisados, todos os nodos terão seus filhos ordenados
+    Problema: Ordenar os filhos de todos os nodos pode resultar em ordenação de nodos que serão podados
+
+    ideia geral:
+        Ir diretamente para a última camada expandida. A classe minimax terá salvo qual o primeiro nodo da última camada, chamemos de Nu. O valore de Nu será definido pelo max de seus filhos. Essa ordenação servirá para que na próxima iteração a ordem de análise já esteja correta. 
+    
+    Ideia geral:
+        Nodo inicializado com a raiz
+        while true:
+            Enquanto nodo não está na profundidade máxima -1 ou não é estado terminal
+                Se este nodo já teve seus filhos ordenados nessa iteração
+                    Ordenar os filhos do nodo
+                Se ainda há filhos não verificados
+                    O nodo se torna o filho mais promissor ainda não verificado
+                Se não:
+                    Se Nodo tem pai:
+                        O nodo se torna seu pai
+                    Se não:
+                        Acabou     
+            Avaliar todos os filhos ->> ERRO: resultará na avaliação de estados que seriam podados
+            Definir o valor do nodo com o melhor dos filhos
+            Nodo se torna seu pai
+
+    Ideia geral:
+        Nodo inicializado com a raiz
+        while true:
+            Se o nodo for terminal: --> PROBLEMA: A maior parte das vezes este teste será falso e testá-lo é custoso pois usa a função len
+                Verifica o valor
+                O nodo se torna se pai
+            Senão, se nodo não está na profundidade máxima 
+                Se este nodo já teve seus filhos ordenados nessa iteração
+                    Ordenar os filhos do nodo
+                Se ainda há filhos não verificados
+                    O nodo se torna o filho mais promissor ainda não verificado
+                Se não:
+                    Se Nodo tem pai:
+                        O nodo se torna seu pai
+                    Se não:
+                        Acabou
+            Se não:
+                Usa função de avaliação
+                Nodo se torna seu pai
+
+    PROBLEMA: Na maior parte das vezes o teste de se um estado é terminal será falso
+    Solução: Testar uma primeira vez e guardar o resultado em uma variável. O teste passa a ser if terminal and terminal(), a variável terminal deve ser inicializada em true 
+    
+    Ideia geral:
+        Constroi Nodo inicializado com a raiz
+
+        while true:
+            Se o nodo for terminal: 
+                Verifica o valor
+                O nodo se torna se pai
+            Senão, se nodo não está na profundidade máxima 
+                Se este nodo já teve seus filhos ordenados nessa iteração
+                    Ordenar os filhos do nodo
+                Se ainda há filhos não verificados
+                    O nodo se torna o filho mais promissor ainda não verificado
+                Se não:
+                    Se Nodo tem pai:
+                        O nodo se torna seu pai
+                    Se não:
+                        Acabou
+            Se não:
+                Usa função de avaliação
+                Nodo se torna seu pai
+    OBS: Contruir os nodos apenas quando estes forem ser analisados e nesse momento definir se é estao terminal ou não
+    OBS: Para evitar o problema de construir nodos que serão podados, usar fast eval do movimento
+
+                    
+
+Questão: Funcionaria avaliar toda a última camada e só após isso atualizar valores
+Resposta: Não, Isso resultará na avaliação de estados que seriam podados
+
+    
+
+Erros:
+07/07 17:07 - Erro na lógica da TT: está guardando valor de alpha como valor do estado. Isso está errado o valor de alpha não é necesariamente o valor do estado uma vez que o alpha pode ter vindo de outro nodo. ALterei para guardar o valor do filho mais promissor ou seja max(move_value[:])

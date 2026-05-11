@@ -28,7 +28,7 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     root_state = Nodo_State(state, None)
-
+    
     return negamax_move(root_state, 4.9, evaluate_custom)
 
 def negamax_move(root_state, time_amount, eval_func:Callable) -> Tuple[int, int]:
@@ -102,6 +102,7 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
     received_alpha = alpha
     pov_player = root_state.state.player if root_state.state.player != None else Board.opponent(previous_state.player)
     with open(log_path, 'a') as log_file:
+        log_file.write("\n")
         for i in range(depth):
             log_file.write("\t")
         log_file.write(f"Chamada tipo: {type} count: {root_state.state.board.piece_count["W"] + root_state.state.board.piece_count["B"] - 4} pov_player: {pov_player} move: {root_state.move}\n")
@@ -136,10 +137,25 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
             child_node = Nodo_State(new_state, move)
             root_state.children.append(child_node)
 
+    """ with open(log_path, 'a') as log_file:
+        for i in range(depth):
+                log_file.write("\t")
+        log_file.write("Legal_moves: ")
+        for move in root_state.state.legal_moves():
+            log_file.write(f"{move} ")
+        log_file.write("\n")
+        for i in range(depth):
+                log_file.write("\t")
+        log_file.write("Childs: ")
+        for child in root_state.children:
+            log_file.write(f"{child.move} ")
+        log_file.write("\n") """
+
     root_state.children.sort(key=lambda a : a.value, reverse=True)
     children_list = copy.deepcopy(root_state.children)
     count_moves = 0
     best_move = None
+    best_value = float("-inf")
     for child_node in root_state.children:
             
         if child_node.state.player == root_state.state.player:
@@ -149,29 +165,31 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
             ## move_value = Call "Min"
             move_value = negamax(child_node, eval_func, -beta, -alpha, depth_max,time_limit, my_player, root_state.state,"MIN" if type == "MAX" else "MAX", depth + 1, tt_dict=tt_dict)[0]
             if move_value != None:
-                move_value = - move_value
+                move_value = -move_value
 
         if time.time() >= time_limit:
             return None,None
         
+        if move_value > best_value:
+            best_value = move_value
+            best_move = child_node.move
         if move_value > alpha:
             alpha = move_value
-            best_move = child_node.move
 
-        if alpha > beta and (previous_state.player != root_state.state.player):
-            tt_dict[root_state.string_board] = {f"{root_state.state.player}" : alpha, f"{Board.opponent(root_state.state.player)}": -alpha, "move": best_move}
+        if alpha > beta:
+            tt_dict[root_state.string_board] = {f"{root_state.state.player}" : best_value, f"{Board.opponent(root_state.state.player)}": -best_value, "move": best_move}
             root_state.value = alpha
             root_state.already = True
             with open(log_path, 'a') as log_file:
                 for i in range(depth):
                     log_file.write("\t")
-                log_file.write(f"Pruning returned value: {alpha} beta: {beta} best_move: {best_move} depth: {depth} received_alpha: {received_alpha} count_moves: {count_moves} values:")
+                log_file.write(f"Pruning returned value: {alpha} beta: {beta} best_move: {best_move} depth: {depth} received_alpha: {received_alpha} count_moves: {count_moves} values received:")
                 for child in children_list:
                     log_file.write(f" {child.value}")
                 log_file.write("\n")
             return alpha, best_move
         count_moves += 1
-    tt_dict[root_state.string_board] = {f"{root_state.state.player}" : alpha, f"{Board.opponent(root_state.state.player)}": -alpha, "move": best_move}
+    tt_dict[root_state.string_board] = {f"{root_state.state.player}" : best_value, f"{Board.opponent(root_state.state.player)}": -best_value, "move": best_move}
     root_state.value = alpha
     root_state.already = True
     with open(log_path, 'a') as log_file:

@@ -13,14 +13,14 @@ from .minimax import log_path
 # do seu agente.
 
 EVAL_TEMPLATE = [
-    [100,-40,10,8,8,10,-40,100],
-    [-40,-50, 1,1,1,1, -50,-40],
-    [ 10,  1, 2,1,1,2,   1, 10],
-    [  8,  1, 1,2,2,1,   1,  8],
-    [  8,  1, 1,2,2,1,   1,  8],
-    [ 10,  1, 2,1,1,2,   1, 10],
-    [-40,-50, 1,1,1,1, -50,-40],
-    [100,-40,10,8,8,10,-40,100]
+    [100,-40,12,8,8,12,-40,100],
+    [-40,-50, 0,0,0,0, -50,-40],
+    [ 12,  0, 2,1,1,2,   0, 12],
+    [  8,  0, 1,2,2,1,   0,  8],
+    [  8,  0, 1,2,2,1,   0,  8],
+    [ 12,  0, 2,1,1,2,   0, 12],
+    [-40,-50, 0,0,0,0, -50,-40],
+    [100,-40,12,8,8,12,-40,100]
 ]
 
 SENSES = [
@@ -64,6 +64,10 @@ def evaluate_custom(state, player:str, state_is_terminal=False) -> float:
 
             custom = Custom_eval(state, player)
             player_value += custom.check_imutable_rocks()
+            """ if player_value > 64:
+                player_value = 64
+            elif player_value < -64:
+                player_value = -64 """
 
             return player_value
         else:
@@ -110,7 +114,10 @@ class Custom_eval:
             return True
 
     def imutable_value(self, pos):
-        value = abs(read_matrix(EVAL_TEMPLATE, pos))
+        value = 12
+        if read_matrix(EVAL_TEMPLATE, pos) < 0:
+            value += abs(read_matrix(EVAL_TEMPLATE, pos))
+
         if self.get_tile(pos) == self.player:
             return value
         else:
@@ -118,6 +125,7 @@ class Custom_eval:
 
     def get_tile(self, pos):
         return self.tiles[pos[0]][pos[1]]
+    
     def calc_limit(self, pontos):
         dx0 = abs(pontos[0][0]-pontos[2][0])
         dy0 = abs(pontos[0][1]-pontos[2][1])
@@ -156,8 +164,7 @@ class Custom_eval:
             if self.get_tile(pontos[2]) == Board.EMPTY:
                 continue
 
-            if self.set_imutable(pontos[2]):
-                immutables_value_sum += self.imutable_value(pontos[2])
+            self.set_imutable(pontos[2]) ##Inicializa canto como imutável
 
             ## Inicializa na coluna e na linha do canto em questão
             for i in range(2):
