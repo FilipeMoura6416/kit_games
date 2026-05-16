@@ -121,7 +121,7 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
     state_is_terminal = root_state.state.is_terminal()
 
     if depth >= depth_max or state_is_terminal:
-        state_value = eval_func(root_state.state, pov_player, state_is_terminal)
+        state_value = eval_func(root_state.state, pov_player)
         tt_dict[root_state.string_board] = {f"{pov_player}" : state_value, f"{Board.opponent(pov_player)}": -state_value, "move": None}
         root_state.value = state_value
         with open(log_path, 'a') as log_file:

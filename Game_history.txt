@@ -687,9 +687,21 @@ Negamax_tt_id vs minimax
         Player 2 (W - advsearch\your_agent): 2
         Player 1 (B - advsearch\your_agent wins!
 
-    python server.py othello  advsearch\your_agent\negamax_tt_id.py advsearch\your_agent\othello_minimax_custom.py
+    python server.py othello  advsearch\your_agent\negamax_tt_id_no_log.py advsearch\your_agent\othello_minimax_custom.py
 
     python server.py othello  advsearch\your_agent\negamax_tt_id.py advsearch\your_agent\negamax_tt_id_prun.py
+
+    python server.py othello advsearch\your_agent\othello_minimax_custom.py  advsearch\your_agent\MTD_f.py
+
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . B . . . . .
+2 . B B . . W . .
+3 . W B W W . . .
+4 . . B*W*B . . .
+5 . B B*W*B . . .
+6 .*W*W*W*. . . .
+7 . . . . . . . .
 
 x 0 1 2 3 4 5 6 7
 0 . . . . . . . .

@@ -46,9 +46,6 @@ def negamax_move(root_state, time_amount, eval_func:Callable) -> Tuple[int, int]
                     and should return a float value representing the utility of the root_state.state for the player.
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-
-    with open(log_path, 'a') as log_file:
-        log_file.write(f"\n\nCall ---------------------------------\n\n")
     alpha = float('-inf')
     beta = float('inf')
     
@@ -62,24 +59,13 @@ def negamax_move(root_state, time_amount, eval_func:Callable) -> Tuple[int, int]
     while time.time() < time_limit - delta:
         start = time.time()
         tt_dict = dict()
-        with open(log_path, 'a') as log_file:
-            log_file.write(f"Start: {start%100} time_limit: {time_limit%100} \n")
         move = negamax(root_state, eval_func, alpha, beta, depth_max, time_limit, root_state.state.player, None, "MAX", tt_dict=tt_dict)
         end = time.time()
         if move[1] != None:
             best_move = move[1]
             best_move_value = move[0]
         delta = end - start
-        with open(log_path, 'a') as log_file:
-            log_file.write(f"End: {end} delta_time: {delta}")
-            if move[1] != None:
-                log_file.write("Encerrado normalmente\n\n\n")
-            else:
-                log_file.write("Encerrdo a força tempo esgotado\n")
-
         depth_max += 1
-    with open(log_path, 'a') as log_file:
-        log_file.write(f"move: {best_move} move_value: {best_move_value} depth: {depth_max - 1}\n")
     return best_move
 
 def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit:float, my_player, previous_state, type, depth = 0, tt_dict:dict=dict()) -> tuple:
@@ -107,12 +93,9 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
 
     
     ##If is terminal root_state.state or time is up
-    now = time.time()
-    received_alpha = alpha
-    pov_player = root_state.state.player if root_state.state.player != None else Board.opponent(previous_state.player)
-    
-    if now >= time_limit - (0.1 * depth):
+    if time.time() >= time_limit - (0.1 * depth):
         return None, None 
+    pov_player = root_state.state.player if root_state.state.player != None else Board.opponent(previous_state.player)
     tt = tt_dict.get(root_state.string_board)
 
     if tt != None:
@@ -122,7 +105,7 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
     state_is_terminal = root_state.state.is_terminal()
 
     if depth >= depth_max or state_is_terminal:
-        state_value = eval_func(root_state.state, pov_player, state_is_terminal)
+        state_value = eval_func(root_state.state, pov_player)
         tt_dict[root_state.string_board] = {f"{pov_player}" : state_value, f"{Board.opponent(pov_player)}": -state_value, "move": None}
         root_state.value = state_value
         
@@ -137,7 +120,6 @@ def negamax(root_state:Nodo_State, eval_func, alpha, beta, depth_max, time_limit
 
 
     root_state.children.sort(key=lambda a : a.value, reverse=True)
-    children_list = copy.deepcopy(root_state.children)
     count_moves = 0
     best_move = None
     best_value = float("-inf")

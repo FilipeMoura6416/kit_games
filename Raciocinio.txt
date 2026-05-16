@@ -100,7 +100,7 @@ Minimax iterativo:
                 O nodo se torna se pai
             Senão, se nodo não está na profundidade máxima 
                 Se este nodo já teve seus filhos ordenados nessa iteração
-                    Ordenar os filhos do nodo
+                    Ordenar os filhos do nodo, ordenar os movimentos pois nem todos os filhos serão efetivamente criados
                 Se ainda há filhos não verificados
                     O nodo se torna o filho mais promissor ainda não verificado
                 Se não:
@@ -111,9 +111,11 @@ Minimax iterativo:
             Se não:
                 Usa função de avaliação
                 Nodo se torna seu pai
-    OBS: Contruir os nodos apenas quando estes forem ser analisados e nesse momento definir se é estao terminal ou não
+    OBS: Contruir os nodos apenas quando estes forem ser analisados e nesse momento definir se é estado terminal ou não
     OBS: Para evitar o problema de construir nodos que serão podados, usar fast eval do movimento
-
+    Como associar os movimentos na lista de movimentos aos seus respectivos valores e aos objetos filhos?
+        Cada movimento é uma chave em um dicionário que leva para uma lista contendo o valor e o objeto filho do movimento 
+        Problema: Quanto o valor do nodo for atualizado terei que atualizar o valor na lista 
                     
 
 Questão: Funcionaria avaliar toda a última camada e só após isso atualizar valores
@@ -123,3 +125,80 @@ Resposta: Não, Isso resultará na avaliação de estados que seriam podados
 
 Erros:
 07/07 17:07 - Erro na lógica da TT: está guardando valor de alpha como valor do estado. Isso está errado o valor de alpha não é necesariamente o valor do estado uma vez que o alpha pode ter vindo de outro nodo. ALterei para guardar o valor do filho mais promissor ou seja max(move_value[:])
+
+
+
+
+
+function AlphaBetaWithMemory(n : node_type; alpha , beta , d : integer) : integer;
+
+    if retrieve(n) == OK then /* Transposition table lookup */
+        if n.lowerbound >= beta then 
+            return n.lowerbound;
+        if n.upperbound <= alpha then
+            return n.upperbound;
+        alpha := max(alpha, n.lowerbound);
+        beta := min(beta, n.upperbound);
+    if d == 0 then 
+        g := evaluate(n); /* leaf node */
+    else if n == MAXNODE then
+        g := -INFINITY; 
+        a := alpha; /* save original alpha value */
+        c := firstchild(n);
+        while (g < beta) and (c != NOCHILD) do
+            g := max(g, AlphaBetaWithMemory(c, a, beta, d - 1));
+            a := max(a, g);
+            c := nextbrother(c);
+    else /* n is a MINNODE */
+        g := +INFINITY; 
+        b := beta; /* save original beta value */
+        c := firstchild(n);
+        while (g > alpha) and (c != NOCHILD) do
+            g := min(g, AlphaBetaWithMemory(c, alpha, b, d - 1));
+            b := min(b, g);
+            c := nextbrother(c);
+
+    /* Traditional transposition table storing of bounds */
+
+    /* Fail low result implies an upper bound */
+    if g <= alpha then 
+        n.upperbound := g;
+        store n.upperbound;
+    
+    /* Fail high result implies a lower bound*/
+    if g >= beta then 
+        n.lowerbound := g; 
+        store n.lowerbound;
+    return g;
+
+function MTDF(root : node_type; f : integer; d: integer) : integer;
+    g := f;
+    upperbound := +INFINITY;
+    lowerbound := -INFINITY;
+    repeat
+        if g == lowerbound then 
+            beta := g + 1 
+        else
+            beta := g;
+        g := AlphaBetaWithMemory(root, beta - 1, beta,d);
+        if g < beta then 
+            upperbound := g 
+        else 
+            lowerbound := g;
+    until lowerbound >= upperbound;
+    return g;
+
+
+Acesso aos filhos de um nodo
+Obs: Vou deixar o move ordering de lado por enquanto
+Objetivo: Evitar desperdício de tempo criando nodos já criados anteriormente e criando nodos que não serão analisados
+Opção 1: Criar todos os filhos na criação do Nodo
+Problema: Se o nodo estiver na última camada a ser visitada estarei criando nodos que não serão visitados e não há como saber qual a última camada que será visitada
+Opção 2: Criar todos os filhos quando chegar no for
+Problema: Possivelmente criando nodos que serão podados
+Opção 3: 
+Quando chegar no for verificar se a lista de movimentos possíveis já foi criada
+    Se não criar lista de moviemntos possíveis e salvar
+Para cada movimento
+    Usar o moviemento como chave de acesso para um dicionário, o valor retornado será o nodo filho
+    Se o nodo filho não existir ainda, criar

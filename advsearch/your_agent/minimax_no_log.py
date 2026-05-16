@@ -70,7 +70,7 @@ def max_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     if (state_is_terminal or (time_limit != -1 and time.time() >= time_limit)):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Max avaliando estado, player: {state.player}\n") """
-        val_return = (eval_func(state, player, state_is_terminal), (0, 0))
+        val_return = (eval_func(state, player), (0, 0))
         with open(log_path, 'a') as log_file:
             for x in range(depth):
                 log_file.write("  ")  # indent for better visualization of the tree
@@ -150,7 +150,7 @@ def min_value(state, alpha, beta, depth, time_limit: float, eval_func, player, p
     if (state_is_terminal or (time_limit != -1 and time.time() >= time_limit)):
         """ with open(log_path, 'a') as log_file:
             log_file.write(f"Min avaliando estado, player: {state.player}\n") """
-        return_val = eval_func(state, player, state_is_terminal)
+        return_val = eval_func(state, player)
         with open(log_path, 'a') as log_file:
             for x in range(depth):
                 log_file.write("  ")  # indent for better visualization of the tree
