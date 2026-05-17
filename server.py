@@ -158,17 +158,17 @@ class Server(object):
             # calls current player's make_move function with the specified timeout
             start = time.time()
             function_call = timer.FunctionTimer(self.player_modules[current_player].make_move, (state_copy,))  # argument must be a 1-element tuple
-            function_call_op = timer.FunctionTimer(self.player_modules[opponent].make_move, (state_copy,))
+            ##function_call_op = timer.FunctionTimer(self.player_modules[opponent].make_move, (state_copy,))
             
             delay = 60 if player_name(self.player_dirs[current_player]) == "humanplayer" else self.delay
             move = function_call.run(delay)
-            move_op = function_call_op.run(delay)
+            ##move_op = function_call_op.run(delay)
 
             elapsed = time.time() - start
 
-            with open(log_path, 'a') as log_file:
+            """ with open(log_path, 'a') as log_file:
                 log_file.write(state_copy.board.decorated_str(colors=False))
-                log_file.write(f"Currrent player: {current_player} move: {move} Opponent: {opponent} move: {move_op}\n\n\n")
+                log_file.write(f"Currrent player: {current_player} move: {move} Opponent: {opponent} move: {move_op}\n\n\n") """
 
             if move is None:  # detects timeout
                 print(f'Player {current_player} has not made a move and lost its turn. Illegal moves count incremented')

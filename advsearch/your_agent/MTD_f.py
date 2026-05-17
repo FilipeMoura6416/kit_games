@@ -48,18 +48,18 @@ class Agent:
 
     def iterative_deepening(self, time_amout):
         self.time_limit = time.time() + time_amout
-        depth_max = 2
+        self.depth_max = 2
         f_guess = 0
         last_move = None
         while time.time() < self.time_limit:
             with open(log_path, 'a') as log_file:
-                log_file.write(f"Starting new search, depth_max: {depth_max}, time: {time.time()}, time_limit: {self.time_limit}\n")
+                log_file.write(f"Starting new search, depth_max: {self.depth_max}, time: {time.time()}, time_limit: {self.time_limit}\n")
             self.tt_dict = dict()
-            f_guess, move = self.mtdf(f_guess, depth_max)
+            f_guess, move = self.mtdf(f_guess, self.depth_max)
             if move != None:
                 last_move = move
-            depth_max += 1
-            if depth_max >= 60:
+            self.depth_max += 1
+            if self.depth_max >= 60:
                 return last_move
         with open(log_path, 'a') as log_file:
             log_file.write(f"Time Limit: {self.time_limit} returned time: {time.time()} move: {last_move}\n")
@@ -74,6 +74,8 @@ class Agent:
                 gamma = f_guess + 1
             else:
                 gamma = f_guess
+            with open(log_path, 'a') as log_file:
+                log_file.write(f"\nStarting new MTD_f search, f_guess: {f_guess}, depth_max: {depth_max}, upper_bound: {upper_bound}, lower_bound: {lower_bound}, gamma: {gamma}, time: {time.time()}\n")
             f_guess, move = self.test(self.root_state, gamma, depth_max)
             if time.time() >= self.time_limit:
                 return None, None
@@ -89,15 +91,17 @@ class Agent:
         if time.time() >= self.time_limit:
             return None, None
         with open(log_path, 'a') as log_file:
-            log_file.write(f"Testing state, gamma: {gamma}, depth_max: {depth_max}\n")
+            log_file.write(self.tab_string(depth_max) + f"Testing state, gamma: {gamma}, depth_max: {depth_max}\n")
 
         memory:Dict_entry = self.tt_dict.get(node_state.string_board)
         if memory != None:
             if memory.minScore >= gamma:
                with open(log_path, 'a') as log_file:
-                   log_file.write(f"State previous calculated minScore >= gamma")
+                    log_file.write(self.tab_string(depth_max) + f"State previous calculated minScore >= gamma returning minScore: {memory.minScore} and move: {memory.bestMove}\n")
                return memory.minScore, memory.bestMove
             elif memory.maxScore < gamma:
+                with open(log_path, 'a') as log_file: 
+                    log_file.write(self.tab_string(depth_max) + f"State previous calculated maxScore < gamma returning maxScore: {memory.maxScore} and move: {memory.bestMove}\n")
                 return memory.maxScore, memory.bestMove
         else:
             memory = Dict_entry()
@@ -106,6 +110,8 @@ class Agent:
             
             memory.maxScore = memory.minScore = evaluate_custom(node_state.state, node_state.player)
             self.tt_dict[node_state.string_board] = memory
+            with open(log_path, 'a') as log_file:
+                log_file.write(self.tab_string(depth_max) + f"State is terminal or depth_max == 0, returning evaluation: {memory.maxScore}\n")
             return memory.minScore, None
         
         best_move = None
@@ -130,27 +136,31 @@ class Agent:
 
             if time.time() >= self.time_limit:
                     return None, None
+            
+            with open(log_path, 'a') as log_file:
+                log_file.write(self.tab_string(depth_max) + f"Move: {move}, returned_score: {returned_score}, best_score: {best_score}, gamma: {gamma}\n")
             if returned_score > best_score:
                 memory.bestMove = move
                 best_score = returned_score
                 best_move = move
 
             if best_score >= gamma:
+                with open(log_path, 'a') as log_file:
+                    log_file.write(self.tab_string(depth_max) + f"Best score: {best_score} >= gamma: {gamma}, breaking loop and returning best_score: {best_score} and move: {best_move}\n")
                 break
         if best_score < gamma:
             memory.maxScore = best_score
         else:
             memory.minScore = best_score
-        self.tt_dict[node_state.string_board] = memory        
+        self.tt_dict[node_state.string_board] = memory 
+        with open(log_path, 'a') as log_file:
+            log_file.write(self.tab_string(depth_max) + f"Finished testing state, returning best_score: {best_score} and move: {best_move}\n")       
         return best_score, best_move
+    
+    def tab_string(self, actual_depth_max):
+        camada = self.depth_max - actual_depth_max
+        string = ""
+        for i in range(camada):
+            string += '\t'
+        return string
 
-def print_with_ident(tiles, ident) -> str:
-    string = ""
-    tab = ""
-    for i in range(ident):
-        tab += "\t"
-    for lines in tiles:
-        string += tab
-        string += f"{lines}"
-        string += "\n"
-    return string

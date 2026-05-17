@@ -20,6 +20,6 @@ if __name__ == "__main__":
     state = GameState(board, 'W')
     value = evaluate_custom(state, 'B')
     print(f"Value: {value}\n")
-    """ returned_move = MTDF_move(state)
+    returned_move = MTDF_move(state)
     print(f"MTD(f) retornou o movimento: {returned_move}")
-    print("teste finalizado") """
+    print("teste finalizado")

@@ -64,10 +64,6 @@ def evaluate_custom(state, player:str) -> float:
 
             custom = Custom_eval(state, player)
             player_value += custom.check_imutable_rocks()
-            """ if player_value > 64:
-                player_value = 64
-            elif player_value < -64:
-                player_value = -64 """
 
             return player_value
         else:
@@ -164,7 +160,8 @@ class Custom_eval:
             if self.get_tile(pontos[2]) == Board.EMPTY:
                 continue
 
-            self.set_imutable(pontos[2]) ##Inicializa canto como imutável
+            if self.set_imutable(pontos[2]): ##Inicializa canto como imutável
+                immutables_value_sum += self.imutable_value(pontos[2])
 
             ## Inicializa na coluna e na linha do canto em questão
             for i in range(2):
