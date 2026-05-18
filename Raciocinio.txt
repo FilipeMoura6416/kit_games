@@ -202,3 +202,41 @@ Quando chegar no for verificar se a lista de movimentos possíveis já foi criad
 Para cada movimento
     Usar o moviemento como chave de acesso para um dicionário, o valor retornado será o nodo filho
     Se o nodo filho não existir ainda, criar
+
+alpha = beta - 1
+if g <= alpha
+if g <= beta - 1 < beta
+if g < beta 
+if -g > - beta
+alpha := - (beta - 1)
+alpha = -beta + 1
+alpha > beta
+ 
+Minnode alpha = beta - 1:
+        g := +INFINITY; 
+        b := beta; /* save original beta value */
+        c := firstchild(n);
+        while (g > beta - 1) and (c != NOCHILD) do
+            g := min(g, AlphaBetaWithMemory(c, alpha, b, d - 1));
+            b := min(b, g);
+            c := nextbrother(c);
+
+        g := +INFINITY; 
+        b := beta; /* save original beta value */
+        c := firstchild(n);
+        while (g >= beta) and (c != NOCHILD) do
+            g := min(g, AlphaBetaWithMemory(c, b - 1, b, d - 1));
+            b := min(b, g);
+            c := nextbrother(c);
+
+        g := -INFINITY; 
+        b := - beta; /* save original beta value */
+        c := firstchild(n);
+        while (g < - beta) and (c != NOCHILD) do
+            g := max(g, - AlphaBetaWithMemory(c, b, d - 1));
+            b := max(b, g);
+            c := nextbrother(c);
+
+        beta = - 2
+        recurs = 10
+        recurs = - 5

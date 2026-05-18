@@ -2,7 +2,6 @@ import random
 from typing import Tuple
 from ..othello.gamestate import GameState
 from ..othello.board import Board
-from .minimax import log_path 
 from .minimax import minimax_move
 from .othello_minimax_count import evaluate_count
 
@@ -38,7 +37,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 4.9, evaluate_mask)
+    return minimax_move(state, 4, evaluate_mask)
 
 
 def evaluate_mask(state, player:str) -> float:

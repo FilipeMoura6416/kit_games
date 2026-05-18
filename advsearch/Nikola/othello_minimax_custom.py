@@ -4,7 +4,6 @@ from ..othello.gamestate import GameState
 from ..othello.board import Board
 from .minimax import minimax_move
 from .othello_minimax_count import evaluate_count
-from .minimax import log_path
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
@@ -43,7 +42,7 @@ def make_move(state) -> Tuple[int, int]:
     # Remova-o e coloque uma chamada para o minimax_move (que vc implementara' no modulo minimax).
     # A chamada a minimax_move deve receber sua funcao evaluate como parametro.
 
-    return minimax_move(state, 4.9, evaluate_custom)
+    return minimax_move(state, 4, evaluate_custom)
 
 def evaluate_custom(state, player:str) -> float:
         """
