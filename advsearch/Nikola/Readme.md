@@ -35,9 +35,20 @@ Othello:
         MCTS X Valor posicional:                    1 X 0,      Scores: 41 X 23
         Valor posicional X MCTS:                    0.5 X 0.5,  Scores: 32 X 32
         MCTS X Heurística customizada:              1 X 0,      Scores: 37 X 27
-        Heurística customizada X MCTS:              1 X 0,      Scores: 40 X 24       
+        Heurística customizada X MCTS:              1 X 0,      Scores: 40 X 24 
+
+        Totais por implementação:
+        Implementação       Resultado   Score total
+        Heurística Custom   5/6         242
+        MCTS                4.5/6       209
+        Valor Posicional    1.5/6       165
+        Contagem de peças   1/6         151
+
+
 
 
 Implementação do MCTS:
     Minha implementação do MCTS foi baseada nas videoaulas do canal do professor do Inf Anderson R. Tavares. A implementação segue a estrutra natural do MCTS: seleção, expansão, simulação e retropropagação. Como é possível ver nos resultados das partidas o desempenho do MCTS foi relativamente bom, entretanto esse resultado é fortemente influenciado pelo fato da implementação aqui apresentada do Minimax é com profundidade máxima, o que dificulta uma comparação justa entre os algoritmos. Ressalto que fiz outros teste usando controle dinâmico de tempo e MCTS acaba por não ser um competidor tão bom quanto apresentado nas partidas aqui descritas. Testei diferentes coeficiente de explitação e exploração e não houve melhora significativa do desempenho em nenhum caso. Isso se dá por ser uma implementação geral e simples. Em minhas pesquisas, encontrei um site submissão de agentes competitivos e no jogo Othello o campeão desde 2024 é um MCTS com uma rede neural para avaliação de estados. Obs: Não é possível ver o código dos agentes, a descrição do agente é do próprio autor. 
+
+Implementação mais bem-sucedida
 
