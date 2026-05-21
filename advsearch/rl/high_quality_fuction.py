@@ -37,6 +37,8 @@ Tenta abrir o arquivo de vetor de pesos, caso ele exista, para continuar o trein
 import pickle
 from ..othello.gamestate import GameState
 from ..othello.board import Board
+import random
+from ..your_agent.MTD_f_no_log import Agent
 
 
 def pattern(pos_list, tiles):
@@ -120,9 +122,10 @@ pattern_features = [
 ]
 
 class Train:
-    def __init__(self, alpha, gamma):
+    def __init__(self, alpha, gamma, epsilon=0.3):
         self.alpha = alpha
         self.gamma = gamma
+        self.epsilon = epsilon
 
     def init_vectors(self) -> list:
         self.vectors_list = list()
@@ -144,7 +147,16 @@ class Train:
             self.vectors_list = self.init_vectors()
         return self.vectors_list
     
-    def e_greedy(self, state:GameState)
+    def e_greedy(self, state:GameState):
+        legal_moves = state.legal_moves() 
+        if random.random() < self.epsilon:
+            return random.choice(legal_moves)
+        else:
+            ##Executa uma busca com MTD(f) usando a função de avaliação atual para escolher o próximo estado
+            agent_search = Agent(state)
+            return agent_search.iterative_deepening(4.9)
+
+
     
     def run_training(self):
         
