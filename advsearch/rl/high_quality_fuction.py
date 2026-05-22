@@ -126,6 +126,8 @@ class Train:
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
+        self.state = None
+        self.next_state = None
 
     def init_vectors(self) -> list:
         self.vectors_list = list()
@@ -156,9 +158,44 @@ class Train:
             agent_search = Agent(state)
             return agent_search.iterative_deepening(4.9)
 
+    def update_vector(self):
+        """
+        erro = r(s+1) - r(s)
+        update_value = b*erro
+        for pettern_feature, indice in pattern_features:
+            configuração = configuração(pettern_feature)
+            w_dict[indice][configuração] = w_dict[indice][configuração] + update_value
+        """
 
+    def evaluate_state(self, state:GameState, vector) -> float:
+        """
+        r(s) é função de avaliação aplicada ao estado 
+        ou seja o somatório dos respectivos valores de cada ocorrência de configuração específica de cada feature do estado
+        vector será o vetor com os valores a serem somados, ou seja, o vetor de pesos. Ele é necessário para acessar os valores associados as configurações específicas de cada feature. Se nenhum vetor em específico for passado será usado o vetor do estagio atual do estado. É possível passar um vetor que não seja o do estágio atual para que a estimativa de parâmetros seja feita de forma mais suave, ou seja, considerar que estágios próximos tenham valores próximos. Um mesmo estado será usado para atualizar os pesos dos vetores dos estágios d, d±1, d±2, onde d é o estágio atual do estado. 
+        """
+        value = 0.0
+        stage = self.get_stage(state)
+        if vector is None:
+            vector = self.vectors_list[stage]
+
+        for pettern_feature, indice in pattern_features:
+            configuração = pattern(pettern_feature[0], state.board.tiles)
+            if configuração in vector[indice][pettern_feature[1]]:
+                value += vector[indice][pettern_feature[1]][configuração]
+        return value    
     
+    def get_stage(self, state:GameState) -> int:
+        """
+        Define o estágio do jogo com base no número de peças no tabuleiro. 
+        O estágio é definido como o número de peças no tabuleiro dividido por 4, arredondado para baixo. 
+        O estágio máximo é 15, que corresponde a 64 peças no tabuleiro.
+        """
+        num_pieces = state.board.piece_count['B'] + state.board.piece_count['W'] - 4
+        stage = num_pieces // 4
+        return stage
+
     def run_training(self):
         
 
 if __name__ == "__main__":
+    pass
