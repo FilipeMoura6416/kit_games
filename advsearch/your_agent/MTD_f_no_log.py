@@ -17,7 +17,7 @@ def make_move(state) -> Tuple[int, int]:
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state)
+    agent = Agent(state, evaluate_custom)
     return agent.iterative_deepening(4.9)
 
 class Node_State:
@@ -41,9 +41,10 @@ class Dict_entry:
         self.bestMove = None
 
 class Agent:
-    def __init__(self, state):
+    def __init__(self, state, eval_func):
 
         self.root_state = Node_State(state)
+        self.eval_func = eval_func
 
     def iterative_deepening(self, time_amout):
         self.time_limit = time.time() + time_amout
@@ -96,7 +97,7 @@ class Agent:
 
         if depth_max == 0 or node_state.state.is_terminal():
             
-            memory.maxScore = memory.minScore = evaluate_custom(node_state.state, node_state.player)
+            memory.maxScore = memory.minScore = self.eval_func(node_state.state, node_state.player)
             self.tt_dict[node_state.string_board] = memory
             return memory.minScore, None
         
