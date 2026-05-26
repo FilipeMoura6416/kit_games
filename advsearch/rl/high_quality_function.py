@@ -404,6 +404,7 @@ class Train:
         """
         for x in range(self.partidas):
             self.state = GameState(Board(), 'B')
+            print("Simulando partida ", x + 1)
             while not self.state.is_terminal():
                 move = self.e_greedy(self.state)
                 self.next_state = self.state.next_state(move)
@@ -411,7 +412,7 @@ class Train:
                 self.state = self.next_state
             with open("vectors.pkl", "w") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x + 1)%5 == 0:
+            if x%5 == 0 and x > 0:
                 self.epsilon *= 0.95
                 self.gamma *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
