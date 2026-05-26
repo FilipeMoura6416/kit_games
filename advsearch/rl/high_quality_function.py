@@ -102,7 +102,7 @@ class Train:
     def e_greedy(self, state:GameState):
         legal_moves = state.legal_moves() 
         if random.random() < self.epsilon:
-            return random.choice(legal_moves)
+            return random.choice(list(legal_moves))
         else:
             ##Executa uma busca com MTD(f) usando a função de avaliação atual para escolher o próximo estado
             agent_search = Agent(state, self.vectors_list)
@@ -137,7 +137,7 @@ class Train:
                 continue
             vector[indice][configuração] = vector[indice].get(configuração, 0) + update_value
 
-        if self.parity_feature(self.state) == 1:
+        if parity_feature(self.state) == 1:
             vector[-1] += update_value ##Parity_feature
 
     def update_vectors_soft(self):

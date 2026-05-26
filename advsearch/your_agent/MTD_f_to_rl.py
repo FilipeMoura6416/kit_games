@@ -33,13 +33,18 @@ class Node_State:
         self.children = dict()
         self.pv = deque()
     
-def neg_tiles(tiles):
+def neg_tiles(tiles)->list:
+    neg_state = list()
     for y in range(len(tiles)):
+        neg_state.append(list())
         for x in range(len(tiles[0])):
             if tiles[y][x] == 'B':
-                tiles[y][x] = 'W'
+                neg_state[-1].append('W')
             elif tiles[y][x] == 'W':
-                tiles[y][x] = 'B'
+                neg_state[-1].append('B')
+            else:
+                neg_state[-1].append('.')
+    return neg_state
 
 class Dict_entry:
 
@@ -61,7 +66,7 @@ class Agent:
         vector = self.vectors_list[stage]
 
         if player == 'W':
-            neg_tiles(state.board.tiles)
+            state = neg_tiles(state.board.tiles)
 
 
         value = vector[0] ##Bias
