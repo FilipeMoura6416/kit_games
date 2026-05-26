@@ -63,8 +63,10 @@ import pickle
 from ..othello.gamestate import GameState
 from ..othello.board import Board
 import random
-from ..your_agent.MTD_f_no_log import Agent
+from ..your_agent.MTD_f_to_rl import Agent
 from ..your_agent.othello_minimax_count import evaluate_count
+import time
+import datetime
 
 
 
@@ -243,12 +245,13 @@ def parity_feature(state:GameState) -> int:
         return 1 if num_pieces % 2 == 0 else 0
 
 class Train:
-    def __init__(self, alpha, gamma, epsilon=0.3):
-        self.alpha = alpha
+    partidas = 10
+    def __init__(self, gamma=1.0, epsilon=0.3):
         self.gamma = gamma
         self.epsilon = epsilon
         self.state = None
         self.next_state = None
+        self.get_vectors_list()
 
     def init_vectors(self) -> list:
         self.vectors_list = list()
@@ -276,13 +279,13 @@ class Train:
             return random.choice(legal_moves)
         else:
             ##Executa uma busca com MTD(f) usando a função de avaliação atual para escolher o próximo estado
-            agent_search = Agent(state)
+            agent_search = Agent(state, self.vectors_list)
             return agent_search.iterative_deepening(4.9)
 
     def update_vector(self, vector=None):
         """
         erro = r(s+1) - r(s)
-        update_value = b*erro
+        update_value = gamma*erro
         for pettern_feature, indice in pattern_features:
             configuração = configuração(pettern_feature)
             w_dict[indice][configuração] = w_dict[indice][configuração] + update_value
@@ -310,6 +313,16 @@ class Train:
 
         if self.parity_feature(self.state) == 1:
             vector[-1] += update_value ##Parity_feature
+
+    def update_vectors_soft(self):
+        stage = get_stage(self.state)
+        self.update_vector
+        for i in range(1, 3):
+            if stage + i <= 15:
+                self.update_vector(self.vectors_list[stage + i])
+            if stage - i >= 0:
+                self.update_vector(self.vectors_list[stage - i])
+
 
             
     def update_simple_conformation(self, dict:dict, configuração, update_value):
@@ -383,9 +396,46 @@ class Train:
         if value != None:
             return value
         return 0 
+    
 
 
     def run_training(self):
+        """
+        """
+        for x in range(self.partidas):
+            self.state = GameState(Board(), 'B')
+            while not self.state.is_terminal():
+                move = self.e_greedy(self.state)
+                self.next_state = self.state.next_state(move)
+                self.update_vectors_soft()
+                self.state = self.next_state
+            with open("vectors.pkl", "w") as file:
+                pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+            if (x + 1)%5 == 0:
+                self.epsilon *= 0.95
+                self.gamma *= 0.95
+                timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                log_path = f"Train_x_it_{timestamp}.txt"
+                with open(log_path, "w") as file:
+                    for i, vector in enumerate(self.vectors_list):
+                        file.write(f"Vector:{i}\n")
+                        for j, entry in enumerate(vector):
+                            file.write(f"\tFeature: {j}\n")
+                            if type(entry) == dict:
+                                for key, value in entry:
+                                    file.write(f"\t\tKey: {key}, value: {value}\n")
+                            else:
+                                file.write(f"\t\Value_Entry: {entry}")
+            pkl_path = f"vectors_{timestamp}.pkl"
+            with open(pkl_path, "w") as file:
+                pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+                
+
+
+                
+
+                
+
 
     # def get_simple_setting_value(configuração:str, dict:dict):
     #     """
@@ -414,4 +464,6 @@ class Train:
         
 
 if __name__ == "__main__":
-    pass
+    rl_train = Train()
+    print("Running train...")
+    rl_train.run_training()
