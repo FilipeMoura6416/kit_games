@@ -9,9 +9,9 @@ from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
-from ..rl.high_quality_fuction import *
+from ..rl.aid_functions import *
 import copy
-
+from ..rl.pattern_features import *
 
 def make_move(state) -> Tuple[int, int]:
     """
@@ -64,7 +64,7 @@ class Agent:
             neg_tiles(state.board.tiles)
 
 
-        value += vector[0] ##Bias
+        value = vector[0] ##Bias
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, state.board.tiles)
