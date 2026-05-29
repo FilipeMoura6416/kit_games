@@ -46,12 +46,12 @@ def get_stage(state:GameState) -> int:
 
 def null_conformation(configuração):
         """
-        Verifica se todas nenhum caracter na configuração é '.', ou seja, uma casa vazia
+        Verifica se todas os caracteres na configuração são '.', ou seja, uma casa vazia
         """
         for char in configuração:
-            if char == '.':
-                return True
-        return False
+            if char == 'W' or char == 'B':
+                return False
+        return True
 
 def get_simple_conformation_value(configuração:str, dict:dict): 
         """
@@ -60,13 +60,13 @@ def get_simple_conformation_value(configuração:str, dict:dict):
         ##Pegar configuração atual da feature no estado
         if null_conformation(configuração):
             return 0
-        value = dict.get(configuração)
-        if value != None:
-            return value
+        entry = dict.get(configuração)
+        if entry != None:
+            return entry["value"]
         r_config = configuração[::-1]
-        value = dict.get(r_config)
-        if value != None:
-            return value
+        entry = dict.get(r_config)
+        if entry != None:
+            return entry["value"]
         return 0
     
 def get_complex_conformation_value(configuração:tuple, dict:dict):
@@ -75,13 +75,13 @@ def get_complex_conformation_value(configuração:tuple, dict:dict):
     """
     if null_conformation(configuração):
         return 0
-    value = dict.get(configuração[0] + configuração[1])
-    if value != None:
-        return value
+    entry = dict.get(configuração[0] + configuração[1])
+    if entry != None:
+        return entry["value"]
     r_config = configuração[0][::-1] + configuração[1]
-    value = dict.get(r_config)
-    if value != None:
-        return value
+    entry = dict.get(r_config)
+    if entry != None:
+        return entry["value"]
     return 0
 
 def parity_feature(state:GameState) -> int:

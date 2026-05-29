@@ -99,21 +99,21 @@ class Agent:
             return None, None
         with open(log_path, 'a') as log_file:
             log_file.write(self.tab_string(depth_max) + f"Testing state, move: {node_state.move}, gamma: {gamma}, depth_max: {depth_max}, player: {node_state.player}\n")
-            string_board = node_state.state.board.decorated_str(colors=False)
-            string_board = string_board.split('\n')
-            for line in string_board:
-                log_file.write(self.tab_string(depth_max-1) + line + '\n')
+            # string_board = node_state.state.board.decorated_str(colors=False)
+            # string_board = string_board.split('\n')
+            # for line in string_board:
+            #     log_file.write(self.tab_string(depth_max-1) + line + '\n')
             
 
         memory:Dict_entry = self.tt_dict.get(node_state.string_board)
         if memory != None:
             if memory.minScore >= gamma:
-               with open(log_path, 'a') as log_file:
-                    log_file.write(self.tab_string(depth_max) + f"State previous calculated minScore >= gamma returning minScore: {memory.minScore} and move: {memory.bestMove}\n")
+            #    with open(log_path, 'a') as log_file:
+            #         log_file.write(self.tab_string(depth_max) + f"State previous calculated minScore >= gamma returning minScore: {memory.minScore} and move: {memory.bestMove}\n")
                return memory.minScore, memory.bestMove
             elif memory.maxScore < gamma:
-                with open(log_path, 'a') as log_file: 
-                    log_file.write(self.tab_string(depth_max) + f"State previous calculated maxScore < gamma returning maxScore: {memory.maxScore} and move: {memory.bestMove}\n")
+                # with open(log_path, 'a') as log_file: 
+                #     log_file.write(self.tab_string(depth_max) + f"State previous calculated maxScore < gamma returning maxScore: {memory.maxScore} and move: {memory.bestMove}\n")
                 return memory.maxScore, memory.bestMove
         else:
             memory = Dict_entry()
@@ -122,8 +122,8 @@ class Agent:
             
             memory.maxScore = memory.minScore = self.eval_func(node_state.state, node_state.player)
             self.tt_dict[node_state.string_board] = memory
-            with open(log_path, 'a') as log_file:
-                log_file.write(self.tab_string(depth_max) + f"State is terminal or depth_max == 0, returning evaluation: {memory.maxScore}\n")
+            # with open(log_path, 'a') as log_file:
+            #     log_file.write(self.tab_string(depth_max) + f"State is terminal or depth_max == 0, returning evaluation: {memory.maxScore}\n")
             return memory.minScore, None
         
         best_move = None
@@ -149,8 +149,8 @@ class Agent:
             if time.time() >= self.time_limit:
                     return None, None
             
-            with open(log_path, 'a') as log_file:
-                log_file.write(self.tab_string(depth_max - 1) + f"Move: {move}, returned_score: {returned_score}, best_score: {best_score}, gamma: {gamma}\n")
+            # with open(log_path, 'a') as log_file:
+            #     log_file.write(self.tab_string(depth_max - 1) + f"Move: {move}, returned_score: {returned_score}, best_score: {best_score}, gamma: {gamma}\n")
             if returned_score > best_score:
                 memory.bestMove = move
                 best_score = returned_score

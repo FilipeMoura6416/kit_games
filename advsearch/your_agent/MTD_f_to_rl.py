@@ -20,7 +20,7 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     agent = Agent(state, evaluate_custom)
-    return agent.iterative_deepening(4.9)
+    return agent.iterative_deepening(3)
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):
@@ -66,26 +66,28 @@ class Agent:
         vector = self.vectors_list[stage]
 
         if player == 'W':
-            state = neg_tiles(state.board.tiles)
+            tiles = neg_tiles(state.board.tiles)
+        else:
+            tiles = state.board.tiles
 
 
         value = vector[0] ##Bias
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
-            configuração = get_simple_conformation(pattern_feature, state.board.tiles)
+            configuração = get_simple_conformation(pattern_feature, tiles)
             value += get_simple_conformation_value(configuração, vector[indice])
 
         for pattern_feature, indice in complex_patter_features:
-            configuração = get_complex_conformation(pattern_feature, state.board.tiles) 
+            configuração = get_complex_conformation(pattern_feature, tiles) 
             value += get_complex_conformation_value(configuração, vector[indice])
 
         for pattern_feature, indice in non_reflexible_pattern:
-            configuração = get_simple_conformation(pattern_feature, state.board.tiles)
+            configuração = get_simple_conformation(pattern_feature, tiles)
             if null_conformation(configuração):
                 continue
-            returned_value = vector[indice][configuração]
-            if returned_value != None:
-                value += returned_value
+            returned_entry = vector[indice].get(configuração)
+            if returned_entry != None:
+                value += returned_entry["value"]
 
 
         if parity_feature(state) == 1:
@@ -113,6 +115,7 @@ class Agent:
     def mtdf(self, f_guess, depth_max):
         upper_bound = float("inf")
         lower_bound = float("-inf")
+        move = None
         while lower_bound < upper_bound and time.time() < self.time_limit:
             if f_guess == lower_bound:
                 gamma = f_guess + 1
@@ -125,6 +128,9 @@ class Agent:
                 upper_bound = f_guess
             else:
                 lower_bound = f_guess
+        if move == None:
+            print("Move is None, returning first legal move")
+            move = self.root_state.state.legal_moves().pop()
         return f_guess, move
 
     def test(self, node_state:Node_State, gamma, depth_max):

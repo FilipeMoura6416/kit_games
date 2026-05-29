@@ -136,8 +136,6 @@ class Agent:
         else:
             memory.minScore = best_score
         self.tt_dict[node_state.string_board] = memory 
-        node_state.pv = node_state.children[best_move].pv.copy()
-        node_state.pv.appendleft(best_move)       
         return best_score, best_move
     
 
