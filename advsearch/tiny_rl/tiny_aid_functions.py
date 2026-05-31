@@ -1,5 +1,7 @@
 from ..othello.gamestate import GameState
 from ..othello.board import Board
+import random
+import pickle
 def get_simple_conformation(positions:list, tiles:list):
     """
     Retorna a configuração atual de um conjunto de posições
@@ -13,7 +15,7 @@ def get_simple_conformation(positions:list, tiles:list):
         x, y = pos
         conformation += tiles[x][y]
     return conformation
-    
+
 def get_stage(state:GameState) -> int:
         """
         Define o estágio do jogo com base no número de peças no tabuleiro. 

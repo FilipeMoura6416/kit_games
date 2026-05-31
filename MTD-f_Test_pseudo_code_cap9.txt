@@ -1,0 +1,53 @@
+function test(board: Board, maxDepth: int, currentDepth: int, gamma: float) -> (float, Move):
+	if currentDepth > lowestDepth:
+		lowestDepth = currentDepth
+		
+	# Lookup the entry from the transposition table.
+	entry: TableEntry = table.getEntry(board.hashValue())
+	if entry and entry.depth > maxDepth - currentDepth:
+	# Early outs for stored positions.
+		if entry.minScore >= gamma:
+			return entry.minScore, entry.bestMove
+		else if entry.maxScore < gamma:
+			return entry.maxScore, entry.bestMove
+	else:
+		# We need to create the entry.
+		entry.hashValue = board.hashValue()
+		entry.depth = maxDepth - currentDepth
+		entry.minScore = -INFINITY
+		entry.maxScore = INFINITY
+		
+	# Now we have the entry, we can get on with the text.
+	# Check if we’re done recursing.
+	if board.isGameOver() or currentDepth == maxDepth:
+		entry.minScore = entry.maxScore = board.evaluate()
+		table.storeEntry(entry)
+		return entry.minScore, null
+		
+	# Now go into bubbling up mode.
+	bestMove: Move = null
+	bestScore: float = -INFINITY
+	for move in board.getMoves():
+		newBoard: Board = board.makeMove(move)
+		
+		# Recurse.
+		recursedScore, currentMove = test(newBoard, maxDepth, currentDepth + 1, -gamma)
+		currentScore = -recursedScore
+		
+		# Update the best score.
+		if currentScore > bestScore:
+			# Track the current best move.
+			entry.bestMove = move
+			bestScore = currentScore
+			bestMove = move
+		if bestScore >= gamma:
+			break;
+			
+	# If we pruned, then we have a min score, otherwise we have a max.
+	if bestScore < gamma:
+		entry.maxScore = bestScore
+	else:
+		entry.minScore = bestScore
+	# Store the entry and return the best score and move.
+	table.storeEntry(entry)
+	return bestScore, bestMove

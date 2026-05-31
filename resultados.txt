@@ -1,0 +1,2395 @@
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Initial board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . . 
+1 . . . . . . . . 
+2 . . . . . . . . 
+3 . . . W B . . . 
+4 . . . B W . . . 
+5 . . . . . . . . 
+6 . . . . . . . . 
+7 . . . . . . . . 
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W*B*. . .
+4 . . . B*B*. . .
+5 . . . .*B*. . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . .*W*B . . .
+4 . . . B*W*. . .
+5 . . . . B*W*. .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W B . . .
+4 . . . B W . . .
+5 . . . .*B*B*B*.
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . .*W*B . . .
+4 . . .*W*W . . .
+5 . . .*W*B B B .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W*B*. . .
+4 . . .*B*W . . .
+5 . .*B*B*B*B B .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W B . . .
+4 . . . B*W*. . .
+5 . . B*W*B B B .
+6 . .*W*. . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W B . . .
+4 . . . B W . . .
+5 . .*B*W B B B .
+6 . .*B*. . . . .
+7 . .*B*. . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W B . . .
+4 . . . B W . . .
+5 . . B*W*W*W*W*W*
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W B . . .
+4 . . .*B*B*B*. .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . .*W*. . . .
+3 . . . W*W*. . .
+4 . . . B B*W*. .
+5 . . B W W W*W*W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . .*B*. . . .
+2 . . .*B*. . . .
+3 . . .*B*W . . .
+4 . . .*B*B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . .*W*. . . .
+1 . . .*W*. . . .
+2 . . .*W*. . . .
+3 . . .*W*W . . .
+4 . . .*W*B W . .
+5 . . B*W*W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . . . W . . . .
+2 . .*B*W . . . .
+3 . . .*B*W . . .
+4 . . . W*B*W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . . . W . . . .
+2 . . B W . . . .
+3 . .*W*W*W*. . .
+4 . . . W B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . . . W . . . .
+2 . . B W .*B*. .
+3 . . W W*B*. . .
+4 . . .*B*B W . .
+5 . .*B*W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . .*W*W . . . .
+2 . .*W*W . B . .
+3 . .*W*W B . . .
+4 . . . B B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . . W W . . . .
+2 . . W W . B . .
+3 .*B*B*B*B*. . .
+4 . . . B B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . W . . . .
+1 . . W W . . . .
+2 . .*W*W . B . .
+3 .*W*B B B . . .
+4*W*. . B B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . .*B*W . . . .
+1 . .*B*W . . . .
+2 . .*B*W . B . .
+3 . W*B*B B . . .
+4 W . . B B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 .*W*W*W*. . . .
+1 . .*W*W . . . .
+2 . . B*W*. B . .
+3 . W B B B . . .
+4 W . . B B W . .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W . . . .
+2 . . B W . B . .
+3 . W B B B . . .
+4 W . . B*B*B*B*.
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W . . . .
+2 . . B W . B . .
+3 .*W*W*W*W*W*. .
+4 W . . B*W*W*W*.
+5 . . B*W*W*W*W*W*
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W . . . .
+2 . .*B*B*B*B . .
+3 . W W W W W . .
+4 W . . B W W W .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W*W*. . .
+2 . . B*W*W*B . .
+3 . W*W*W*W*W . .
+4 W . . B W W W .
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . . .
+2 . . B W W B . .
+3 . W W W W W . .
+4 W . .*B*B*B*B*B*
+5 . . B W W W W W
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . . .
+2 . . B W W B . .
+3 . W W W W W .*W*
+4 W . . B B B*W*W*
+5 . . B W W*W*W*W*
+6 . . B . . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . . .
+2 . . B W W B . .
+3 . W W W W W . W
+4 W . .*B*B*B*W W
+5 . . B*B*B*W W W
+6 . . B*B*. . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . . .
+2 . . B W*W*W*W*.
+3 . W W W W W . W
+4 W . . B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . . .
+2 . .*B*B*B*B*B*B*
+3 . W W W W W . W
+4 W . . B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . . . .
+1 . . W W W . .*W*
+2 . . B B B B*W*W*
+3 . W W W W*W*.*W*
+4 W . . B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W .*B*. .
+1 . . W W*B*. . W
+2 . . B*B*B B W W
+3 . W W W W W . W
+4 W . . B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . B . .
+1 . . W W B . . W
+2 .*W*W*W*W*W*W*W
+3 . W W W W W . W
+4 W . . B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . B . .
+1 . . W W*B*. . W
+2 . W W*B*W W W W
+3 . W*B*W W W . W
+4 W*B*. B B B W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . B . .
+1 . . W W B . . W
+2 . W*W*B W W W W
+3 . W*W*W W W . W
+4*W*W*W*W*W*W*W*W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . B . .
+1 . . W W B . . W
+2*B*B*B*B*W W W W
+3 .*B*W W W W . W
+4 W W*B*W W W W W
+5 . . B*B*B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . W W W . B . .
+1*W*. W W B . . W
+2 B*W*B B W W W W
+3 . B*W*W W W . W
+4 W W B W W W W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0*B*W W W . B . .
+1*B*. W W B . . W
+2*B*W B B W W W W
+3 . B W W W W . W
+4 W W B W W W W W
+5 . . B B B W W W
+6 . . B B . . . .
+7 . . B . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W B . . W
+2 B W B B W W W W
+3 . B W W W W . W
+4 W*W*B W W W W W
+5 . .*W*B B W W W
+6 . . B*W*. . . .
+7 . . B .*W*. . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W B . . W
+2 B W B B W W W W
+3 . B W W W W . W
+4 W W B W W W W W
+5 . . W*B*B W W W
+6 . . B*B*. . . .
+7 . . B*B*W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W B . . W
+2 B W B B W W W W
+3 . B W W W W . W
+4 W W B W*W*W W W
+5 . . W*W*B W W W
+6 . .*W*B . . . .
+7 .*W*W*W*W*. . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W*B*. . W
+2 B W B B W*B*W W
+3 .*B*B*B*B*B*B*W
+4 W W B W W*B*W W
+5 . . W W*B*W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W B . . W
+2 B W B B W B W W
+3*W*W*W*W*W*W*W*W*
+4 W W B W W B W W
+5 . . W W B W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W . B . .
+1 B . W W B . . W
+2*B*W B*B*W B W W
+3*B*W*B*W W W W W
+4*B*B*B W W B W W
+5*B*. W W B W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W*W*B . .
+1 B . W W*W*. . W
+2 B W B B*W*B W W
+3 B W B W W W W W
+4 B B B W W B W W
+5 B . W W B W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W*B*. W
+2 B W B B*B*B W W
+3 B W B*B*W W W W
+4 B B*B*W W B W W
+5 B . W W B W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W*W*W*W*W
+2 B W B B B*W*W W
+3 B W B B*W*W W W
+4 B B B W W B W W
+5 B . W W B W W W
+6 . . W B . . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B B W W W
+3 B W B B W W W W
+4 B B*B*W W B W W
+5 B . W*B*B W W W
+6 . . W B*B*. . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W*W*W W
+2 B W B B*W*W W W
+3 B*W*B*W*W W W W
+4 B*W*W*W W B W W
+5 B*W*W B B W W W
+6 . . W B B . . .
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W*B*B W W W W
+3 B W B*B*W W W W
+4 B W W W*B*B W W
+5 B W W B B*B*W W
+6 . . W B B .*B*.
+7 . W W W W . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B W W W W
+3 B W B B W W W W
+4 B W*W*W B B W W
+5 B W W*W*B B W*W*
+6 . . W B*W*.*W*.
+7 . W W W W*W*. .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B W W W W
+3 B W B B W W W W
+4 B W W W B B W W
+5 B W W W B*B*W W
+6 . . W B W .*B*.
+7 . W W W W W .*B*
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B W W W W
+3 B W B B W*W*W W
+4 B W W*W*B*W*W W
+5 B W W W*W*W*W W
+6 . . W B W*W*B .
+7 . W W W W W . B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B W W W W
+3 B W*B*B W W W W
+4 B W W*B*B W W W
+5 B W W W*B*W W W
+6 . . W B W*B*B .
+7 . W W W W W*B*B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B . .
+1 B . W W W W W W
+2 B W B B W W W W
+3 B W B B W W W W
+4 B W W B B W W W
+5 B W W W B W W W
+6 . . W B*W*W*W*W*
+7 . W W W W W B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B*B*.
+1 B . W W W*B*B*W
+2 B W B B*B*W*B*W
+3 B W B*B*W W*B*W
+4 B W W B B W*B*W
+5 B W W W B W*B*W
+6 . . W B W W*B*W
+7 . W W W W W*B*B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W*W*W*W*W*
+1 B . W W W B*W*W
+2 B W B B B*W*B W
+3 B W B B W W B W
+4 B W W B B W B W
+5 B W W W B W B W
+6 . . W B W W B W
+7 . W W W W W B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W W W W
+1 B*B*B*B*B*B*W W
+2 B W B B B W B W
+3 B W B B W W B W
+4 B W W B B W B W
+5 B W W W B W B W
+6 . . W B W W B W
+7 . W W W W W B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W (advsearch\Nikola) has no legal moves. advsearch\Nikola will play again
+Player B move 0,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W W W W
+1 B B B B B B W W
+2 B W B B B W B W
+3 B W B*B*W W B W
+4 B W*B*B B W B W
+5 B*B*W W B W B W
+6*B*. W B W W B W
+7 . W W W W W B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W W W W
+1 B B B B B B W W
+2 B W B B B W B W
+3 B W B B W W B W
+4 B*W*B B B W B W
+5 B*W*W W B W B W
+6 B*W*W B W W B W
+7 . W W W W W B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W W W W
+1 B B B B B B W W
+2 B W B B B W B W
+3 B W B B W W B W
+4 B W B*B*B W B W
+5 B W*B*W B W B W
+6 B*B*W B W W B W
+7*B*B*B*B*B*B*B*B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+End of game reached! Scores:
+Player 1 (B - advsearch\Nikola): 37
+Player 2 (W - advsearch\Nikola): 27
+Player 1 (B - advsearch\Nikola wins!
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Initial board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . . 
+1 . . . . . . . . 
+2 . . . . . . . . 
+3 . . . W B . . . 
+4 . . . B W . . . 
+5 . . . . . . . . 
+6 . . . . . . . . 
+7 . . . . . . . . 
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . . W*B*. . .
+4 . . . B*B*. . .
+5 . . . .*B*. . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . . .*W*W*W*. .
+4 . . . B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . .*B*. . . . .
+3 . . .*B*W W . .
+4 . . . B*B*. . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . B . . . . .
+3 . .*W*W*W*W . .
+4 . . . B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . .*B*. . . . .
+3 . .*B*W W W . .
+4 . .*B*B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . B . . . . .
+3 .*W*W*W*W W . .
+4 . . B B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . B . .*B*. .
+3 . W W W*B*W . .
+4 . . B*B*B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . .*W*. . . .
+2 . .*W*. . B . .
+3 .*W*W W B W . .
+4 . . B B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . W . . . .
+2 . . W . . B . .
+3*B*B*B*B*B*W . .
+4 . . B B B . . .
+5 . . . . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . W . . . .
+2 . .*W*. . B . .
+3 B B*W*B B W . .
+4 . .*W*B B . . .
+5 . .*W*. B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . .*B*. . .
+1 . . .*B*. . . .
+2 . .*B*. . B . .
+3 B*B*W B B W . .
+4 . . W B B . . .
+5 . . W . B . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . B . . .
+1 . . . B . . . .
+2 . . B . . B . .
+3 B B*W*B B W . .
+4 . . W*W*B . . .
+5 . . W .*W*. . .
+6 . . . . .*W*. .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . B . . .
+1 . . . B . . . .
+2 . .*B*. . B . .
+3 B B*B*B B W . .
+4 . .*B*W B . . .
+5 . .*B*. W . . .
+6 . .*B*. . W . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . B . . .
+1 . . . B . . . .
+2 .*W*B . . B . .
+3 B B*W*B B W . .
+4 . . B*W*B . . .
+5 . . B . W . . .
+6 . . B . . W . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . B . . .
+1 . . . B . . . .
+2*B*B*B*. . B . .
+3 B B W B B W . .
+4 . . B W B . . .
+5 . . B . W . . .
+6 . . B . . W . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . B . . .
+1*W*. . B . . . .
+2 B*W*B . . B . .
+3 B B*W*B B W . .
+4 . . B W B . . .
+5 . . B . W . . .
+6 . . B . . W . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0*B*. . . B . . .
+1*B*. . B . . . .
+2*B*W B . . B . .
+3 B B W B B W . .
+4 . . B W B . . .
+5 . . B . W . . .
+6 . . B . . W . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3 B B*W*B B W . .
+4 . .*W*W B . . .
+5 . .*W*. W . . .
+6 . .*W*. . W . .
+7 . .*W*. . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3 B*B*W*B*B W . .
+4 . .*B*B*B . . .
+5 . . W*B*W . . .
+6 . . W . . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B*W*B . . B . .
+3 B*W*W B B W . .
+4 .*W*B B B . . .
+5 . . W B W . . .
+6 . . W . . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3 B W W B B W . .
+4 . W B B B . . .
+5 . . W*B*B*B*. .
+6 . . W . . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3 B W W B B W . .
+4 . W B B B . . .
+5 . .*W*W*W*W*W*.
+6 . . W . . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3*B*W W B B W . .
+4 .*B*B*B*B . . .
+5 . .*B*B*W W W .
+6 . . W*B*. W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . . B . . . .
+2 B W B . . B . .
+3 B*W*W B B W . .
+4 .*W*B B B . . .
+5 .*W*W*W*W*W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B .*B*B . . . .
+2 B*B*B . . B . .
+3*B*W W B B W . .
+4 . W B B B . . .
+5 . W W W W W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . B B . . . .
+2 B B B .*W*B . .
+3 B W W*W*W*W . .
+4 . W*W*B*W*. . .
+5 .*W*W W*W*W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . . . B . . .
+1 B . B B . . . .
+2 B B B*B*B*B*. .
+3 B W W*B*W W . .
+4 . W W*B*W . . .
+5 . W W W W W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B .*W*. B . . .
+1 B .*W*W*. . . .
+2 B B*W*B*W*B . .
+3 B W*W*B W*W*. .
+4 . W W B W . . .
+5 . W W W W W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W*B*W B . .
+3 B W*B*B W W . .
+4 .*B*W B W . . .
+5*B*W W W W W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W B*W*W*W*.
+3 B W B B W W . .
+4 . B W B W . . .
+5 B W W W W W W .
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W B W W W .
+3 B W B B W W . .
+4 . B W B W . . .
+5*B*B*B*B*B*B*B*B*
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W B W W W .
+3 B W B B W W . .
+4*W*W*W*B W . . .
+5 B*W*B B B B B B
+6 . .*W*B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W*B*W W W .
+3 B W B B*B*W . .
+4 W W W*B*B*B*. .
+5 B W B B B B B B
+6 . . W B . W . .
+7 . . W . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W*W*. . . .
+2 B B W*W*W W W .
+3 B W B*W*B W . .
+4 W W W*W*B B . .
+5 B W B*W*B B B B
+6 . . W*W*. W . .
+7 . . W*W*. . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W B W . .
+4 W W W W B B . .
+5 B W B W B*B*B B
+6 . . W W .*B*. .
+7 . . W W .*B*. .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W*W*W W .
+3 B W B W*W*W . .
+4 W W W W*W*B . .
+5 B W B W*W*B B B
+6 . . W W*W*B . .
+7 . . W W . B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W W B . .
+5 B W*B*W W B B B
+6 . . W*B*W B . .
+7 . . W W*B*B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W*W*W*W*.
+5 B W B W W*W*B B
+6 . . W B*W*B . .
+7 . . W W B B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W W W W .
+5 B W B W W W B B
+6 . . W B W B . .
+7 .*B*B*B*B*B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W W W W .
+5 B W B W*W*W B B
+6 . . W B W*W*. .
+7 . B B B B B*W*.
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W W W W .
+5 B W B W W W B B
+6 . . W B W W . .
+7 . B B B B*B*B*B*
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B W W W . .
+4 W W W W W*W*W .
+5 B W B W W W*W*B
+6 . . W B W W .*W*
+7 . B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W*B*B*B*B*B*.
+4 W W W W W*B*W .
+5 B W B W*B*W W B
+6 . . W*B*W W . W
+7 . B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B B B B .
+4 W W W*W*W B W .
+5 B W*W*W B W W B
+6 .*W*W B W W . W
+7 . B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B*B*B B .
+4 W W W*B*W B W .
+5 B W*B*W B W W B
+6 .*B*W B W W . W
+7*B*B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B B B B .
+4*W*W W B W B W .
+5*W*W B W B W W B
+6*W*W*W*B W W . W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B B B B*B*
+4 W W W B W B*B*.
+5 W W B W B*B*W B
+6 W W W B*B*W . W
+7 B B B*B*B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B B B B B
+4 W W W B*W*B B .
+5 W W B W B*W*W B
+6 W W W B B W*W*W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B . W W . . . .
+2 B B W W W W W .
+3 B W B B B B B B
+4 W W W B W B B*B*
+5 W W B W B W*B*B
+6 W W W B B*B*W W
+7 B B B B*B*B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B*W*W W . . . .
+2 B*W*W W W W W .
+3 B*W*B B B B B B
+4 W W W B W B B B
+5 W W B W B W B B
+6 W W W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . . .
+1 B W W W . .*B*.
+2 B W W W W*B*B*.
+3 B W B B*B*B*B*B
+4 W W W B W B B B
+5 W W B W B W B B
+6 W W W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W . B . .*W*
+1 B W W W . .*W*.
+2 B W W W W*W*B .
+3 B W B B*W*B B B
+4 W W W*W*W B B B
+5 W W*W*W B W B B
+6 W*W*W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B*B*W . B . . W
+1 B*B*B*W . . W .
+2 B*B*W*B*W W B .
+3 B*B*B B*B*B B B
+4 W*B*W W W*B*B B
+5 W*B*W W B W B B
+6 W*B*W B B B W W
+7 B*B*B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B W . B . . W
+1 B B B W . . W*W*
+2 B B W B W W*W*.
+3 B B B B B*W*B B
+4 W B W W*W*B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B W . B . . W
+1 B B B W . . W W
+2 B B W*B*B*B*B*B*
+3 B B B B B W B B
+4 W B W W W B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B W . B . . W
+1 B B B W*W*. W W
+2 B B W*W*W*B B B
+3 B B*W*B*W*W B B
+4 W*W*W W*W*B B B
+5*W*B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B*B*B*B*B . . W
+1 B B B*B*B*. W W
+2 B B W*B*W*B*B B
+3 B B W*B*W W B B
+4 W W W W W B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B B B B*W*. W
+1 B B B B*W*. W W
+2 B B W*W*W B B B
+3 B B*W*B W W B B
+4 W W W W W B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B B B*B*B*B*W
+1 B B B B W .*B*W
+2 B B W W W B*B*B
+3 B B W B W W B B
+4 W W W W W B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B B B B B B B W
+1 B B B B W*W*W*W*
+2 B B W W W*W*B B
+3 B B W B W*W*B B
+4 W W W W W B B B
+5 W B W W B W B B
+6 W B W B B B W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+End of game reached! Scores:
+Player 1 (B - advsearch\Nikola): 39
+Player 2 (W - advsearch\Nikola): 25
+Player 1 (B - advsearch\Nikola wins!
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Initial board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . . 
+1 . . . . . . . . 
+2 . . . . . . . . 
+3 . . . W B . . . 
+4 . . . B W . . . 
+5 . . . . . . . . 
+6 . . . . . . . . 
+7 . . . . . . . . 
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . . . . . .
+3 . .*B*B*B*. . .
+4 . . . B W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . . . .
+2 . . . .*W*. . .
+3 . . B B*W*. . .
+4 . . . B*W*. . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . .*B*. .
+2 . . . .*B*. . .
+3 . . B*B*W . . .
+4 . . . B W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . B . .
+2 . . . . B . . .
+3 .*W*W*W*W*. . .
+4 . . . B W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . . .
+1 . . . . . B . .
+2 .*B*. . B . . .
+3 . W*B*W W . . .
+4 . . .*B*W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . .*W*.
+1 . . . . .*W*. .
+2 . B . .*W*. . .
+3 . W B*W*W . . .
+4 . . . B W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3*B*B*B*W W . . .
+4 . . . B W . . .
+5 . . . . . . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B B*W*W . . .
+4 . . .*W*W . . .
+5 . . .*W*. . . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B*B*W W . . .
+4 . . .*B*W . . .
+5 . . . W*B*. . .
+6 . . . . . . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B B W W . . .
+4 . . . B*W*. . .
+5 . . . W*W*. . .
+6 . . . .*W*. . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B B W W . . .
+4 . . .*B*B*B*. .
+5 . . . W W . . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B B*W*W . . .
+4 . . . B*W*B . .
+5 . . . W W*W*. .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W . . .
+3 B B*B*B*B*B*. .
+4 . . . B W B . .
+5 . . . W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 5,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W*W*. .
+3 B B B B B*W*. .
+4 . . . B W*W*. .
+5 . . . W W*W*. .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 . . . . . W . .
+2 . B . . W W . .
+3 B B B B B W . .
+4 . . .*B*B*B*B*.
+5 . . . W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1*W*. . . . W . .
+2 .*W*. . W W . .
+3 B B*W*B B W . .
+4 . . .*W*B B B .
+5 . . . W*W*W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W .*B*. . W . .
+2 .*B*. . W W . .
+3*B*B W B B W . .
+4 . . . W B B B .
+5 . . . W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B W B B W . .
+4 . . .*W*W*W*W*W*
+5 . . . W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B W B*B*W . .
+4 . . .*B*W W W W
+5 . .*B*W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . .*W*W . .
+3 B B W*W*B W . .
+4 . .*W*W*W*W W W
+5 . . B W W W . .
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B W W*B*W . .
+4 . . W W W*B*W W
+5 . .*B*B*B*B*B*.
+6 . . . . W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B W W B W . .
+4 . .*W*W*W*B W W
+5 . .*W*W*B B B .
+6 . .*W*. W . . .
+7 . . . . . . . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B*B*W W B W . .
+4 . .*B*W W B W W
+5 . . W*B*B B B .
+6 . . W .*B*. . .
+7 . . . . .*B*. .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B W W B W . .
+4 . . B W W B W W
+5 . .*W*W*W*W*W*W*
+6 . . W . B . . .
+7 . . . . . B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 .*B*. . W W . .
+3 B B*B*W B W . .
+4 . . B*B*W*B*W W
+5 . . W W*B*B*W W
+6 . . W . B*B*. .
+7 . . . . . B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B B W B W . .
+4 . . B B W B*W*W
+5 . . W W B*W*W W
+6 . . W .*W*B . .
+7 . . .*W*. B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 4,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . B . . W W . .
+3 B B B W B W . .
+4 . . B B W B W W
+5 . . W W*B*W W W
+6 . . W .*B*B . .
+7 . . . W*B*B . .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1*W*. B . . W . .
+2 .*W*. . W W . .
+3 B B*W*W B W . .
+4 . . B*W*W B W W
+5 . . W W*W*W W W
+6 . . W . B*W*. .
+7 . . .*W*W*W*W*.
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . W . . W W . .
+3 B B W W B W . .
+4 . .*B*W W B W W
+5 . .*B*W W W W W
+6 . .*B*. B W . .
+7 . .*B*W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . . W .
+1 W . B . . W . .
+2 . W . . W W . .
+3 B B W W B W . .
+4 . . B W W B W W
+5 . . B*W*W W W W
+6 . .*W*. B W . .
+7 .*W*W*W*W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 5,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . .*B*W .
+1 W . B . .*B*. .
+2 . W . . W*B*. .
+3 B B W W B*B*. .
+4 . . B W W*B*W W
+5 . . B W W W W W
+6 . . W . B W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . B W .
+1 W . B . . B . .
+2 . W . . W B . .
+3 B B W W B B . .
+4 . . B W W B W W
+5 . . B W W W W W
+6 . . W*W*W*W*. .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . .*B*B*B*
+1 W . B . . B . .
+2 . W . . W B . .
+3 B B W W B B . .
+4 . . B W W B W W
+5 . . B W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . B B B
+1 W . B . . B . .
+2 . W . .*W*W*W*.
+3 B B W W B*W*. .
+4 . . B W*W*B W W
+5 . . B W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 2,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . . . . B B B
+1 W . B . . B . .
+2 . W*B*. W W W .
+3 B B*B*W B W . .
+4 . .*B*W W B W W
+5 . . B W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 2,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . .*W*. . B B B
+1 W .*W*. . B . .
+2 . W*W*. W W W .
+3 B B*W*W B W . .
+4 . .*W*W W B W W
+5 . .*W*W W W W W
+6 . .*W*W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 3,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . W*B*. B B B
+1 W .*B*. . B . .
+2 .*B*W . W W W .
+3*B*B W W B W . .
+4 . . W W W B W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 . . W B . B B B
+1 W . B . . B . .
+2*W*W*W*. W W W .
+3 B*W*W W B W . .
+4 . .*W*W W B W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0*B*. W B . B B B
+1*B*. B . . B . .
+2*B*W W . W W W .
+3*B*W W W B W . .
+4 . . W W W B W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W B . B B B
+1 B . B . . B . .
+2 B W W*W*W W W .
+3 B W W W*W*W . .
+4 . . W W W*W*W W
+5 . . W W W W*W*W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,2 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W B . B B B
+1 B . B . . B . .
+2*B*B*B*B*B*B*B*B*
+3 B W W W W W . .
+4 . . W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W B . B B B
+1 B . B . . B .*W*
+2 B B B B B B*W*B
+3 B W W W W*W*. .
+4 . . W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B . W B . B B B
+1 B . B . .*B*. W
+2 B B B B B B*B*B
+3 B W W W W W .*B*
+4 . . W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B*W*W B . B B B
+1 B .*W*. . B . W
+2 B B B*W*B B B B
+3 B W W W*W*W . B
+4 . . W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W B . B B B
+1 B . W . . B . W
+2 B B*B*W B B B B
+3 B*B*W W W W . B
+4*B*. W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,0 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W*W*W*W*B B B
+1 B . W . . B . W
+2 B B B W B B B B
+3 B B W W W W . B
+4 B . W W W W W W
+5 . . W W W W W W
+6 . . W W W W . .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . . B . W
+2 B B*B*W B B B B
+3 B B W*B*W W . B
+4 B . W W*B*W W W
+5 . . W W W*B*W W
+6 . . W W W W*B*.
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 4,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W .*W*B . W
+2 B B B W*W*B B B
+3 B B W B*W*W . B
+4 B . W W B W W W
+5 . . W W W B W W
+6 . . W W W W B .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 6,3 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W B . W
+2 B B B W W B B B
+3 B B W*B*B*B*B*B
+4 B . W W B W*B*W
+5 . . W W W B*B*W
+6 . . W W W W*B*.
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 6,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W .*W*W*W*W
+2 B B B W W*W*W*B
+3 B B W B*W*B*W*B
+4 B . W*W*B W*W*W
+5 . . W W W B*W*W
+6 . . W W W W*W*.
+7 . W W W W W*W*.
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W W W W
+2 B B B W W W W B
+3 B B W*B*W B W B
+4 B .*B*W B W W W
+5 .*B*B*B*B*B*W W
+6 . . W W W W W .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 0,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W W W W
+2 B B B W*W*W W B
+3 B B W*W*W B W B
+4 B .*W*W B W W W
+5 .*W*B B B B W W
+6*W*. W W W W W .
+7 . W W W W W W .
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 7,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W W W W
+2 B B B W W W W B
+3 B B W W W B W B
+4 B . W W B W W W
+5 . W B B B*B*W W
+6 W . W W W W*B*.
+7 . W W W W W W*B*
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 7,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W W W W
+2 B B B W W W W B
+3 B B W W W B W B
+4 B . W W B W W W
+5 . W B B B B W W
+6 W . W W W*W*W*W*
+7 . W W W W W W B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,5 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B . W . W W W W
+2 B B B W W W W B
+3 B B W W W B W B
+4 B . W W B W W W
+5*B*B*B*B B B W W
+6 W . W W W W W W
+7 . W W W W W W B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B*W*W . W W W W
+2 B B*W*W W W W B
+3 B B W*W*W B W B
+4 B . W W B W W W
+5 B B B B B B W W
+6 W . W W W W W W
+7 . W W W W W W B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 0,7 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B W W . W W W W
+2 B B W W W W W B
+3 B B W W W B W B
+4 B . W W B W W W
+5*B*B B B B B W W
+6*B*. W W W W W W
+7*B*B*B*B*B*B*B*B*
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 1,6 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B W W . W W W W
+2 B B W W W W W B
+3 B B W W W B W B
+4 B . W*W*B W W W
+5 B B*W*B B B W W
+6 B*W*W W W W W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player B move 1,4 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W*B*B B
+1 B W W .*B*W W W
+2 B B W*B*W W W B
+3 B B*B*W W B W B
+4 B*B*B*B*B*W W W
+5 B B*B*B B B W W
+6 B W W*B*W W W W
+7 B B B B*B*B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+Player W move 3,1 accepted.
+Current board:
+x 0 1 2 3 4 5 6 7
+0 B W W W W B B B
+1 B W W*W*W*W*W W
+2 B B W*W*W W W B
+3 B B B*W*W B W B
+4 B B B B B W W W
+5 B B B B B B W W
+6 B W W B W W W W
+7 B B B B B B B B
+
+---- Current match: advsearch\Nikola (B) x (W) advsearch\Nikola ----
+End of game reached! Scores:
+Player 1 (B - advsearch\Nikola): 34
+Player 2 (W - advsearch\Nikola): 30
+Player 1 (B - advsearch\Nikola wins!
+

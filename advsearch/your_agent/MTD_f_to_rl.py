@@ -12,6 +12,7 @@ from ..othello.gamestate import GameState
 from ..rl.aid_functions import *
 import copy
 from ..rl.pattern_features import *
+import pickle
 
 def make_move(state) -> Tuple[int, int]:
     """
@@ -19,7 +20,7 @@ def make_move(state) -> Tuple[int, int]:
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state, evaluate_custom)
+    agent = Agent(state)
     return agent.iterative_deepening(3)
 
 class Node_State:
@@ -54,9 +55,12 @@ class Dict_entry:
         self.bestMove = None
 
 class Agent:
-    def __init__(self, state, vectors_list):
+    def __init__(self, state, vectors_list=None):
 
         self.root_state = Node_State(state)
+        if vectors_list == None:
+            with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+                self.vectors_list = pickle.load(file)
         self.vectors_list = vectors_list
 
     def eval_func(self, state:GameState, player):

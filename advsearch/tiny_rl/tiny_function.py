@@ -10,8 +10,8 @@ from .tiny_aid_functions import *
 from .tiny_pattern_features import *
 
 class Train:
-    partidas = 30
-    def __init__(self, alpha=0.1, gamma=0.95, epsilon=0.3):
+    partidas = 1000
+    def __init__(self, alpha=0.95, gamma=0.95, epsilon=0.3):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
@@ -32,7 +32,8 @@ class Train:
     def get_vectors_list(self) -> list:
         """Tenta pegar a lista de vetores do arquivo vectors.pkl, se não existir, cria os vetores"""
         try:
-            with open("advsearch/tiny_rl/vectors_log/tiny_vectors.pkl", "rb") as file:
+            with open("advsearch/tiny_rl/vectors_log/last_vectors.pkl", "rb") as file:
+                
                 self.vectors_list = pickle.load(file)
         except:
             self.vectors_list = self.init_vectors()
@@ -45,7 +46,7 @@ class Train:
         else:
             ##Executa uma busca com MTD(f) usando a função de avaliação atual para escolher o próximo estado
             agent_search = Agent(state, self.vectors_list)
-            return agent_search.iterative_deepening(1.5)
+            return agent_search.iterative_deepening(2)
 
     def update_vector(self, vector=None):
         """
@@ -60,7 +61,10 @@ class Train:
             stage = get_stage(self.state)
             vector = self.vectors_list[stage]
         erro =  self.gamma * self.evaluate_state(self.next_state, vector) - self.evaluate_state(self.state, vector)
-        update_value = self.alpha * erro
+        if self.next_state.is_terminal():
+            print(f"Erro:{erro}")
+        update_value = self.alpha * erro / 6
+        print(f"Update value: {update_value}")
         vector[0] += update_value 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, self.state.board.tiles)
@@ -71,19 +75,19 @@ class Train:
         if null_conformation(configuração):
             return
         if configuração in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[configuração]["count"]/100)/dict[configuração]["count"]}")
-            dict[configuração]["value"] += update_value*min(1, dict[configuração]["count"]/100)/dict[configuração]["count"]
+            # if update_value != 0:
+            #     print(f"Update value: {update_value*min(1, dict[configuração]["count"]/50)/dict[configuração]["count"]}")
+            dict[configuração]["value"] += update_value*min(1, dict[configuração]["count"]/50)
             dict[configuração]["count"] += 1
             return
         r_config = configuração[::-1]
         if r_config in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]}")
-            dict[r_config]["value"] += update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]
+            # if update_value != 0:
+            #     print(f"Update value: {update_value*min(1, dict[r_config]["count"]/50)/dict[r_config]["count"]}")
+            dict[r_config]["value"] += update_value*min(1, dict[r_config]["count"]/50)
             dict[r_config]["count"] += 1
             return
-        dict[configuração] = {"value": update_value, "count": 1}
+        dict[configuração] = {"value": update_value*1/50, "count": 1}
         return
     
     
@@ -117,9 +121,6 @@ class Train:
     def run_training(self):
         """
         """
-        ##Grava o primeiro vetor antes de começar o treinamento
-        with open("advsearch/tiny_rl/vectors_log/random_vectors.pkl", "wb") as file:
-            pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
         ##Grava em txt
         self.write_txt()
         for x in range(self.partidas):
@@ -132,9 +133,9 @@ class Train:
                 self.update_vector()
                 self.state = self.next_state
 
-            self.save_last_vectors
+            self.save_last_vectors()
             
-            if (x+1)%10 == 0 and x > 0:
+            if (x+1)%(self.partidas/10) == 0 and x > 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 self.write_txt()

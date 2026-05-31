@@ -56,10 +56,10 @@ class Agent:
 
         self.root_state = Node_State(state)
         if vectors_list == None:
-            try:
-                with open("advsearch/tiny_rl/vectors_log/vectors_2026-05-30_16-29-46.pkl", "rb") as file:
+            try: 
+                with open("advsearch/tiny_rl/vectors_log/vectors_2026-05-29_18-41-52.pkl", "rb") as file:
                     self.vectors_list = pickle.load(file)
-            except:
+            except: 
                 raise "Não foi possível ler os vetores"
         else:
             self.vectors_list = vectors_list
@@ -68,7 +68,6 @@ class Agent:
         if state.is_terminal():
             return evaluate_count(state, player)
         stage = get_stage(state)
-        
         if self.vectors_list == None:
             raise "Vectors list == none"
         vector = self.vectors_list[stage]

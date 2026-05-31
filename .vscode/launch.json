@@ -27,6 +27,13 @@
    "request": "launch",
    "module": "advsearch.rl.high_quality_function",
    "console": "integratedTerminal"
+  },
+  {
+    "name": "Run_tiny_rl",
+    "type": "debugpy",
+    "request": "launch",
+    "module": "advsearch.tiny_rl.tiny_function",
+    "console": "integratedTerminal"
   }
  ]
 }

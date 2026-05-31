@@ -696,6 +696,47 @@ Negamax_tt_id vs minimax
     python server.py othello advsearch\your_agent\MTD_f_no_log.py advsearch\your_agent\othello_minimax_custom.py 
     1x2
 
+    python server.py othello advsearch\tiny_rl\tiny_mtdf.py advsearch\tiny_rl\tiny_mtdf_2.py 3x0
+    
+        advsearch/tiny_rl/vectors_log/vectors_2026-05-30_16-29-46.pkl
+        advsearch/tiny_rl/vectors_log/vectors_2026-05-29_18-41-52.pkl
+        Player 1 (B - advsearch\tiny_rl): 43
+        Player 2 (W - advsearch\tiny_rl): 21
+        Player 1 (B - advsearch\tiny_rl wins!
+
+        Player 1 (B - advsearch\tiny_rl): 53
+        Player 2 (W - advsearch\tiny_rl): 11
+        Player 1 (B - advsearch\tiny_rl wins!
+
+        Player 1 (B - advsearch\tiny_rl): 40
+        Player 2 (W - advsearch\tiny_rl): 24
+        Player 1 (B - advsearch\tiny_rl wins!
+
+    python server.py othello advsearch\tiny_rl\tiny_mtdf_2.py advsearch\tiny_rl\tiny_mtdf.py 2x4
+        Player 1 (B - advsearch\tiny_rl): 28
+        Player 2 (W - advsearch\tiny_rl): 35
+        Player 2 (W - advsearch\tiny_rl) wins!
+
+        Player 1 (B - advsearch\tiny_rl): 29
+        Player 2 (W - advsearch\tiny_rl): 35
+        Player 2 (W - advsearch\tiny_rl) wins!
+
+        Player 1 (B - advsearch\tiny_rl): 33
+        Player 2 (W - advsearch\tiny_rl): 31
+        Player 1 (B - advsearch\tiny_rl wins!
+
+        Player 1 (B - advsearch\tiny_rl): 34
+        Player 2 (W - advsearch\tiny_rl): 30
+        Player 1 (B - advsearch\tiny_rl wins!
+
+        Player 1 (B - advsearch\tiny_rl): 14
+        Player 2 (W - advsearch\tiny_rl): 49
+        Player 2 (W - advsearch\tiny_rl) wins!
+
+        Player 1 (B - advsearch\tiny_rl): 20
+        Player 2 (W - advsearch\tiny_rl): 44
+        Player 2 (W - advsearch\tiny_rl) wins!
+
 x 0 1 2 3 4 5 6 7
 0 . . . . . . . .
 1 . . B . . . . .
