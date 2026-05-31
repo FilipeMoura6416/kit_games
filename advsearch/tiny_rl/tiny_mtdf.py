@@ -57,7 +57,7 @@ class Agent:
         self.root_state = Node_State(state)
         if vectors_list == None:
             try:
-                with open("advsearch/tiny_rl/vectors_log/vectors_2026-05-30_16-29-46.pkl", "rb") as file:
+                with open("advsearch/tiny_rl/vectors_log/last_vectors.pkl", "rb") as file:
                     self.vectors_list = pickle.load(file)
             except:
                 raise "Não foi possível ler os vetores"

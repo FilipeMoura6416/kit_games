@@ -71,8 +71,8 @@ from .aid_functions import *
 from .pattern_features import *
 
 class Train:
-    partidas = 30
-    def __init__(self, alpha=0.1, gamma=0.95, epsilon=0.3):
+    partidas = 10000
+    def __init__(self, alpha=1, gamma=1, epsilon=0.3):
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
@@ -94,7 +94,7 @@ class Train:
     def get_vectors_list(self) -> list:
         """Tenta pegar a lista de vetores do arquivo vectors.pkl, se não existir, cria os vetores"""
         try:
-            with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+            with open("advsearch/rl/vectors.pkl", "rb") as file:
                 self.vectors_list = pickle.load(file)
         except:
             self.vectors_list = self.init_vectors()
@@ -107,7 +107,7 @@ class Train:
         else:
             ##Executa uma busca com MTD(f) usando a função de avaliação atual para escolher o próximo estado
             agent_search = Agent(state, self.vectors_list)
-            return agent_search.iterative_deepening(1.5)
+            return agent_search.iterative_deepening(2)
 
     def update_vector(self, vector=None):
         """
@@ -123,8 +123,14 @@ class Train:
             if stage == 14:
                 print("Updating vector of stage ", stage)
             vector = self.vectors_list[stage]
-        erro =  self.gamma * self.evaluate_state(self.next_state, vector) - self.evaluate_state(self.state, vector)
-        update_value = self.alpha * erro
+        next_state_value, next_state_occurances = self.evaluate_state(self.next_state, vector)
+        current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
+        erro =  (self.gamma * next_state_value) - current_state_value
+        update_value = self.alpha * erro / current_state_occurances
+        if update_value == 0:
+            return
+        else:
+            print("Update value: ", update_value)
         vector[0] += update_value 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, self.state.board.tiles)
@@ -139,7 +145,7 @@ class Train:
             if null_conformation(configuração):
                 continue
             if vector[indice].get(configuração) != None:
-                vector[indice][configuração]["value"] += update_value*min(1, vector[indice][configuração]["count"]/100)/vector[indice][configuração]["count"]
+                vector[indice][configuração]["value"] += update_value
                 vector[indice][configuração]["count"] += 1
             else:
                 vector[indice][configuração] = {"value": update_value, "count": 1}
@@ -164,16 +170,12 @@ class Train:
         if null_conformation(configuração):
             return
         if configuração in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[configuração]["count"]/100)/dict[configuração]["count"]}")
-            dict[configuração]["value"] += update_value*min(1, dict[configuração]["count"]/100)/dict[configuração]["count"]
+            dict[configuração]["value"] += update_value
             dict[configuração]["count"] += 1
             return
         r_config = configuração[::-1]
         if r_config in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]}")
-            dict[r_config]["value"] += update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]
+            dict[r_config]["value"] += update_value
             dict[r_config]["count"] += 1
             return
         dict[configuração] = {"value": update_value, "count": 1}
@@ -185,16 +187,12 @@ class Train:
         if null_conformation(config):
             return
         if config in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[config]["count"]/100)/dict[config]["count"]}")
-            dict[config]["value"] += update_value*min(1, dict[config]["count"]/100)/dict[config]["count"]
+            dict[config]["value"] += update_value
             dict[config]["count"] += 1
             return
         r_config = configuração[0][::-1] + configuração[1]
         if r_config in dict:
-            if update_value != 0:
-                print(f"Update value: {update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]}")
-            dict[r_config]["value"] += update_value*min(1, dict[r_config]["count"]/100)/dict[r_config]["count"]
+            dict[r_config]["value"] += update_value
             dict[r_config]["count"] += 1
             return
         dict[config] = {"value": update_value, "count": 1}
@@ -208,21 +206,26 @@ class Train:
         :param vector: será o vetor de dicionários com os valores a serem somados, ou seja, o vetor de pesos. Ele é necessário para acessar os valores associados as configurações específicas de cada feature. Se nenhum vetor em específico for passado será usado o vetor do estagio atual do estado. É possível passar um vetor que não seja o do estágio atual para que a estimativa de parâmetros seja feita de forma mais suave, ou seja, considerar que estágios próximos tenham valores próximos. Um mesmo estado será usado para atualizar os pesos dos vetores dos estágios d, d±1, d±2, onde d é o estágio atual do estado. 
         """
         if state.is_terminal():
-            return evaluate_count(state, 'B')
+            return evaluate_count(state, 'B'), None
         value = 0.0
         if vector is None:
             stage = get_stage(state)
             vector = self.vectors_list[stage]
         
         value += vector[0] ##Bias
+        count_occurrence = 1
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, state.board.tiles)
-            value += get_simple_conformation_value(configuração, vector[indice])
+            if not null_conformation(configuração):
+                value += get_simple_conformation_value(configuração, vector[indice])
+                count_occurrence += 1
 
         for pattern_feature, indice in complex_patter_features:
             configuração = get_complex_conformation(pattern_feature, state.board.tiles) 
-            value += get_complex_conformation_value(configuração, vector[indice])
+            if not null_conformation(configuração):
+                value += get_complex_conformation_value(configuração, vector[indice])
+                count_occurrence += 1
 
         for pattern_feature, indice in non_reflexible_pattern:
             configuração = get_simple_conformation(pattern_feature, state.board.tiles)
@@ -231,20 +234,14 @@ class Train:
             returned_entry = vector[indice].get(configuração)
             if returned_entry != None:
                 value += returned_entry["value"]
+                count_occurrence += 1
 
 
         if parity_feature(state) == 1:
             value += vector[-1] ##Parity_feature
+            count_occurrence += 1
 
-        return value 
-    
-    def get_conformation_value(self, configuração:str, dict:dict):
-        if null_conformation(configuração):
-            return 0
-        value = dict.get(configuração)
-        if value != None:
-            return value
-        return 0 
+        return (value,count_occurrence)
     
 
 
@@ -261,11 +258,11 @@ class Train:
                 self.state = self.next_state
             with open("advsearch/rl/vectors_log/vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%10 == 0 and x > 0:
+            if (x+1)%(self.partidas//100) == 0 and x > 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                log_path = f"advsearch/rl/vectors_log/Train_x_it_{timestamp}.txt"
+                log_path = f"advsearch/rl/vectors_log/Train_{timestamp}_{x+1}.txt"
                 with open(log_path, "w") as file:
                     for i, vector in enumerate(self.vectors_list):
                         file.write(f"Vector:{i}\n")

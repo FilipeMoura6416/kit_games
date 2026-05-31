@@ -51,8 +51,6 @@ def get_simple_conformation_value(configuração:str, dict:dict):
         Identifica a configuração atual da feature, busca e retorna seu valor. Versão simples da função, aplicada features que a reflexão é simplesmente a inversão da string 
         """
         ##Pegar configuração atual da feature no estado
-        if null_conformation(configuração):
-            return 0
         entry = dict.get(configuração)
         if entry != None:
             return entry["value"]
@@ -66,8 +64,6 @@ def get_complex_conformation_value(configuração:tuple, dict:dict):
     """
     Identifica a configuração atual da feature, busca e retorna seu valor. Versão complexa da função, aplicada para features que tem mais de uma casa no eixo de reflexão 
     """
-    if null_conformation(configuração):
-        return 0
     entry = dict.get(configuração[0] + configuração[1])
     if entry != None:
         return entry["value"]
