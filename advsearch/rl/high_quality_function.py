@@ -256,7 +256,7 @@ class Train:
                 self.next_state = self.state.next_state(move)
                 self.update_vectors_soft()
                 self.state = self.next_state
-            with open("advsearch/rl/vectors_log/vectors.pkl", "wb") as file:
+            with open("advsearch/rl/vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
             if (x+1)%(self.partidas//100) == 0 and x > 0:
                 #self.epsilon *= 0.95
