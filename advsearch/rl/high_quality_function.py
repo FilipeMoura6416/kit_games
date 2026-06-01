@@ -71,7 +71,7 @@ from .aid_functions import *
 from .pattern_features import *
 
 class Train:
-    partidas = 20
+    partidas = 10000
     def __init__(self, alpha=1, gamma=1, epsilon=0.3):
         self.alpha = alpha
         self.gamma = gamma
@@ -257,7 +257,7 @@ class Train:
                 self.state = self.next_state
             with open("advsearch/rl/vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%(10) == 0 and x > 0:
+            if (x+1)%(self.partidas//100) == 0 and x > 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
