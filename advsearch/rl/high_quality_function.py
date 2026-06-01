@@ -71,7 +71,7 @@ from .aid_functions import *
 from .pattern_features import *
 
 class Train:
-    partidas = 10000
+    partidas = 20
     def __init__(self, alpha=1, gamma=1, epsilon=0.3):
         self.alpha = alpha
         self.gamma = gamma
@@ -120,17 +120,18 @@ class Train:
         """
         if vector is None:
             stage = get_stage(self.state)
-            if stage == 14:
-                print("Updating vector of stage ", stage)
+            print("Updating currently vector of stage ", stage)
             vector = self.vectors_list[stage]
-        next_state_value, next_state_occurances = self.evaluate_state(self.next_state, vector)
+        else:
+            print("Updating vector of stage ", self.vectors_list.index(vector))
+        next_state_value, next_state_occurances = self.evaluate_state(self.next_state)
         current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
         erro =  (self.gamma * next_state_value) - current_state_value
         update_value = self.alpha * erro / current_state_occurances
-        if update_value == 0:
-            return
-        else:
-            print("Update value: ", update_value)
+        # if update_value > 128 or update_value < -128:
+        #     print("Update value before clipping: ", update_value)
+        #     update_value = 128 if update_value > 0 else -128
+        print("Update value: ", update_value)
         vector[0] += update_value 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, self.state.board.tiles)
@@ -158,8 +159,6 @@ class Train:
         self.update_vector()
         for i in range(1, 3):
             if stage + i <= 14:
-                if stage + i == 14:
-                    print("Updating vector of stage ", stage + i)
                 self.update_vector(self.vectors_list[stage + i])
             if stage - i >= 0:
                 self.update_vector(self.vectors_list[stage - i])
@@ -258,7 +257,7 @@ class Train:
                 self.state = self.next_state
             with open("advsearch/rl/vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%(self.partidas//100) == 0 and x > 0:
+            if (x+1)%(10) == 0 and x > 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
