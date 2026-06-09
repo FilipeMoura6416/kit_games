@@ -274,7 +274,7 @@ class Train:
                 self.state = self.next_state
             with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%(self.partidas//100) == 0 and x > 0:
+            if (x)%(self.partidas//100) == 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
