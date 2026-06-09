@@ -72,7 +72,7 @@ from .pattern_features import *
 import numpy as np
 
 class Train:
-    partidas = 100
+    partidas = 1000000
     def __init__(self, alpha=1, gamma=1, epsilon=0.3, search_depth_max=4):
         self.alpha = alpha
         self.gamma = gamma
@@ -140,10 +140,8 @@ class Train:
         """
         if vector is None:
             stage = get_stage(self.state)
-            print("Updating currently vector of stage ", stage)
             vector = self.vectors_list[stage]
-        else:
-            print("Updating vector of stage ", self.vectors_list.index(vector))
+
         next_state_value, next_state_occurances = self.evaluate_state(self.next_state)
         current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
         erro =  (self.gamma * next_state_value) - current_state_value
@@ -270,16 +268,13 @@ class Train:
         for x in range(self.partidas):
             self.state = GameState(Board(), 'B')
             print("Simulando partida ", x + 1)
-            start = time.time()
             while not self.state.is_terminal():
                 self.next_state = self.softmax(self.state)
                 self.update_vectors_soft()
                 self.state = self.next_state
             with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%(self.partidas//20) == 0 and x > 0:
-                self.search_depth_max += 1  
-            if (x+1)%(self.partidas//10) == 0 and x > 0:
+            if (x+1)%(self.partidas//100) == 0 and x > 0:
                 #self.epsilon *= 0.95
                 #self.alpha *= 0.95
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -294,12 +289,9 @@ class Train:
                                     file.write(f"\t\tKey: {key}, value: {value}\n")
                             else:
                                 file.write(f"\t\tValue_Entry: {entry}\n")
-        
-                timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                pkl_path = f"advsearch/fixed_rl/vectors_log/vectors_{timestamp}.pkl"
+                pkl_path = f"advsearch/fixed_rl/vectors_log/vectors_{timestamp}_{x+1}.pkl"
                 with open(pkl_path, "wb") as file:
                     pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            print("Time for simulating the match: ", time.time() - start)
                 
 
 
