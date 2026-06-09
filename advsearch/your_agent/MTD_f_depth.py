@@ -7,8 +7,13 @@ from datetime import datetime
 from ..othello.board import Board
 from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
+from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
+from ..fixed_rl.aid_functions import *
 import copy
+from ..fixed_rl.pattern_features import *
+import pickle
+
 
 def make_move(state) -> Tuple[int, int]:
     """
@@ -16,8 +21,15 @@ def make_move(state) -> Tuple[int, int]:
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state, evaluate_custom)
-    return agent.iterative_deepening(4.9)
+    vectors_list = None
+    try:
+        with open("advsearch/fixed_rl/new_vectors.pkl", "rb") as file:
+            vectors_list = pickle.load(file)
+    except FileNotFoundError:
+        print("Vector file not found. Make sure to train the agent before running the match.")
+        raise FileNotFoundError("Vector file not found. Make sure to train the agent before running the match.")
+    agent = Agent(state, vectors_list)
+    return agent.mtdf(0, 4)[1]
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):
@@ -30,7 +42,18 @@ class Node_State:
         self.children = dict()
         self.pv = deque()
     
-
+def neg_tiles(tiles)->list:
+    neg_state = list()
+    for y in range(len(tiles)):
+        neg_state.append(list())
+        for x in range(len(tiles[0])):
+            if tiles[y][x] == 'B':
+                neg_state[-1].append('W')
+            elif tiles[y][x] == 'W':
+                neg_state[-1].append('B')
+            else:
+                neg_state[-1].append('.')
+    return neg_state
 
 class Dict_entry:
 
@@ -40,52 +63,97 @@ class Dict_entry:
         self.bestMove = None
 
 class Agent:
-    def __init__(self, state, eval_func):
+    def __init__(self, state, vectors_list=None):
 
         self.root_state = Node_State(state)
-        self.eval_func = eval_func
+        self.eval_time = 0
+        if vectors_list == None:
+            try:
+                with open("advsearch/fixed_rl/new_vectors.pkl", "rb") as file:
+                    self.vectors_list = pickle.load(file)
+            except FileNotFoundError:
+                raise FileNotFoundError("Vector file not found.")
+        else:
+            self.vectors_list = vectors_list
 
-    def iterative_deepening(self, time_amout):
+    def eval_func(self, state:GameState, player):
         start = time.time()
-        self.time_limit = time.time() + time_amout
+        if state.is_terminal():
+            return evaluate_count(state, player)
+        stage = get_stage(state)
+        vector = self.vectors_list[stage]
+
+        if player == 'W':
+            tiles = neg_tiles(state.board.tiles)
+        else:
+            tiles = state.board.tiles
+
+
+        value = vector[0] ##Bias
+
+        for pattern_feature, indice in pattern_features: ##Pattern_features
+            configuração = get_simple_conformation(pattern_feature, tiles)
+            value += get_simple_conformation_value(configuração, vector[indice])
+
+        for pattern_feature, indice in complex_patter_features:
+            configuração = get_complex_conformation(pattern_feature, tiles) 
+            value += get_complex_conformation_value(configuração, vector[indice])
+
+        for pattern_feature, indice in non_reflexible_pattern:
+            configuração = get_simple_conformation(pattern_feature, tiles)
+            if null_conformation(configuração):
+                continue
+            returned_entry = vector[indice].get(configuração)
+            if returned_entry != None:
+                value += returned_entry["value"]
+
+
+        if parity_feature(state) == 1:
+            value += vector[-1] ##Parity_feature
+        eval_time = time.time() - start
+        if eval_time > self.eval_time:
+            self.eval_time = eval_time
+        return value 
+        
+
+    def iterative_deepening(self, depth_max):
         self.depth_max = 2
         f_guess = 0
         last_move = None
-        while time.time() < self.time_limit:
-            self.tt_dict = dict()
+        while self.depth_max <= depth_max:
             f_guess, move = self.mtdf(f_guess, self.depth_max)
             if move != None:
                 last_move = move
             self.depth_max += 1
             if self.depth_max >= 60:
-                break
-        print("Iterative Deepening finished, time taken: ", time.time() - start)        
-        return last_move
+               break
+        print("Max eval time: ", self.eval_time)
+        return f_guess, last_move
+    
 
 
     def mtdf(self, f_guess, depth_max):
         upper_bound = float("inf")
         lower_bound = float("-inf")
-        while lower_bound < upper_bound and time.time() < self.time_limit:
+        move = None
+        self.tt_dict = dict()
+        while lower_bound < upper_bound:
             if f_guess == lower_bound:
                 gamma = f_guess + 1
             else:
                 gamma = f_guess
             f_guess, move = self.test(self.root_state, gamma - 0.5, depth_max)
-            if time.time() >= self.time_limit:
-                return None, None
             if f_guess < gamma:
                 upper_bound = f_guess
             else:
                 lower_bound = f_guess
+        if move == None:
+            print("Move is None, returning first legal move")
+            move = self.root_state.state.legal_moves().pop()
         return f_guess, move
 
     def test(self, node_state:Node_State, gamma, depth_max):
 
-
-        if time.time() >= self.time_limit:
-            return None, None
-            
 
         memory:Dict_entry = self.tt_dict.get(node_state.string_board)
         if memory != None:
@@ -98,6 +166,7 @@ class Agent:
 
         if depth_max == 0 or node_state.state.is_terminal():
             
+
             memory.maxScore = memory.minScore = self.eval_func(node_state.state, node_state.player)
             self.tt_dict[node_state.string_board] = memory
             return memory.minScore, None
@@ -121,9 +190,6 @@ class Agent:
                 returned_score, returned_move = self.test(child_state, -gamma, depth_max - 1)
                 if returned_score != None:
                     returned_score = -returned_score 
-
-            if time.time() >= self.time_limit:
-                    return None, None
             
             if returned_score > best_score:
                 memory.bestMove = move

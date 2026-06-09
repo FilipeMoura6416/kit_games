@@ -2,7 +2,7 @@ import random
 from typing import Tuple
 from ..othello.gamestate import GameState
 from ..othello.board import Board
-from .minimax import minimax_move
+from .minimax_no_log import minimax_move
 from .othello_minimax_count import evaluate_count
 from .minimax import log_path
 

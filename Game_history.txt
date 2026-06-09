@@ -755,6 +755,13 @@ Negamax_tt_id vs minimax
         Player 2 (W - advsearch\tiny_rl): 28
         Player 1 (B - advsearch\your_agent wins!
 
+    python server.py othello advsearch\your_agent\MTD_f_tiny_log.py advsearch\your_agent\othello_minimax_custom.py
+    python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_time.py
+    python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_tiny_log_2.py
+    python server.py othello advsearch\your_agent\MTD_f_depth_max.py advsearch\your_agent\MTD_f_depth_max.py
+
+    
+
 
 
 x 0 1 2 3 4 5 6 7

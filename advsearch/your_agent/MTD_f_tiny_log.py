@@ -13,6 +13,8 @@ from ..rl.aid_functions import *
 import copy
 from ..rl.pattern_features import *
 import pickle
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_path = f"game_log\\MTD_f_tiny_log{timestamp}.txt"
 with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
@@ -59,6 +61,8 @@ class Agent:
     def __init__(self, state, vectors_list=None):
 
         self.root_state = Node_State(state)
+        self.hit_count = 0
+        self.search_features_count = 0
         if vectors_list == None:
             try:
                 with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
@@ -84,40 +88,82 @@ class Agent:
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, tiles)
-            value += get_simple_conformation_value(configuração, vector[indice])
+            value += self.get_simple_conformation_value(configuração, vector[indice])
 
         for pattern_feature, indice in complex_patter_features:
             configuração = get_complex_conformation(pattern_feature, tiles) 
-            value += get_complex_conformation_value(configuração, vector[indice])
+            value += self.get_complex_conformation_value(configuração, vector[indice])
 
         for pattern_feature, indice in non_reflexible_pattern:
             configuração = get_simple_conformation(pattern_feature, tiles)
             if null_conformation(configuração):
                 continue
             returned_entry = vector[indice].get(configuração)
+            self.search_features_count += 1
             if returned_entry != None:
                 value += returned_entry["value"]
+                self.hit_count += 1
 
 
         if parity_feature(state) == 1:
             value += vector[-1] ##Parity_feature
 
         return value 
+    
+    def get_simple_conformation_value(self, configuração:str, dict:dict): 
+        """
+        Identifica a configuração atual da feature, busca e retorna seu valor. Versão simples da função, aplicada features que a reflexão é simplesmente a inversão da string 
+        """
+        ##Pegar configuração atual da feature no estado
+        entry = dict.get(configuração)
+        self.search_features_count += 1
+        if entry != None:
+            self.hit_count += 1
+            return entry["value"]
+        r_config = configuração[::-1]
+        entry = dict.get(r_config)
+        if entry != None:
+            self.search_features_count += 1
+            return entry["value"]
+        return 0
+    
+    def get_complex_conformation_value(self, configuração:tuple, dict:dict):
+        """
+        Identifica a configuração atual da feature, busca e retorna seu valor. Versão complexa da função, aplicada para features que tem mais de uma casa no eixo de reflexão 
+        """
+        entry = dict.get(configuração[0] + configuração[1])
+        self.search_features_count += 1
+        if entry != None:
+            self.hit_count += 1
+            return entry["value"]
+        r_config = configuração[0][::-1] + configuração[1]
+        entry = dict.get(r_config)
+        if entry != None:
+            self.search_features_count += 1
+            return entry["value"]
+        return 0
         
 
     def iterative_deepening(self, time_amout):
+        it_start_time = time.time()
         self.time_limit = time.time() + time_amout
         self.depth_max = 2
         f_guess = 0
         last_move = None
+        last_time = 0
         while time.time() < self.time_limit:
             self.tt_dict = dict()
+            start = time.time()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
+            last_time = time.time() - start
             if move != None:
                 last_move = move
+                self.depth_max_with_move = self.depth_max
+                self.depth_max_time = time.time() - it_start_time
             self.depth_max += 1
             if self.depth_max >= 60:
-                return last_move
+                break
+        print(f"Depth with move: {self.depth_max_with_move}, time taken: {self.depth_max_time}")
         return last_move
 
 
@@ -199,6 +245,8 @@ class Agent:
         else:
             memory.minScore = best_score
         self.tt_dict[node_state.string_board] = memory 
+        node_state.pv = node_state.children[best_move].pv.copy()
+        node_state.pv.appendleft(best_move)       
         return best_score, best_move
     
 

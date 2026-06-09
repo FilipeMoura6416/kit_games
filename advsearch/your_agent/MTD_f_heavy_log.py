@@ -13,15 +13,16 @@ from ..rl.aid_functions import *
 import copy
 from ..rl.pattern_features import *
 import pickle
-with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
-    vectors_list = pickle.load(file)
+
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_path = f"game_log\\MTD_f_{timestamp}.txt"
 def make_move(state) -> Tuple[int, int]:
     """
     Returns a move for the given game root_state.state
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state, vectors_list)
+    agent = Agent(state)
     return agent.iterative_deepening(4.9)
 
 class Node_State:
@@ -106,11 +107,15 @@ class Agent:
         
 
     def iterative_deepening(self, time_amout):
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"Iterative Deepening - Starting iterative deepening, time amount: {time_amout}, time: {time.time()}\n")
         self.time_limit = time.time() + time_amout
         self.depth_max = 2
         f_guess = 0
         last_move = None
         while time.time() < self.time_limit:
+            with open(log_path, 'a') as log_file:
+                log_file.write(f"\n\nIterative Deepening - Starting new search, depth_max: {self.depth_max}, time: {time.time()}, time_limit: {self.time_limit}\n")
             self.tt_dict = dict()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
             if move != None:
@@ -118,6 +123,8 @@ class Agent:
             self.depth_max += 1
             if self.depth_max >= 60:
                 return last_move
+        with open(log_path, 'a') as log_file:
+            log_file.write(f"\nIterative Deepening - Time Limit: {self.time_limit} returned time: {time.time()} move: {last_move}\n")
         return last_move
 
 
@@ -130,6 +137,8 @@ class Agent:
                 gamma = f_guess + 1
             else:
                 gamma = f_guess
+            with open(log_path, 'a') as log_file:
+                log_file.write(f"\nStarting new MTD_f search, f_guess: {f_guess}, depth_max: {depth_max}, upper_bound: {upper_bound}, lower_bound: {lower_bound}, gamma: {gamma}, time: {time.time()}\n")
             f_guess, move = self.test(self.root_state, gamma - 0.5, depth_max)
             if time.time() >= self.time_limit:
                 return None, None
@@ -137,9 +146,12 @@ class Agent:
                 upper_bound = f_guess
             else:
                 lower_bound = f_guess
+            with open(log_path, 'a') as log_file:
+                    log_file.write(f"Finished MTD_f search, f_guess: {f_guess}, depth_max: {depth_max}, upper_bound: {upper_bound}, lower_bound: {lower_bound}, gamma: {gamma}, time: {time.time()}\n")
         if move == None:
             print("Move is None, returning first legal move")
             move = self.root_state.state.legal_moves().pop()
+            
         return f_guess, move
 
     def test(self, node_state:Node_State, gamma, depth_max):
@@ -147,7 +159,10 @@ class Agent:
 
         if time.time() >= self.time_limit:
             return None, None
-            
+        with open(log_path, 'a') as log_file:
+            log_file.write(self.tab_string(depth_max) + f"Testing state, move: {node_state.move}, gamma: {gamma}, depth_max: {depth_max}, player: {node_state.player}\n")
+            for line in str(node_state.state.board).splitlines():
+                log_file.write(self.tab_string(depth_max) + line + "\n")  
 
         memory:Dict_entry = self.tt_dict.get(node_state.string_board)
         if memory != None:
@@ -193,13 +208,27 @@ class Agent:
                 best_move = move
 
             if best_score >= gamma:
+                with open(log_path, 'a') as log_file:
+                    log_file.write(self.tab_string(depth_max - 1) + f"Best score: {best_score} >= gamma: {gamma}, breaking loop and returning best_score: {best_score} and move: {best_move}\n")
                 break
         if best_score < gamma:
             memory.maxScore = best_score
         else:
             memory.minScore = best_score
         self.tt_dict[node_state.string_board] = memory 
+        node_state.pv = node_state.children[best_move].pv.copy()
+        node_state.pv.appendleft(best_move)  
+        with open(log_path, 'a') as log_file:
+            log_file.write(self.tab_string(depth_max) + f"Finished testing state, returning best_score: {best_score} and move: {best_move}\n")
+            log_file.write(self.tab_string(depth_max) + f"PV for this node: {list(node_state.pv)}\n")     
         return best_score, best_move
+    
+    def tab_string(self, actual_depth_max):
+        camada = self.depth_max - actual_depth_max
+        string = ""
+        for i in range(camada):
+            string += '\t'
+        return string
     
 
 

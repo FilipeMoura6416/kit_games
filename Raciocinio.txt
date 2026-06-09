@@ -240,3 +240,10 @@ Minnode alpha = beta - 1:
         beta = - 2
         recurs = 10
         recurs = - 5
+
+To do:
+    Para a seleção de próximo estado:
+        Avaliação rasa usando diretamente a função de avaliação para seleção do top 3
+        Alterar MTD(f) para funcionar com profundidade máxima 
+        Implementar softmax
+        Implementar nova feature simples de 4_edge

@@ -34,6 +34,20 @@
     "request": "launch",
     "module": "advsearch.tiny_rl.tiny_function",
     "console": "integratedTerminal"
+  },
+  {
+    "name": "Run_matches",
+    "type": "debugpy",
+    "request": "launch",
+    "module": "advsearch.your_agent.run_matchs",
+    "console": "integratedTerminal"
+  },
+  {
+    "name": "Run fixed rl train",
+    "type": "debugpy",
+    "request": "launch",
+    "module": "advsearch.fixed_rl.high_quality_function",
+    "console": "integratedTerminal"
   }
  ]
 }

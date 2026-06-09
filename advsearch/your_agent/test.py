@@ -5,6 +5,7 @@ if __name__ == "__main__":
     from .othello_minimax_mask import evaluate_mask
     from .negamax_tt_id import make_move as mm_negamax
     from .MTD_f import make_move as MTDF_move
+    from .MTD_f_depth_max import make_move as MTDF_depth_max_move
 
     string_board = ""
     with open("advsearch\\your_agent\\board.txt", 'r') as board_file:
@@ -20,8 +21,10 @@ if __name__ == "__main__":
     state = GameState(board, 'B')
     value = evaluate_custom(state, 'B')
     print(f"Value: {value}\n")
-    minimax_move = mm_minimax(state)
-    returned_move = MTDF_move(state)
-    print(f"Minimax retornou o movimento: {minimax_move}")
-    print(f"MTD(f) retornou o movimento: {returned_move}")
+    # minimax_move = mm_minimax(state)
+    # returned_move = MTDF_move(state)
+    returned_move_depth_max = MTDF_depth_max_move(state)
+    # print(f"Minimax retornou o movimento: {minimax_move}")
+    # print(f"MTD(f) retornou o movimento: {returned_move}")
+    print(f"MTD(f) com profundidade máxima retornou o movimento: {returned_move_depth_max}")
     print("teste finalizado")

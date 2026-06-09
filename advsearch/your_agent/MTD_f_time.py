@@ -7,17 +7,22 @@ from datetime import datetime
 from ..othello.board import Board
 from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
+from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
+from ..rl.aid_functions import *
 import copy
-
+from ..rl.pattern_features import *
+import pickle
+with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+    vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
     Returns a move for the given game root_state.state
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state, evaluate_custom)
-    return agent.iterative_deepening(4.9)
+    agent = Agent(state, vectors_list)
+    return agent.mtdf(0, 4.6 + time.time())[1]
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):
@@ -30,7 +35,18 @@ class Node_State:
         self.children = dict()
         self.pv = deque()
     
-
+def neg_tiles(tiles)->list:
+    neg_state = list()
+    for y in range(len(tiles)):
+        neg_state.append(list())
+        for x in range(len(tiles[0])):
+            if tiles[y][x] == 'B':
+                neg_state[-1].append('W')
+            elif tiles[y][x] == 'W':
+                neg_state[-1].append('B')
+            else:
+                neg_state[-1].append('.')
+    return neg_state
 
 class Dict_entry:
 
@@ -40,47 +56,94 @@ class Dict_entry:
         self.bestMove = None
 
 class Agent:
-    def __init__(self, state, eval_func):
+    def __init__(self, state, vectors_list=None):
 
         self.root_state = Node_State(state)
-        self.eval_func = eval_func
+        if vectors_list == None:
+            try:
+                with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+                    self.vectors_list = pickle.load(file)
+            except FileNotFoundError:
+                raise FileNotFoundError("Vector file not found.")
+        else:
+            self.vectors_list = vectors_list
+
+    def eval_func(self, state:GameState, player):
+        if state.is_terminal():
+            return evaluate_count(state, player)
+        stage = get_stage(state)
+        vector = self.vectors_list[stage]
+
+        if player == 'W':
+            tiles = neg_tiles(state.board.tiles)
+        else:
+            tiles = state.board.tiles
+
+
+        value = vector[0] ##Bias
+
+        for pattern_feature, indice in pattern_features: ##Pattern_features
+            configuração = get_simple_conformation(pattern_feature, tiles)
+            value += get_simple_conformation_value(configuração, vector[indice])
+
+        for pattern_feature, indice in complex_patter_features:
+            configuração = get_complex_conformation(pattern_feature, tiles) 
+            value += get_complex_conformation_value(configuração, vector[indice])
+
+        for pattern_feature, indice in non_reflexible_pattern:
+            configuração = get_simple_conformation(pattern_feature, tiles)
+            if null_conformation(configuração):
+                continue
+            returned_entry = vector[indice].get(configuração)
+            if returned_entry != None:
+                value += returned_entry["value"]
+
+
+        if parity_feature(state) == 1:
+            value += vector[-1] ##Parity_feature
+
+        return value 
+        
 
     def iterative_deepening(self, time_amout):
-        start = time.time()
         self.time_limit = time.time() + time_amout
         self.depth_max = 2
         f_guess = 0
         last_move = None
         while time.time() < self.time_limit:
-            self.tt_dict = dict()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
             if move != None:
                 last_move = move
             self.depth_max += 1
             if self.depth_max >= 60:
-                break
-        print("Iterative Deepening finished, time taken: ", time.time() - start)        
+                return last_move
         return last_move
 
 
-    def mtdf(self, f_guess, depth_max):
+    def mtdf(self, f_guess, time_limit):
         upper_bound = float("inf")
         lower_bound = float("-inf")
+        move = None
+        self.tt_dict = dict()
+        self.time_limit = time_limit
         while lower_bound < upper_bound and time.time() < self.time_limit:
             if f_guess == lower_bound:
                 gamma = f_guess + 1
             else:
                 gamma = f_guess
-            f_guess, move = self.test(self.root_state, gamma - 0.5, depth_max)
+            f_guess, move = self.test(self.root_state, gamma - 0.5, time_limit - 0.1)
             if time.time() >= self.time_limit:
                 return None, None
             if f_guess < gamma:
                 upper_bound = f_guess
             else:
                 lower_bound = f_guess
+        if move == None:
+            print("Move is None, returning first legal move")
+            move = self.root_state.state.legal_moves().pop()
         return f_guess, move
 
-    def test(self, node_state:Node_State, gamma, depth_max):
+    def test(self, node_state:Node_State, gamma, time_limit):
 
 
         if time.time() >= self.time_limit:
@@ -96,7 +159,7 @@ class Agent:
         else:
             memory = Dict_entry()
 
-        if depth_max == 0 or node_state.state.is_terminal():
+        if time.time() >= self.time_limit or node_state.state.is_terminal():
             
             memory.maxScore = memory.minScore = self.eval_func(node_state.state, node_state.player)
             self.tt_dict[node_state.string_board] = memory
@@ -107,18 +170,19 @@ class Agent:
         if len(node_state.legal_moves) == 0:
             node_state.legal_moves = list(node_state.state.legal_moves())
 
-        for move in node_state.legal_moves:
-
+        for i in range(len(node_state.legal_moves)):
+            move = node_state.legal_moves[i]
             child_state = node_state.children.get(move)
 
             if child_state == None:
                 child_state = Node_State(node_state.state.next_state(move), move, node_state)
                 node_state.children[move] = child_state
 
+            child_time_limit = ((self.time_limit - time.time()) / (len(node_state.legal_moves) - i)) + time.time()
             if child_state.player == node_state.player:
-                returned_score, returned_move = self.test(child_state, gamma, depth_max - 1)
+                returned_score, returned_move = self.test(child_state, gamma, child_time_limit)
             else:
-                returned_score, returned_move = self.test(child_state, -gamma, depth_max - 1)
+                returned_score, returned_move = self.test(child_state, -gamma, child_time_limit)
                 if returned_score != None:
                     returned_score = -returned_score 
 
