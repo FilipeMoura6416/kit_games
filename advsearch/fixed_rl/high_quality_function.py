@@ -76,6 +76,8 @@ class Train:
     def __init__(self, alpha=0.1, gamma=0.95,):
         self.average_error = 0
         self.it_count = 0
+        self.average_match_error = 0
+        self.match_inside_count = 0
         self.alpha = alpha
         self.gamma = gamma
         self.state = None
@@ -145,13 +147,16 @@ class Train:
         next_state_value, next_state_occurances = self.evaluate_state(self.next_state)
         current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
         self.it_count += 1
+        self.match_inside_count += 1
         erro =  (self.gamma * next_state_value) - current_state_value
-        self.average_error += (erro - self.average_error)/self.it_count
+        self.average_error += (abs(erro) - self.average_error)/self.it_count
+        self.average_match_error += (abs(erro) - self.average_match_error)/self.match_inside_count
+        if abs(erro) > self.max_error_match:
+            self.max_error_match = erro
         update_value = self.alpha * erro / current_state_occurances
         # if update_value > 128 or update_value < -128:
         #     print("Update value before clipping: ", update_value)
         #     update_value = 128 if update_value > 0 else -128
-        print(f"Error value: {erro}, Update value: {update_value}")
         vector[0] += update_value 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, self.state.board.tiles)
@@ -267,37 +272,64 @@ class Train:
     def run_training(self):
         """
         """
-        for x in range(self.partidas):
-            self.state = GameState(Board(), 'B')
-            print("Simulando partida ", x + 1)
-            while not self.state.is_terminal():
-                self.next_state = self.softmax(self.state)
-                self.update_vectors_soft()
-                self.state = self.next_state
-            with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
-                pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x+1)%1000 == 0:
-                with open("advsearch/fixed_rl/vectors_log/Tiny_train_log.txt", "a") as tiny:
-                    tiny.write(f"{x}, {self.average_error}\n")
-            if (x + 1)%(100000) == 0:
-                self.alpha *= 0.75
-            if (x)%(self.partidas//10000) == 0:
-                
-                timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                log_path = f"advsearch/fixed_rl/vectors_log/Train_{timestamp}_{x+1}.txt"
-                with open(log_path, "w") as file:
-                    for i, vector in enumerate(self.vectors_list):
-                        file.write(f"Vector:{i}\n")
-                        for j, entry in enumerate(vector):
-                            file.write(f"\tFeature: {j}\n")
-                            if type(entry) == dict:
-                                for key, value in entry.items():
-                                    file.write(f"\t\tKey: {key}, value: {value}\n")
-                            else:
-                                file.write(f"\t\tValue_Entry: {entry}\n")
-                pkl_path = f"advsearch/fixed_rl/vectors_log/vectors_{timestamp}_{x+1}.pkl"
-                with open(pkl_path, "wb") as file:
+        try:
+            for x in range(self.partidas):
+                self.state = GameState(Board(), 'B')
+                print("Simulando partida ", x + 1)
+                self.average_match_error = 0
+                self.match_inside_count = 0
+                self.max_error_match = 0
+                while not self.state.is_terminal():
+                    self.next_state = self.softmax(self.state)
+                    self.update_vectors_soft()
+                    self.state = self.next_state
+                print(f"Match average erro: {self.average_match_error} Max match error: {self.max_error_match}")
+                with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
                     pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+                if (x+1)%1000 == 0:
+                    with open("advsearch/fixed_rl/vectors_log/Tiny_train_log.txt", "a") as tiny:
+                        tiny.write(f"{x}, {self.average_error}\n")
+                if (x + 1)%(100000) == 0:
+                    self.alpha *= 0.75
+                if (x)%(self.partidas//100) == 0:
+                    
+                    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                    log_path = f"advsearch/fixed_rl/vectors_log/Train_{timestamp}_{x+1}.txt"
+                    with open(log_path, "w") as file:
+                        for i, vector in enumerate(self.vectors_list):
+                            file.write(f"Vector:{i}\n")
+                            for j, entry in enumerate(vector):
+                                file.write(f"\tFeature: {j}\n")
+                                if type(entry) == dict:
+                                    for key, value in entry.items():
+                                        file.write(f"\t\tKey: {key}, value: {value}\n")
+                                else:
+                                    file.write(f"\t\tValue_Entry: {entry}\n")
+                    pkl_path = f"advsearch/fixed_rl/vectors_log/vectors_{timestamp}_{x+1}.pkl"
+                    with open(pkl_path, "wb") as file:
+                        pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+        except KeyboardInterrupt:
+            print("\nInterrupção detectada!")
+        finally:
+            print("Salvando última iteração em arquivo....")
+            with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
+                    pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            log_path = f"advsearch/fixed_rl/vectors_log/Train_{timestamp}_{x+1}.txt"
+            with open(log_path, "w") as file:
+                for i, vector in enumerate(self.vectors_list):
+                    file.write(f"Vector:{i}\n")
+                    for j, entry in enumerate(vector):
+                        file.write(f"\tFeature: {j}\n")
+                        if type(entry) == dict:
+                            for key, value in entry.items():
+                                file.write(f"\t\tKey: {key}, value: {value}\n")
+                        else:
+                            file.write(f"\t\tValue_Entry: {entry}\n")
+            pkl_path = f"advsearch/fixed_rl/vectors_log/vectors_{timestamp}_{x+1}.pkl"
+            with open(pkl_path, "wb") as file:
+                pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+            print("Progesso salvo com sucesso!")
                 
 
 
