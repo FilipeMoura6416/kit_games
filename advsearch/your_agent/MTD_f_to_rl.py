@@ -9,11 +9,11 @@ from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
-from ..rl.aid_functions import *
+from ..fixed_rl.aid_functions import *
 import copy
-from ..rl.pattern_features import *
+from ..fixed_rl.pattern_features import *
 import pickle
-with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-10_08-04-07_90001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """

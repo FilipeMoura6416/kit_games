@@ -760,6 +760,8 @@ Negamax_tt_id vs minimax
     python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_tiny_log_2.py
     python server.py othello advsearch\your_agent\MTD_f_depth_max.py advsearch\your_agent\MTD_f_depth_max.py
 
+    python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_tiny_log.py
+
     
 
 

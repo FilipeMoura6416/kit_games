@@ -73,11 +73,11 @@ import numpy as np
 
 class Train:
     partidas = 1000000
-    def __init__(self, alpha=1, gamma=1, epsilon=0.3, search_depth_max=4):
+    def __init__(self, alpha=0.1, gamma=0.95,):
+        self.average_error = 0
+        self.it_count = 0
         self.alpha = alpha
         self.gamma = gamma
-        self.epsilon = epsilon
-        self.search_depth_max = search_depth_max
         self.state = None
         self.next_state = None
         self.get_vectors_list()
@@ -144,7 +144,9 @@ class Train:
 
         next_state_value, next_state_occurances = self.evaluate_state(self.next_state)
         current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
+        self.it_count += 1
         erro =  (self.gamma * next_state_value) - current_state_value
+        self.average_error += (erro - self.average_error)/self.it_count
         update_value = self.alpha * erro / current_state_occurances
         # if update_value > 128 or update_value < -128:
         #     print("Update value before clipping: ", update_value)
@@ -274,9 +276,13 @@ class Train:
                 self.state = self.next_state
             with open("advsearch/fixed_rl/new_vectors.pkl", "wb") as file:
                 pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
-            if (x)%(self.partidas//100) == 0:
-                #self.epsilon *= 0.95
-                #self.alpha *= 0.95
+            if (x+1)%1000 == 0:
+                with open("advsearch/fixed_rl/vectors_log/Tiny_train_log.txt", "a") as tiny:
+                    tiny.write(f"{x}, {self.average_error}\n")
+            if (x + 1)%(100000) == 0:
+                self.alpha *= 0.75
+            if (x)%(self.partidas//10000) == 0:
+                
                 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                 log_path = f"advsearch/fixed_rl/vectors_log/Train_{timestamp}_{x+1}.txt"
                 with open(log_path, "w") as file:

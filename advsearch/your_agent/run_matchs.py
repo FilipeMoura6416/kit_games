@@ -1,7 +1,7 @@
 import datetime
 import xml.etree.ElementTree as ET
 import subprocess
-agents = {"MTD_f_to_rl": "advsearch\\your_agent\\MTD_f_to_rl.py", "Minimax_custom": "advsearch\\your_agent\\othello_minimax_custom.py"}
+agents = {"MTD_f_to_rl": "advsearch\\your_agent\\MTD_f_to_rl.py", "Tiny_log": "advsearch\\your_agent\\MTD_f_tiny_log.py"}
 itens = list(agents.items())
 time_stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 log_path = f"matchs_log_{time_stamp}.txt"

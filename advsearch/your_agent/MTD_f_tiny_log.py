@@ -9,13 +9,13 @@ from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
-from ..rl.aid_functions import *
+from ..fixed_rl.aid_functions import *
 import copy
-from ..rl.pattern_features import *
+from ..fixed_rl.pattern_features import *
 import pickle
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"game_log\\MTD_f_tiny_log{timestamp}.txt"
-with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-10_01-17-21_50001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
@@ -150,12 +150,10 @@ class Agent:
         self.depth_max = 2
         f_guess = 0
         last_move = None
-        last_time = 0
         while time.time() < self.time_limit:
             self.tt_dict = dict()
             start = time.time()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
-            last_time = time.time() - start
             if move != None:
                 last_move = move
                 self.depth_max_with_move = self.depth_max
