@@ -1,5 +1,19 @@
 from ..othello.gamestate import GameState
 from ..othello.board import Board
+
+def neg_tiles(tiles)->list:
+    neg_state = list()
+    for y in range(len(tiles)):
+        neg_state.append(list())
+        for x in range(len(tiles[0])):
+            if tiles[y][x] == 'B':
+                neg_state[-1].append('W')
+            elif tiles[y][x] == 'W':
+                neg_state[-1].append('B')
+            else:
+                neg_state[-1].append('.')
+    return neg_state
+
 def get_simple_conformation(positions:list, tiles:list):
     """
     Retorna a configuração atual de um conjunto de posições

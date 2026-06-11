@@ -13,7 +13,7 @@ from ..fixed_rl.aid_functions import *
 import copy
 from ..fixed_rl.pattern_features import *
 import pickle
-with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-10_08-04-07_90001.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-10_12-38-39_10001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """

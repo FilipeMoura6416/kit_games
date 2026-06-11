@@ -113,7 +113,7 @@ class Train:
         next_states_values = []
         for move in legal_moves:
             next_state = state.next_state(move)
-            value, _ = self.evaluate_state(next_state)
+            value, _ = self.evaluate_state(state=next_state, player=state.player)
             next_states_values.append([next_state, value])
         for i in range(len(next_states_values)):
             next_states_values[i][1] = np.exp(next_states_values[i][1]/self.get_temp(get_stage(state)))
@@ -145,7 +145,7 @@ class Train:
             vector = self.vectors_list[stage]
 
         next_state_value, next_state_occurances = self.evaluate_state(self.next_state)
-        current_state_value, current_state_occurances = self.evaluate_state(self.state, vector)
+        current_state_value, current_state_occurances = self.evaluate_state(self.state, vector=vector)
         self.it_count += 1
         self.match_inside_count += 1
         erro =  (self.gamma * next_state_value) - current_state_value
@@ -223,15 +223,25 @@ class Train:
         return
             
 
-    def evaluate_state(self, state:GameState, vector=None) -> float:
+    def evaluate_state(self, state:GameState, vector=None, player=None) -> float:
         """
         Esta é função r(s), a função de avaliação aplicada ao estado, ou seja, o somatório dos respectivos valores de cada ocorrência de configuração específica de cada feature do estado
 
         :param vector: será o vetor de dicionários com os valores a serem somados, ou seja, o vetor de pesos. Ele é necessário para acessar os valores associados as configurações específicas de cada feature. Se nenhum vetor em específico for passado será usado o vetor do estagio atual do estado. É possível passar um vetor que não seja o do estágio atual para que a estimativa de parâmetros seja feita de forma mais suave, ou seja, considerar que estágios próximos tenham valores próximos. Um mesmo estado será usado para atualizar os pesos dos vetores dos estágios d, d±1, d±2, onde d é o estágio atual do estado. 
         """
+
+        
+        if player == 'W':
+            if state.is_terminal():
+                return evaluate_count(state, 'W'), None
+            tiles = neg_tiles(state.board.tiles)
+        else:
+            tiles = state.board.tiles
+
         if state.is_terminal():
             return evaluate_count(state, 'B'), None
         value = 0.0
+
         if vector is None:
             stage = get_stage(state)
             vector = self.vectors_list[stage]
@@ -240,19 +250,19 @@ class Train:
         count_occurrence = 1
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
-            configuração = get_simple_conformation(pattern_feature, state.board.tiles)
+            configuração = get_simple_conformation(pattern_feature, tiles)
             if not null_conformation(configuração):
                 value += get_simple_conformation_value(configuração, vector[indice])
                 count_occurrence += 1
 
         for pattern_feature, indice in complex_patter_features:
-            configuração = get_complex_conformation(pattern_feature, state.board.tiles) 
+            configuração = get_complex_conformation(pattern_feature, tiles) 
             if not null_conformation(configuração):
                 value += get_complex_conformation_value(configuração, vector[indice])
                 count_occurrence += 1
 
         for pattern_feature, indice in non_reflexible_pattern:
-            configuração = get_simple_conformation(pattern_feature, state.board.tiles)
+            configuração = get_simple_conformation(pattern_feature, tiles)
             if null_conformation(configuração):
                 continue
             returned_entry = vector[indice].get(configuração)
