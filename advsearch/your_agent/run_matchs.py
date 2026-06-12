@@ -13,10 +13,10 @@ def get_agents_scores():
         print(f"{int(content.get('score'))}")
 
 get_agents_scores()
-agents = {"MTD_f_to_rl": "advsearch\\your_agent\\MTD_f_to_rl.py", "Tiny_log": "advsearch\\your_agent\\MTD_f_tiny_log.py"}
+agents = {"Tiny_log 190000": "advsearch\\your_agent\\MTD_f_tiny_log.py", "MTD_f_to_rl 100000": "advsearch\\your_agent\\MTD_f_to_rl.py"}
 itens = list(agents.items())
 time_stamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_path = f"matchs_log_{time_stamp}.txt"
+log_path = f"Match_log/matchs_log_{time_stamp}.txt"
 match_number = 4
 pasta_kit_games = "C:\\Users\\lfsmo\\Superpasta\\Ufrgs\\Bolsa_Game_AI\\kit_games"
 for i in range(len(itens) - 1):

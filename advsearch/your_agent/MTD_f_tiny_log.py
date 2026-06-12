@@ -15,7 +15,7 @@ from ..fixed_rl.pattern_features import *
 import pickle
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"game_log\\MTD_f_tiny_log{timestamp}.txt"
-with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-10_22-11-04_70001.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-12_08-41-55_190001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
