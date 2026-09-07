@@ -4,3 +4,7 @@ advsearch/rl/vectors_log/
 advsearch/fixed_rl/vectors_log/
 Match_log/
 advsearch/engolobus/
+*.rar
+n*.pkl
+log_*.txt
+MTD_f_eval.txt
