@@ -3,21 +3,11 @@ import xml.etree.ElementTree as ET
 import subprocess
 import time
 
-def get_agents_scores():
-    
-    tree = ET.parse('results.xml')
-    root = tree.getroot()
-    contents = root.findall('player')
-    print(contents)
-    for agent, content in enumerate(contents):
-        print(f"{int(content.get('score'))}")
-
-get_agents_scores()
-agents = {"Tiny_log 190000": "advsearch\\your_agent\\MTD_f_tiny_log.py", "MTD_f_to_rl 100000": "advsearch\\your_agent\\MTD_f_to_rl.py"}
+agents = {"Tiny_log last": "advsearch\\your_agent\\MTD_f_tiny_log.py", "MTD_f_custom": "advsearch\\your_agent\\MTD_f_no_log.py"}
 itens = list(agents.items())
 time_stamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"Match_log/matchs_log_{time_stamp}.txt"
-match_number = 4
+match_number = 5
 pasta_kit_games = "C:\\Users\\lfsmo\\Superpasta\\Ufrgs\\Bolsa_Game_AI\\kit_games"
 for i in range(len(itens) - 1):
     for j in range(i + 1, len(itens)):

@@ -1,9 +1,9 @@
 x 0 1 2 3 4 5 6 7
-0 . . . W . . . . 
-1 . B . W W . B . 
-2 W W W W W W W W 
-3 . . W B W . . . 
-4 . . B W W . . . 
-5 . B W . W W . . 
-6 . B . . . . B . 
-7 . . . . . . . . 
+0 . B B B B B . .
+1 B . B W*W*W . .
+2 B B B B*W*W W W
+3 B B B W*W*W W .
+4 B W B B*W*. . .
+5 B B B B*W*B . .
+6 . . . . . . . .
+7 . . . . . . . .

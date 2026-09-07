@@ -73,7 +73,7 @@ import numpy as np
 
 class Train:
     partidas = 1000000
-    def __init__(self, alpha=0.1, gamma=0.95,):
+    def __init__(self, alpha=0.042, gamma=0.95,):
         self.average_error = 0
         self.it_count = 0
         self.average_match_error = 0
@@ -99,7 +99,7 @@ class Train:
     def get_vectors_list(self) -> list:
         """Tenta pegar a lista de vetores do arquivo vectors.pkl, se não existir, cria os vetores"""
         try:
-            with open("advsearch/fixed_rl/zero_new_vectors.pkl", "rb") as file:
+            with open("advsearch/fixed_rl/Zero_new_vectors.pkl", "rb") as file:
                 self.vectors_list = pickle.load(file)
         except:
             self.vectors_list = self.init_vectors()
@@ -294,7 +294,7 @@ class Train:
                     self.update_vectors_soft()
                     self.state = self.next_state
                 print(f"Match average erro: {self.average_match_error} Max match error: {self.max_error_match}")
-                with open("advsearch/fixed_rl/zero_new_vectors.pkl", "wb") as file:
+                with open("advsearch/fixed_rl/Zero_new_vectors.pkl", "wb") as file:
                     pickle.dump(self.vectors_list, file, protocol=pickle.HIGHEST_PROTOCOL)
                 if (x+1)%1000 == 0:
                     with open("advsearch/fixed_rl/vectors_log/Zero_Tiny_train_log.txt", "a") as tiny:

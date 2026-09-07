@@ -166,8 +166,8 @@ class Server(object):
 
             elapsed = time.time() - start
 
-            # with open(log_path, 'a') as log_file:
-            #     log_file.write(state_copy.board.decorated_str(colors=False))
+            with open(log_path, 'a') as log_file:
+                log_file.write(state_copy.board.decorated_str(colors=False) + "\n\n")
             #     log_file.write(f"Currrent player: {current_player} move_player: {move} move_opponent: {move_op}\n\n\n")
 
             if move is None:  # detects timeout

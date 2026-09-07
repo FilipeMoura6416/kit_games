@@ -13,7 +13,7 @@ from ..fixed_rl.aid_functions import *
 import copy
 from ..fixed_rl.pattern_features import *
 import pickle
-with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-11_16-46-48_100001.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/Zero_vectors_2026-06-12_15-15-23_10001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
@@ -22,7 +22,7 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     agent = Agent(state, vectors_list)
-    return agent.iterative_deepening(4.9)
+    return agent.iterative_deepening(1)
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):

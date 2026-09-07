@@ -6,7 +6,7 @@ from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
 from .othello_minimax_custom import EVAL_TEMPLATE
-from .othello_minimax_custom import evaluate_custom
+from .custom import evaluate_custom
 from ..othello.gamestate import GameState
 import copy
 
@@ -56,11 +56,14 @@ class Agent:
         self.depth_max = 2
         f_guess = 0
         last_move = None
-        while time.time() < self.time_limit:
+        last_time = 0
+        while time.time() + last_time < self.time_limit:
             with open(log_path, 'a') as log_file:
                 log_file.write(f"\n\nIterative Deepening - Starting new search, depth_max: {self.depth_max}, time: {time.time()}, time_limit: {self.time_limit}\n")
             self.tt_dict = dict()
+            start = time.time()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
+            last_time = time.time() - start
             if move != None:
                 last_move = move
             self.depth_max += 1
@@ -74,14 +77,17 @@ class Agent:
     def mtdf(self, f_guess, depth_max):
         upper_bound = float("inf")
         lower_bound = float("-inf")
-        while lower_bound < upper_bound and time.time() < self.time_limit:
+        last_time = 0
+        while lower_bound < upper_bound and time.time() + last_time < self.time_limit:
             if f_guess == lower_bound:
                 gamma = f_guess + 1
             else:
                 gamma = f_guess
             with open(log_path, 'a') as log_file:
                 log_file.write(f"\nStarting new MTD_f search, f_guess: {f_guess}, depth_max: {depth_max}, upper_bound: {upper_bound}, lower_bound: {lower_bound}, gamma: {gamma}, time: {time.time()}\n")
-            f_guess, move = self.test(self.root_state, gamma - 0.5, depth_max)
+            start = time.time()
+            f_guess, move = self.test(self.root_state, gamma - 0.0001, depth_max)
+            last_time = time.time() - start
             if time.time() >= self.time_limit:
                 return None, None
             if f_guess < gamma:

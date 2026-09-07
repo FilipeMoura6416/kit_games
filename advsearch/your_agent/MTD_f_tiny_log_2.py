@@ -9,13 +9,13 @@ from .othello_minimax_custom import EVAL_TEMPLATE
 from .othello_minimax_custom import evaluate_custom
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
-from ..rl.aid_functions import *
+from ..fixed_rl.aid_functions import *
 import copy
-from ..rl.pattern_features import *
+from ..fixed_rl.pattern_features import *
 import pickle
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_path = f"game_log\\MTD_f__tiny_log_2_{timestamp}.txt"
-with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
+log_path = f"game_log\\MTD_f_tiny_log{timestamp}.txt"
+with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-12_20-14-59_250001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
@@ -24,7 +24,7 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     agent = Agent(state, vectors_list)
-    return agent.iterative_deepening(4.9)
+    return agent.iterative_deepening(1)
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):
@@ -65,7 +65,7 @@ class Agent:
         self.search_features_count = 0
         if vectors_list == None:
             try:
-                with open("advsearch/rl/vectors_log/vectors_log/vectors_2026-06-04_17-54-18.pkl", "rb") as file:
+                with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
                     self.vectors_list = pickle.load(file)
             except FileNotFoundError:
                 raise FileNotFoundError("Vector file not found.")
@@ -147,25 +147,21 @@ class Agent:
     def iterative_deepening(self, time_amout):
         it_start_time = time.time()
         self.time_limit = time.time() + time_amout
-        self.depth_max = 4
+        self.depth_max = 2
         f_guess = 0
         last_move = None
-        last_time = 0
-        while time.time() + last_time < self.time_limit:
+        while time.time() < self.time_limit:
             self.tt_dict = dict()
             start = time.time()
             f_guess, move = self.mtdf(f_guess, self.depth_max)
-            last_time = time.time() - start
             if move != None:
                 last_move = move
+                self.depth_max_with_move = self.depth_max
+                self.depth_max_time = time.time() - it_start_time
             self.depth_max += 1
             if self.depth_max >= 60:
                 break
-        print("Iterative Deepening finished, time taken: ", time.time() - it_start_time)
-        file_time = time.time()
-        with open(log_path, 'a') as log_file:
-            log_file.write(f"Search features count: {self.search_features_count}, Hit count: {self.hit_count}, hit mean: {self.hit_count / self.search_features_count if self.search_features_count > 0 else 0}\n")
-        print("Time taken to write log: ", time.time() - file_time)
+        print(f"Depth with move: {self.depth_max_with_move}, time taken: {self.depth_max_time}")
         return last_move
 
 

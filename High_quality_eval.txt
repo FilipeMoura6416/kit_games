@@ -1,0 +1,231 @@
+Config 1: .... val: 0
+Config 1: .W.. val: 0.028939993687784226
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..B.. val: -0.013026969750299777
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..W... val: 0.023352961901448
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWWW. val: -0.007481432111451649
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WB... val: 0.02887619656864304
+Config 5: .BBBB... val: -0.06266460789590085
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: .....W.. val: -0.02322765525778751
+Config 6: .B...... val: -0.034003218370862016
+Config 6: ......B. val: -0.034003218370862016
+Config 6: ........ val: 0
+Config 7: ....W... val: 0.025003089268805595
+Config 7: ..B..W.. val: 0.00980307152558976
+Config 7: ...WWB.. val: -0.009342044171686534
+Config 7: .W...W.. val: -0.04713439177454354
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WBW... val: 0.016566906972772702
+Config 8: ...WB... val: -0.0043839544887809105
+Config 8: ..WBW... val: 0.016566906972772702
+Config 9: .......... val: 0
+Config 9: B......... val: -0.058520469354994255
+Config 9: .........B val: -0.058520469354994255
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('..W...', '...') val: -0.8963248912129487
+Config 10: ('......', '.BB') val: -2.586129793472513
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 11: .......W.. val: -0.0058113075165675335
+Config 11: ......B... val: -0.10830965833818772
+Config 11: ......B... val: -0.10830965833818772
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..W.. val: -0.03549348393477719
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..B... val: -0.012609481009996822
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWB.. val: -0.0025167351438489427
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WW... val: 0.023012327890865686
+Config 5: ..WWB... val: -0.04841633184056631
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 7: ....B... val: -0.030002719297834383
+Config 7: ..W..W.. val: -0.012281315348730944
+Config 7: ...WWW.. val: -0.01187842800253206
+Config 7: .....W.. val: 0.013267238790676626
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WWW... val: 0.023630714150421412
+Config 8: ...WW... val: -0.022531949212424872
+Config 8: ..BBW... val: 0.012005498919820409
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..W.. val: -0.03549348393477719
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..B... val: -0.012609481009996822
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWB.. val: -0.0025167351438489427
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WW... val: 0.023012327890865686
+Config 5: ..WWB... val: -0.04841633184056631
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 7: ....B... val: -0.030002719297834383
+Config 7: ..W..W.. val: -0.012281315348730944
+Config 7: ...WWW.. val: -0.01187842800253206
+Config 7: .....W.. val: 0.013267238790676626
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WWW... val: 0.023630714150421412
+Config 8: ...WW... val: -0.022531949212424872
+Config 8: ..BBW... val: 0.012005498919820409
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..W.. val: -0.03549348393477719
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..B... val: -0.012609481009996822
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWB.. val: -0.0025167351438489427
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WW... val: 0.023012327890865686
+Config 5: ..WWB... val: -0.04841633184056631
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 7: ....B... val: -0.030002719297834383
+Config 7: ..W..W.. val: -0.012281315348730944
+Config 7: ...WWW.. val: -0.01187842800253206
+Config 7: .....W.. val: 0.013267238790676626
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WWW... val: 0.023630714150421412
+Config 8: ...WW... val: -0.022531949212424872
+Config 8: ..BBW... val: 0.012005498919820409
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..W.. val: -0.03549348393477719
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..B... val: -0.012609481009996822
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWB.. val: -0.0025167351438489427
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WW... val: 0.023012327890865686
+Config 5: ..WWB... val: -0.04841633184056631
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 7: ....B... val: -0.030002719297834383
+Config 7: ..W..W.. val: -0.012281315348730944
+Config 7: ...WWW.. val: -0.01187842800253206
+Config 7: .....W.. val: 0.013267238790676626
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WWW... val: 0.023630714150421412
+Config 8: ...WW... val: -0.022531949212424872
+Config 8: ..BBW... val: 0.012005498919820409
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 1: .... val: 0
+Config 2: ..... val: 0
+Config 2: ..... val: 0
+Config 2: ..W.. val: -0.03549348393477719
+Config 2: ..W.. val: -0.03549348393477719
+Config 3: ..W... val: 0.023352961901448
+Config 3: ..B... val: -0.012609481009996822
+Config 3: ...... val: 0
+Config 3: ..W... val: 0.023352961901448
+Config 4: ..WWB.. val: -0.0025167351438489427
+Config 4: ...B... val: 0.006327032564264204
+Config 4: ...W... val: 0.007189499994537687
+Config 4: ..WW... val: 0.023012327890865686
+Config 5: ..WWB... val: -0.04841633184056631
+Config 5: ...WWW.. val: 0.034380676523723654
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 6: ........ val: 0
+Config 7: ....B... val: -0.030002719297834383
+Config 7: ..W..W.. val: -0.012281315348730944
+Config 7: ...WWW.. val: -0.01187842800253206
+Config 7: .....W.. val: 0.013267238790676626
+Config 8: ..WWB... val: -0.004183291434630291
+Config 8: ..WWW... val: 0.023630714150421412
+Config 8: ...WW... val: -0.022531949212424872
+Config 8: ..BBW... val: 0.012005498919820409
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 9: .......... val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '...') val: 0
+Config 10: ('......', '..W') val: -2.1115413213374152
+Config 10: ('......', '..W') val: -2.1115413213374152

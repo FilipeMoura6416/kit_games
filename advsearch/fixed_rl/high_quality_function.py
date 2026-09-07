@@ -63,9 +63,7 @@ import pickle
 from ..othello.gamestate import GameState
 from ..othello.board import Board
 import random
-from ..your_agent.MTD_f_depth import Agent
 from ..your_agent.othello_minimax_count import evaluate_count
-import time
 from datetime import datetime
 from .aid_functions import *
 from .pattern_features import *
@@ -73,7 +71,7 @@ import numpy as np
 
 class Train:
     partidas = 1000000
-    def __init__(self, alpha=0.1, gamma=0.95,):
+    def __init__(self, alpha=0.031, gamma=0.95,):
         self.average_error = 0
         self.it_count = 0
         self.average_match_error = 0
@@ -99,7 +97,7 @@ class Train:
     def get_vectors_list(self) -> list:
         """Tenta pegar a lista de vetores do arquivo vectors.pkl, se não existir, cria os vetores"""
         try:
-            with open("advsearch/fixed_rl/new_vectors.pkl", "rb") as file:
+            with open("advsearch/fixed_rl/vectors_log/Zero_vectors_2026-06-15_07-54-23_110001.pkl", "rb") as file:
                 self.vectors_list = pickle.load(file)
         except:
             self.vectors_list = self.init_vectors()
@@ -132,6 +130,7 @@ class Train:
             return 1
         
     def update_vector(self, vector=None):
+        
         """
         erro = r(s+1) - r(s)
         update_value = alpha*erro
@@ -139,6 +138,7 @@ class Train:
             configuração = configuração(pettern_feature)
             w_dict[indice][configuração] = w_dict[indice][configuração] + update_value
 
+        
         """
         if vector is None:
             stage = get_stage(self.state)
@@ -229,7 +229,7 @@ class Train:
 
         :param vector: será o vetor de dicionários com os valores a serem somados, ou seja, o vetor de pesos. Ele é necessário para acessar os valores associados as configurações específicas de cada feature. Se nenhum vetor em específico for passado será usado o vetor do estagio atual do estado. É possível passar um vetor que não seja o do estágio atual para que a estimativa de parâmetros seja feita de forma mais suave, ou seja, considerar que estágios próximos tenham valores próximos. Um mesmo estado será usado para atualizar os pesos dos vetores dos estágios d, d±1, d±2, onde d é o estágio atual do estado. 
         """
-
+        path = "High_quality_eval.txt"
         
         if player == 'W':
             if state.is_terminal():
@@ -251,25 +251,36 @@ class Train:
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, tiles)
+            config_val = 0
             if not null_conformation(configuração):
-                value += get_simple_conformation_value(configuração, vector[indice])
+                config_val = get_simple_conformation_value(configuração, vector[indice])
                 count_occurrence += 1
+            value += config_val
+            # with open(path, 'a') as file:
+            #     file.write(f"Config {indice}: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in complex_patter_features:
             configuração = get_complex_conformation(pattern_feature, tiles) 
-            if not null_conformation(configuração):
-                value += get_complex_conformation_value(configuração, vector[indice])
+            config_val = 0
+            if not null_conformation(configuração[0] + configuração[1]):
+                config_val = get_complex_conformation_value(configuração, vector[indice])
                 count_occurrence += 1
+            value += config_val
+            # with open(path, 'a') as file:
+            #     file.write(f"Config {indice}: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in non_reflexible_pattern:
             configuração = get_simple_conformation(pattern_feature, tiles)
             if null_conformation(configuração):
                 continue
             returned_entry = vector[indice].get(configuração)
+            config_val = 0
             if returned_entry != None:
-                value += returned_entry["value"]
+                config_val = returned_entry["value"]
                 count_occurrence += 1
-
+            value += config_val
+            # with open(path, 'a') as file:
+            #     file.write(f"Config {indice}: {configuração} val: {config_val}\n")
 
         if parity_feature(state) == 1:
             value += vector[-1] ##Parity_feature

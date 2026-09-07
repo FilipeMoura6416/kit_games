@@ -1,11 +1,9 @@
 if __name__ == "__main__":
     from ..othello.board import Board
     from ..othello.gamestate import GameState
-    from .othello_minimax_custom import evaluate_custom, make_move as mm_minimax
-    from .othello_minimax_mask import evaluate_mask
-    from .negamax_tt_id import make_move as mm_negamax
-    from .MTD_f import make_move as MTDF_move
-    from .MTD_f_depth_max import make_move as MTDF_depth_max_move
+    from .MTD_f_tiny_log import Agent, vectors_list
+    from ..fixed_rl.high_quality_function import *
+    from .MTD_f_heavy_log import make_move as mm_heavy
 
     string_board = ""
     with open("advsearch\\your_agent\\board.txt", 'r') as board_file:
@@ -15,16 +13,10 @@ if __name__ == "__main__":
                 if lines[i][j] not in "0123456789 *":
                     string_board += lines[i][j]
 
-    ##board:Board = Board().from_string(string_board)
-    board:Board = Board().from_string(string_board)
-    print(board.decorated_str(colors=False))
+    board = Board().from_string(string_board)
     state = GameState(board, 'B')
-    value = evaluate_custom(state, 'B')
-    print(f"Value: {value}\n")
-    # minimax_move = mm_minimax(state)
-    # returned_move = MTDF_move(state)
-    returned_move_depth_max = MTDF_depth_max_move(state)
-    # print(f"Minimax retornou o movimento: {minimax_move}")
-    # print(f"MTD(f) retornou o movimento: {returned_move}")
-    print(f"MTD(f) com profundidade máxima retornou o movimento: {returned_move_depth_max}")
-    print("teste finalizado")
+    # agent = Agent(state, vectors_list)
+    # print(f"Val w: {agent.eval_func(state, 'W')}")
+    # train = Train()
+    # print(f"Train evaluate_state: {train.evaluate_state(state, player='W')}")
+    print(f"Heavy: {mm_heavy(state)}")

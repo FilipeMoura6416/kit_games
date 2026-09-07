@@ -5,8 +5,7 @@ import time
 from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
-from .othello_minimax_custom import EVAL_TEMPLATE
-from .othello_minimax_custom import evaluate_custom
+from .custom import evaluate_custom as eval_func
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
 from ..rl.aid_functions import *
@@ -16,13 +15,16 @@ import pickle
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"game_log\\MTD_f_{timestamp}.txt"
+vectors_path = "advsearch/fixed_rl/vectors_log/Zero_vectors_2026-06-15_07-54-23_110001.pkl"
+with open(vectors_path, "rb") as file:
+    vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
     Returns a move for the given game root_state.state
     :param root_state.state: root_state.state to make the move
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
-    agent = Agent(state)
+    agent = Agent(state, vectors_list)
     return agent.iterative_deepening(4.9)
 
 class Node_State:
@@ -60,6 +62,8 @@ class Agent:
     def __init__(self, state, vectors_list=None):
 
         self.root_state = Node_State(state)
+        self.search_features_count = 0
+        self.hit_count = 0
         if vectors_list == None:
             try:
                 with open("advsearch/rl/vectors_log/vectors.pkl", "rb") as file:
@@ -70,6 +74,7 @@ class Agent:
             self.vectors_list = vectors_list
 
     def eval_func(self, state:GameState, player):
+        path = "MTD_f_eval.txt"
         if state.is_terminal():
             return evaluate_count(state, player)
         stage = get_stage(state)
@@ -85,25 +90,70 @@ class Agent:
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, tiles)
-            value += get_simple_conformation_value(configuração, vector[indice])
+            config_val = self.get_simple_conformation_value(configuração, vector[indice])
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in complex_patter_features:
             configuração = get_complex_conformation(pattern_feature, tiles) 
-            value += get_complex_conformation_value(configuração, vector[indice])
+            config_val = self.get_complex_conformation_value(configuração, vector[indice])
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in non_reflexible_pattern:
             configuração = get_simple_conformation(pattern_feature, tiles)
             if null_conformation(configuração):
                 continue
             returned_entry = vector[indice].get(configuração)
+            self.search_features_count += 1
+            config_val = 0
             if returned_entry != None:
-                value += returned_entry["value"]
+                config_val = returned_entry["value"]
+                self.hit_count += 1
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
 
         if parity_feature(state) == 1:
             value += vector[-1] ##Parity_feature
 
-        return value 
+        return value
+    
+    def get_simple_conformation_value(self, configuração:str, dict:dict): 
+        """
+        Identifica a configuração atual da feature, busca e retorna seu valor. Versão simples da função, aplicada features que a reflexão é simplesmente a inversão da string 
+        """
+        ##Pegar configuração atual da feature no estado
+        entry = dict.get(configuração)
+        self.search_features_count += 1
+        if entry != None:
+            self.hit_count += 1
+            return entry["value"]
+        r_config = configuração[::-1]
+        entry = dict.get(r_config)
+        if entry != None:
+            self.search_features_count += 1
+            return entry["value"]
+        return 0
+    
+    def get_complex_conformation_value(self, configuração:tuple, dict:dict):
+        """
+        Identifica a configuração atual da feature, busca e retorna seu valor. Versão complexa da função, aplicada para features que tem mais de uma casa no eixo de reflexão 
+        """
+        entry = dict.get(configuração[0] + configuração[1])
+        self.search_features_count += 1
+        if entry != None:
+            self.hit_count += 1
+            return entry["value"]
+        r_config = configuração[0][::-1] + configuração[1]
+        entry = dict.get(r_config)
+        if entry != None:
+            self.search_features_count += 1
+            return entry["value"]
+        return 0
         
 
     def iterative_deepening(self, time_amout):
@@ -139,7 +189,7 @@ class Agent:
                 gamma = f_guess
             with open(log_path, 'a') as log_file:
                 log_file.write(f"\nStarting new MTD_f search, f_guess: {f_guess}, depth_max: {depth_max}, upper_bound: {upper_bound}, lower_bound: {lower_bound}, gamma: {gamma}, time: {time.time()}\n")
-            f_guess, move = self.test(self.root_state, gamma - 0.5, depth_max)
+            f_guess, move = self.test(self.root_state, gamma - 0.01, depth_max)
             if time.time() >= self.time_limit:
                 return None, None
             if f_guess < gamma:
@@ -175,7 +225,9 @@ class Agent:
 
         if depth_max == 0 or node_state.state.is_terminal():
             
-            memory.maxScore = memory.minScore = self.eval_func(node_state.state, node_state.player)
+            memory.maxScore = memory.minScore = eval_func(node_state.state, node_state.player)
+            with open(log_path, 'a') as log_file:
+                log_file.write(self.tab_string(depth_max) + f"Eval func: {memory.minScore}\n")
             self.tt_dict[node_state.string_board] = memory
             return memory.minScore, None
         

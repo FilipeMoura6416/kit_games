@@ -5,8 +5,8 @@ import time
 from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
-from .othello_minimax_custom import EVAL_TEMPLATE
-from .othello_minimax_custom import evaluate_custom
+from .custom import EVAL_TEMPLATE
+from .custom import evaluate_custom
 from ..othello.gamestate import GameState
 import copy
 
@@ -106,6 +106,7 @@ class Agent:
         best_score = float("-inf")
         if len(node_state.legal_moves) == 0:
             node_state.legal_moves = list(node_state.state.legal_moves())
+            node_state.legal_moves.sort(key=lambda x: self.fast_eval(pos=x), reverse=True)
 
         for move in node_state.legal_moves:
 
@@ -139,5 +140,7 @@ class Agent:
         self.tt_dict[node_state.string_board] = memory 
         return best_score, best_move
     
+    def fast_eval(self, pos:tuple):
+        return EVAL_TEMPLATE[pos[1]][pos[0]]
 
 

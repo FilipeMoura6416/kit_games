@@ -5,8 +5,6 @@ import time
 from ..tttm import board as board
 from datetime import datetime
 from ..othello.board import Board
-from .othello_minimax_custom import EVAL_TEMPLATE
-from .othello_minimax_custom import evaluate_custom
 from .othello_minimax_count import evaluate_count
 from ..othello.gamestate import GameState
 from ..fixed_rl.aid_functions import *
@@ -15,7 +13,7 @@ from ..fixed_rl.pattern_features import *
 import pickle
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = f"game_log\\MTD_f_tiny_log{timestamp}.txt"
-with open("advsearch/fixed_rl/vectors_log/vectors_2026-06-12_08-41-55_190001.pkl", "rb") as file:
+with open("advsearch/fixed_rl/vectors_log/Zero_vectors_2026-06-15_07-54-23_110001.pkl", "rb") as file:
     vectors_list = pickle.load(file)
 def make_move(state) -> Tuple[int, int]:
     """
@@ -24,7 +22,7 @@ def make_move(state) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     agent = Agent(state, vectors_list)
-    return agent.iterative_deepening(4.9)
+    return agent.iterative_deepening(2.9)
 
 class Node_State:
     def __init__(self, state:GameState, move=None, parent_node=None):
@@ -73,6 +71,7 @@ class Agent:
             self.vectors_list = vectors_list
 
     def eval_func(self, state:GameState, player):
+        path = "MTD_f_eval.txt"
         if state.is_terminal():
             return evaluate_count(state, player)
         stage = get_stage(state)
@@ -88,11 +87,17 @@ class Agent:
 
         for pattern_feature, indice in pattern_features: ##Pattern_features
             configuração = get_simple_conformation(pattern_feature, tiles)
-            value += self.get_simple_conformation_value(configuração, vector[indice])
+            config_val = self.get_simple_conformation_value(configuração, vector[indice])
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in complex_patter_features:
             configuração = get_complex_conformation(pattern_feature, tiles) 
-            value += self.get_complex_conformation_value(configuração, vector[indice])
+            config_val = self.get_complex_conformation_value(configuração, vector[indice])
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
         for pattern_feature, indice in non_reflexible_pattern:
             configuração = get_simple_conformation(pattern_feature, tiles)
@@ -100,9 +105,13 @@ class Agent:
                 continue
             returned_entry = vector[indice].get(configuração)
             self.search_features_count += 1
+            config_val = 0
             if returned_entry != None:
-                value += returned_entry["value"]
+                config_val = returned_entry["value"]
                 self.hit_count += 1
+            value += config_val
+            with open(path, 'a') as file:
+                file.write(f"Config: {configuração} val: {config_val}\n")
 
 
         if parity_feature(state) == 1:
@@ -149,10 +158,12 @@ class Agent:
         self.time_limit = time.time() + time_amout
         self.depth_max = 2
         f_guess = 0
+        last_f_guess = 0
         last_move = None
         while time.time() < self.time_limit:
             self.tt_dict = dict()
             start = time.time()
+            last_f_guess = f_guess
             f_guess, move = self.mtdf(f_guess, self.depth_max)
             if move != None:
                 last_move = move
@@ -161,7 +172,7 @@ class Agent:
             self.depth_max += 1
             if self.depth_max >= 60:
                 break
-        print(f"Depth with move: {self.depth_max_with_move}, time taken: {self.depth_max_time}")
+        print(f"Depth with move: {self.depth_max_with_move}, time taken: {self.depth_max_time}, last_fguess: {last_f_guess}")
         return last_move
 
 

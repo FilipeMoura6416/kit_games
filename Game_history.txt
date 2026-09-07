@@ -760,10 +760,32 @@ Negamax_tt_id vs minimax
     python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_tiny_log_2.py
     python server.py othello advsearch\your_agent\MTD_f_depth_max.py advsearch\your_agent\MTD_f_depth_max.py
 
+MTD_f_to_rl: 50000, tiny_log: 220000    
     python server.py othello advsearch\your_agent\MTD_f_to_rl.py advsearch\your_agent\MTD_f_tiny_log.py
+        Player 1 (B - advsearch\your_agent): 40
+        Player 2 (W - advsearch\your_agent): 24
+        Player 1 (B - advsearch\your_agent wins!
+
+        Player 1 (B - advsearch\your_agent): 43
+        Player 2 (W - advsearch\your_agent): 21
+        Player 1 (B - advsearch\your_agent wins!
+
+    python server.py othello advsearch\your_agent\MTD_f_tiny_log.py advsearch\your_agent\MTD_f_to_rl.py 
+        Player 1 (B - advsearch\your_agent): 32
+        Player 2 (W - advsearch\your_agent): 32
+        Draw!
+
+        Player 1 (B - advsearch\your_agent): 31
+        Player 2 (W - advsearch\your_agent): 33
+        Player 2 (W - advsearch\your_agent) wins!
+
     python server.py othello advsearch\your_agent\MTD_f_no_log.py advsearch\your_agent\MTD_f_tiny_log.py
+    python server.py othello advsearch\your_agent\othello_minimax_mask.py advsearch\your_agent\MTD_f_tiny_log.py
+
+    python server.py othello advsearch\your_agent\mcts.py advsearch\your_agent\mcts.py
 
     "MTD_f_to_rl": "advsearch\\your_agent\\MTD_f_to_rl.py", 
+    "Tiny_log 40000": "advsearch\\your_agent\\MTD_f_tiny_log.py", 
 
 
 
